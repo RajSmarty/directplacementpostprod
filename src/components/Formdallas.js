@@ -203,7 +203,7 @@ export default function FormDallas() {
           <div className="row">
             <div className="col-sm-12">
               <h2>work order form</h2>
-              <h2 style={{ fontSize: "80%" }}>Employee's Name:- <span style={{ fontWeight: "bold" }}></span></h2>
+              {/* <h2 style={{ fontSize: "80%" }}>Employee's Name:- <span style={{ fontWeight: "bold" }}></span></h2> */}
             </div>
           </div>
         </div>
@@ -397,16 +397,14 @@ export default function FormDallas() {
                       <label htmlFor="exampleInputEmail1">Bilingual</label>
                       <div className="check_area">
                         <div className="form-check">
-                          <input name="bilingual" className="form-check-input" type="radio" id="exampleRadios1"
-                            defaultChecked />
-                          <label className="form-check-label" htmlFor="exampleRadios1">
+                          <input className="form-check-input" type="radio" name="Bilingual2" id="Bilingual" defaultChecked/>
+                          <label className="form-check-label" htmlFor="Bilingual1">
                             Yes
                           </label>
                         </div>
                         <div className="form-check">
-                          <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2"
-                            value="option2" />
-                          <label className="form-check-label" htmlFor="exampleRadios2">
+                          <input className="form-check-input" type="radio" name="Bilingual2" id="Bilingual" />
+                          <label className="form-check-label" htmlFor="Bilingual2">
                             No
                           </label>
                         </div>
@@ -451,16 +449,14 @@ export default function FormDallas() {
                       <label htmlFor="exampleFormControlSelect1">Tax Credit</label>
                       <div className="check_area">
                         <div className="form-check">
-                          <input className="form-check-input" type="radio" name="taxcredit" id="exampleRadios3"
-                            defaultChecked />
-                          <label className="form-check-label" htmlFor="exampleRadios3">
+                          <input className="form-check-input" type="radio" name="taxcredit" id="taxcredit1" defaultChecked/>
+                          <label className="form-check-label" htmlFor="taxcredit1">
                             Yes
                           </label>
                         </div>
                         <div className="form-check">
-                          <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios4"
-                            value="option2" />
-                          <label className="form-check-label" htmlFor="exampleRadios4">
+                          <input className="form-check-input" type="radio" name="taxcredit" id="taxcredit2" />
+                          <label className="form-check-label" htmlFor="taxcredit2">
                             No
                           </label>
                         </div>
@@ -477,16 +473,14 @@ export default function FormDallas() {
                       <label htmlFor="exampleFormControlSelect1">Type of Assignment</label>
                       <div className="check_area">
                         <div className="form-check">
-                          <input className="form-check-input" type="radio" name="typeofassignment" id="exampleRadios5"
-                            defaultChecked />
-                          <label className="form-check-label" htmlFor="exampleRadios5">
+                          <input className="form-check-input" type="radio" name="typeofassignment" id="typeofassignment1" defaultChecked/>
+                          <label className="form-check-label" htmlFor="typeofassignment1">
                             Temp
                           </label>
                         </div>
                         <div className="form-check">
-                          <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios6"
-                            value="option2" />
-                          <label className="form-check-label" htmlFor="exampleRadios6">
+                          <input className="form-check-input" type="radio" name="typeofassignment" id="typeofassignment2" />
+                          <label className="form-check-label" htmlFor="typeofassignment2">
                             Perm
                           </label>
                         </div>
@@ -503,16 +497,14 @@ export default function FormDallas() {
                       <label htmlFor="exampleInputEmail1">EPA Certified</label>
                       <div className="check_area">
                         <div className="form-check">
-                          <input className="form-check-input" type="radio" name="epacertified" id="exampleRadios7"
-                            defaultChecked />
-                          <label className="form-check-label" htmlFor="exampleRadios7">
+                          <input className="form-check-input" type="radio" name="epacertified" id="epacertified1" defaultChecked/>
+                          <label className="form-check-label" htmlFor="epacertified1">
                             Yes
                           </label>
                         </div>
                         <div className="form-check">
-                          <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios8"
-                            value="option2" />
-                          <label className="form-check-label" htmlFor="exampleRadios8">
+                          <input className="form-check-input" type="radio" name="epacertified" id="epacertified2" />
+                          <label className="form-check-label" htmlFor="epacertified2">
                             No
                           </label>
                         </div>

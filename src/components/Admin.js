@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import userLogoImg from '../images/logo1.png';
+import Spinner from './SpinnerLogin';
 
 
 export default function Admin() {
 
   let loaderBtn = document.getElementById("loaderBtn");
+  const [spinner, setSpinner] = useState("")
+
 
   const [credentials, setCredentials] = useState({ email: "", password: "" })
   let history = useHistory();
@@ -13,15 +16,15 @@ export default function Admin() {
   const handleSubmit = async (event) => {
     event.preventDefault()
 
-    // if (credentials.email.length === 0) {
-    //   alert("Please Fill all the Inputs")
-    //   window.location.reload()
-    // } else {
+    if (credentials.email.length === 0) {
+      alert("Please Fill all the Inputs")
+      window.location.reload()
+    } else {
 
-    //   setLoader(<LoaderMUI />);
-    //   setSpinner(<Spinner />);
+      loaderBtn.style.backgroundColor = "rgb(52 176 223)"
+      setSpinner(<Spinner />);
 
-    // }
+    }
 
     const response = await fetch("https://directplacement.herokuapp.com/api/adminauth/login",
       {
@@ -37,7 +40,7 @@ export default function Admin() {
       // console.log(json);
       if (json.Response) {
         // Save the auth token and redirect
-        loaderBtn.style.backgroundColor = "rgb(0 0 167)"
+        // loaderBtn.style.backgroundColor = "rgb(0 0 167)"
         localStorage.setItem('token', json.authtoken);
         history.push("/admindashboard");
 
@@ -84,7 +87,7 @@ export default function Admin() {
 
 
 
-              <button disabled={credentials.email.length === 0 || credentials.password.length === 0} id="loaderBtn" className="btn log_in_submit mt-3">log in</button>
+              <button disabled={credentials.email.length === 0 || credentials.password.length === 0} id="loaderBtn" className="btn log_in_submit mt-3" style={{ display: "flex", justifyContent: "center", width: "100%", borderRadius: "8px", fontWeight: "bold", backgroundColor: "rgb(52 176 223)" }}>log in{spinner}</button>
             </form>
           </div>
         </div>

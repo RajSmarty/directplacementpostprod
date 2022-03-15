@@ -16,7 +16,7 @@ import AdminDashboard from './components/AdminDashboard';
 import Admin from './components/Admin';
 import AdminSignup from './components/AdminSignup';
 import AccessDenied from './components/AccessDenied';
-// import Error from './components/Error';
+import Error from './components/Error';
 import Backend from './components/Backend';
 import EmpHoustonReg from './components/EmpHoustonReg';
 import EmpDallasReg from './components/EmpDallasReg';
@@ -112,9 +112,9 @@ function App() {
                 <AccessDenied />
               </Route>
 
-              {/* <Route>
+              <Route>
               <Error heading="Error" />
-            </Route> */}
+            </Route>
 
             </Switch>
           </div>

@@ -23,8 +23,6 @@ export default function UserLogin() {
     else {
 
       loaderBtn.style.backgroundColor = "rgb(52 176 223)"
-      // loaderBtn.style.backgroundColor = "red"
-
       setSpinner(<Spinner />);
     }
 
@@ -47,8 +45,6 @@ export default function UserLogin() {
       else {
   
         loaderBtn.style.backgroundColor = "rgb(52 136 223)"
-        // loaderBtn.style.backgroundColor = "red"
-  
         setSpinner(<Spinner />);
       }
       const response = await fetch("https://directplacement.herokuapp.com/api/authd/login", {

@@ -2,7 +2,7 @@ import React from 'react'
 import {  useHistory } from 'react-router-dom'
 import { useState } from 'react'
 
-export default function EmpHoustonReg() {
+export default function EmpDallasReg() {
 
     // const loaderBtn = document.getElementById("loaderBtn");
     let history = useHistory();

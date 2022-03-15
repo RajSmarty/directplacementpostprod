@@ -8,27 +8,39 @@ import AccessDenied from './AccessDenied';
 export default function AdminDashboard() {
 
   const [activeList, setActiveList] = useState([]);
-  const [closedList, setClosedList] = useState([]);
+  const [activeDList, setActiveDList] = useState([]);
 
-// ACTIVE ORDERS
+  const [closedList, setClosedList] = useState([]);
+  const [closedDList, setClosedDList] = useState([]);
+
+
+  // ACTIVE ORDERS HOUSTON
   useEffect(() => {
-    
+
     Axios.get("https://directplacement.herokuapp.com/api/empuserformh/activeorders").then((response) => {
       setActiveList(response.data)
+    })
+
+    Axios.get("https://directplacement.herokuapp.com/api/empuserformd/activeorders").then((response) => {
+      setActiveDList(response.data)
     })
   }, [])
 
 
   // CLOSED ORDERS
   useEffect(() => {
-    
+
     Axios.get("https://directplacement.herokuapp.com/api/empuserformh/closedorders").then((response) => {
       setClosedList(response.data)
+    })
+
+    Axios.get("https://directplacement.herokuapp.com/api/empuserformd/closedorders").then((response) => {
+      setClosedDList(response.data)
     })
   }, [])
 
 
-  
+
 
 
 
@@ -53,10 +65,10 @@ export default function AdminDashboard() {
 
     }
 
-    else if (selectState === "Texas") {
-      window.location.href = "/formT"
+    // else if (selectState === "Texas") {
+    //   window.location.href = "/formT"
 
-    }
+    // }
   }
 
 
@@ -82,14 +94,26 @@ export default function AdminDashboard() {
         },
       });
 
+      
+      const resd = await fetch("https://directplacement.herokuapp.com/api/empuserformd/activecount", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json"
+        },
+      });
+
       const data = await res.json();
+      const datad = await resd.json();
+
       console.log(data);
-      setActiveHoustonCount(data);
+      console.log(datad);
+     
+        setActiveHoustonCount(data + datad);
 
       if (!res.status === 200) {
-        const error = new Error(res.error);
-        throw error;
-      }
+          const error = new Error(res.error);
+          throw error;
+        }
     }
     catch (err) {
       console.log(err)
@@ -109,15 +133,32 @@ export default function AdminDashboard() {
           "Content-Type": "application/json"
         },
       });
-      // TO DO :----------->>>>>>>> DALLAS COUNT PENDING 
-      // TO DO :----------->>>>>>>> DALLAS COUNT PENDING 
-      // TO DO :----------->>>>>>>> DALLAS COUNT PENDING 
-      // TO DO :----------->>>>>>>> DALLAS COUNT PENDING 
-      // TO DO :----------->>>>>>>> DALLAS COUNT PENDING 
+
+      const resd = await fetch("https://directplacement.herokuapp.com/api/empuserformd/closedcount", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json"
+        },
+      });
+
 
       const data = await res.json();
+      const datad = await resd.json();
+
       console.log(data);
-      setClosedHoustonCount(data);
+      console.log(datad);
+
+      if (data === 0) {
+        setClosedHoustonCount(datad);
+      }
+      else if (datad === 0) {
+        setClosedHoustonCount(data);
+        
+      }
+      else if(data && datad !== 0){
+        setClosedHoustonCount(data + datad);
+
+      }
 
       if (!res.status === 200) {
         const error = new Error(res.error);
@@ -144,9 +185,20 @@ export default function AdminDashboard() {
         },
       });
 
+      const resd = await fetch("https://directplacement.herokuapp.com/api/empuserformd/allordercount", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json"
+        },
+      });
+
       const data = await res.json();
+      const datad = await resd.json();
+
       console.log(data);
-      setAllOrderCount(data);
+      console.log(datad);
+
+      setAllOrderCount(data + datad);
 
       if (!res.status === 200) {
         const error = new Error(res.error);
@@ -431,7 +483,7 @@ export default function AdminDashboard() {
                                       <ion-icon name="hourglass-outline"></ion-icon>
                                     </div>
                                     <div className="order_content" id="active_job">
-                                      <h4>active job order</h4>
+                                      <h4>active job orders</h4>
                                       <h2>{activeHoustonCount}</h2>
                                     </div>
                                   </div>
@@ -488,7 +540,7 @@ export default function AdminDashboard() {
                                             <tr style={{ fontWeight: "bold", color: "#141414" }}>
                                               <td style={{ color: "grey" }}>{val.startdate}</td>
                                               <td>{val.name}</td>
-                                              <td>Houstan</td>
+                                              <td>Houston</td>
                                               <td>{val.phone}</td>
                                               <td>{val.enddate}</td>
                                               <td>{val.tempname}</td>
@@ -572,9 +624,9 @@ export default function AdminDashboard() {
                                   <h4>order views</h4>
                                   <div className="form-group categories">
                                     <select className="form-control" id="exampleFormControlSelect1">
-                                      <option value="">last 6 months</option>
-                                      <option value="">last 1 year</option>
-                                      <option value="">last 3 years</option>
+                                      <option value="">last 7 days</option>
+                                      <option value="">last 1 month</option>
+                                      <option value="">last 3 months</option>
                                     </select>
                                   </div>
 
@@ -602,8 +654,6 @@ export default function AdminDashboard() {
 
 
 
-
-
             {/* <!-- Active Order Modal --> */}
             <div className="modal fade" id="ActiveJobOrder" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 
@@ -616,16 +666,6 @@ export default function AdminDashboard() {
                     <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div className="modal-body">
-
-
-
-
-
-
-
-
-
-
 
                     <div className="home_overview job_table table-responsive">
                       <table className="table">
@@ -652,7 +692,7 @@ export default function AdminDashboard() {
                               <tr style={{ fontWeight: "bold", color: "#141414" }}>
                                 <td style={{ color: "grey" }}>{val.startdate}</td>
                                 <td>{val.name}</td>
-                                <td>Houstan</td>
+                                <td>Houston</td>
                                 <td>{val.phone}</td>
                                 <td>{val.enddate}</td>
                                 <td>{val.tempname}</td>
@@ -667,14 +707,6 @@ export default function AdminDashboard() {
                                       {val.employeeStatus}
                                     </p>
 
-                                    {/* <ul className="dropdown-menu">
-                                      <li><p onClick={() => onClickActiveH(val._id)} className="activeDesign dropdown-item"
-
-                                      >Active</p></li>
-
-                                      <li><p onClick={() => onClickClosedH(val._id)} className="closedDesign dropdown-item">Closed</p></li>
-                                    </ul> */}
-
                                   </div>
                                 </td>
 
@@ -685,7 +717,7 @@ export default function AdminDashboard() {
 
 
                         {/* Employee Mapping  */}
-                        {employeeUserListDallas.map((val, key) => {
+                        {activeDList.map((val, key) => {
                           return (
                             <tbody key={key}>
                               <tr style={{ fontWeight: "bold", color: "#141414" }}>
@@ -701,13 +733,6 @@ export default function AdminDashboard() {
                                     <p id='paraStatusD' style={{ cursor: "pointer" }} data-bs-toggle="dropdown" aria-expanded="false">
                                       {val.employeeStatus}
                                     </p>
-
-                                    {/* <ul className="dropdown-menu">
-                                      <li><p onClick={() => onClickActiveD(val._id)} className="activeDesign dropdown-item" >Active</p></li>
-
-                                      <li><p onClick={() => onClickClosedD(val._id)} className="closedDesign dropdown-item" >Closed</p></li>
-                                    </ul> */}
-
                                   </div>
 
                                 </td>
@@ -715,13 +740,8 @@ export default function AdminDashboard() {
                             </tbody>
                           )
                         })}
-
-
                       </table>
                     </div>
-
-
-
                   </div>
                   <div className="modal-footer">
 
@@ -729,7 +749,6 @@ export default function AdminDashboard() {
                 </div>
               </div>
             </div>
-
 
 
 
@@ -747,15 +766,6 @@ export default function AdminDashboard() {
                   <div className="modal-body">
 
 
-
-
-
-
-
-
-
-
-
                     <div className="home_overview job_table table-responsive">
                       <table className="table">
                         <thead style={{ borderBottom: "2px solid #dee2e6", borderTop: "1px solid #dee2e6" }}>
@@ -770,18 +780,14 @@ export default function AdminDashboard() {
                           </tr>
                         </thead>
 
-
-                        {/* <h4>Backend Database Data</h4> */}
-
-
-                        {/* Administrator Mapping */}
+                        {/* Closed Mapping */}
                         {closedList.map((val, key) => {
                           return (
                             <tbody key={key}>
                               <tr style={{ fontWeight: "bold", color: "#141414" }}>
                                 <td style={{ color: "grey" }}>{val.startdate}</td>
                                 <td>{val.name}</td>
-                                <td>Houstan</td>
+                                <td>Houston</td>
                                 <td>{val.phone}</td>
                                 <td>{val.enddate}</td>
                                 <td>{val.tempname}</td>
@@ -795,15 +801,6 @@ export default function AdminDashboard() {
                                     >
                                       {val.employeeStatus}
                                     </p>
-
-                                    {/* <ul className="dropdown-menu">
-                                      <li><p onClick={() => onClickActiveH(val._id)} className="activeDesign dropdown-item"
-
-                                      >Active</p></li>
-
-                                      <li><p onClick={() => onClickClosedH(val._id)} className="closedDesign dropdown-item">Closed</p></li>
-                                    </ul> */}
-
                                   </div>
                                 </td>
 
@@ -814,7 +811,7 @@ export default function AdminDashboard() {
 
 
                         {/* Employee Mapping  */}
-                        {employeeUserListDallas.map((val, key) => {
+                        {closedDList.map((val, key) => {
                           return (
                             <tbody key={key}>
                               <tr style={{ fontWeight: "bold", color: "#141414" }}>
@@ -828,15 +825,8 @@ export default function AdminDashboard() {
 
                                   <div >
                                     <p id='paraStatusD' style={{ cursor: "pointer" }} data-bs-toggle="dropdown" aria-expanded="false">
-                                      {val.employeeStatusDallas}
+                                      {val.employeeStatus}
                                     </p>
-
-                                    {/* <ul className="dropdown-menu">
-                                      <li><p onClick={() => onClickActiveD(val._id)} className="activeDesign dropdown-item" >Active</p></li>
-
-                                      <li><p onClick={() => onClickClosedD(val._id)} className="closedDesign dropdown-item" >Closed</p></li>
-                                    </ul> */}
-
                                   </div>
 
                                 </td>
@@ -846,22 +836,12 @@ export default function AdminDashboard() {
                         })}
                       </table>
                     </div>
-
-
-
-
-
-
-
                   </div>
                   <div className="modal-footer">
-
                   </div>
                 </div>
               </div>
             </div>
-
-
 
 
 
@@ -881,270 +861,270 @@ export default function AdminDashboard() {
                       </div>
                       <div className="modal-body">
                         <section className="setting_sec">
-        <div className="container">
-          <div className="setting_box">
-            <form method="POST">
-              <div className="row">
-                <div className="col-sm-6">
-                  <div className="setting_area">
+                          <div className="container">
+                            <div className="setting_box">
+                              <form method="POST">
+                                <div className="row">
+                                  <div className="col-sm-6">
+                                    <div className="setting_area">
 
-                    {/* <form> */}
-                    <div className="form-group">
-                      <label htmlFor="exampleInputEmail1">Name</label>
-                      <input type="text" name='name' className="form-control setting_input" id="exampleInputEmail1"
-                        aria-describedby="emailHelp" placeholder="Empty Field"
-                        value={val.name} readOnly style={{fontWeight:"Bold"}}
-                      
-                      />
-                    </div>
+                                      {/* <form> */}
+                                      <div className="form-group">
+                                        <label htmlFor="exampleInputEmail1">Name</label>
+                                        <input type="text" name='name' className="form-control setting_input" id="exampleInputEmail1"
+                                          aria-describedby="emailHelp" placeholder="Empty Field"
+                                          value={val.name} readOnly style={{ fontWeight: "Bold" }}
 
-                  </div>
-                </div>
+                                        />
+                                      </div>
 
-                <div className="col-sm-6">
-                  <div className="setting_area">
-                    {/* <form> */}
-                    <div className="form-group">
-                      <label htmlFor="exampleInputEmail1">Staffing Manager</label>
-                      <input type="text" name='staffingmanager' className="form-control setting_input" id="exampleInputEmail1"
-                        aria-describedby="emailHelp" placeholder="Empty Field"
-                        value={val.staffingmanager} readOnly style={{fontWeight:"Bold"}}/>
-                    </div>
-                    {/* <div className="form-group" style={{ marginTop: "3%" }}>
+                                    </div>
+                                  </div>
+
+                                  <div className="col-sm-6">
+                                    <div className="setting_area">
+                                      {/* <form> */}
+                                      <div className="form-group">
+                                        <label htmlFor="exampleInputEmail1">Staffing Manager</label>
+                                        <input type="text" name='staffingmanager' className="form-control setting_input" id="exampleInputEmail1"
+                                          aria-describedby="emailHelp" placeholder="Empty Field"
+                                          value={val.staffingmanager} readOnly style={{ fontWeight: "Bold" }} />
+                                      </div>
+                                      {/* <div className="form-group" style={{ marginTop: "3%" }}>
                       <label htmlFor="exampleInputEmail1" style={{ marginBottom: "3.1%" }}>Hourly Billing Rate</label> */}
-                      {/* <input type="text" className="form-control setting_input" id="exampleInputEmail1"
+                                      {/* <input type="text" className="form-control setting_input" id="exampleInputEmail1"
                         aria-describedby="emailHelp" placeholder="" onChange={handleOnChange} readonly="readonly" value={text1} /> */}
 
-                      {/* <input style={{ fontWeight: "bold", color: "#7d7d7d", backgroundColor: "white" }} className="form-control setting_input" type="text" placeholder="" name='hourlybillingrate'  readOnly />
+                                      {/* <input style={{ fontWeight: "bold", color: "#7d7d7d", backgroundColor: "white" }} className="form-control setting_input" type="text" placeholder="" name='hourlybillingrate'  readOnly />
                     </div> */}
-                    {/* </form> */}
-                  </div>
-                </div>
+                                      {/* </form> */}
+                                    </div>
+                                  </div>
 
-                <div className="col-sm-6">
-                  <div className="setting_area">
-                    {/* <form> */}
-                    <div className="form-group mt-3">
-                      <label htmlFor="exampleInputEmail1">Company Name</label>
-                      <input name='companyname' type="text" className="form-control setting_input" id="exampleInputEmail1"
-                        aria-describedby="emailHelp" placeholder="Empty Field" value={val.companyname}  readOnly style={{fontWeight:"Bold"}}/>
-                    </div>
-                    <div className="form-group mt-3">
-                      <label htmlFor="exampleInputEmail1">Company Address</label>
-                      <input name='companyaddress' type="text" className="form-control setting_input" id="exampleInputEmail1"
-                        aria-describedby="emailHelp" placeholder="Empty Field" value={val.companyaddress}  readOnly style={{fontWeight:"Bold"}}/>
-                    </div>
-                    {/* </form> */}
-                  </div>
-                </div>
+                                  <div className="col-sm-6">
+                                    <div className="setting_area">
+                                      {/* <form> */}
+                                      <div className="form-group mt-3">
+                                        <label htmlFor="exampleInputEmail1">Company Name</label>
+                                        <input name='companyname' type="text" className="form-control setting_input" id="exampleInputEmail1"
+                                          aria-describedby="emailHelp" placeholder="Empty Field" value={val.companyname} readOnly style={{ fontWeight: "Bold" }} />
+                                      </div>
+                                      <div className="form-group mt-3">
+                                        <label htmlFor="exampleInputEmail1">Company Address</label>
+                                        <input name='companyaddress' type="text" className="form-control setting_input" id="exampleInputEmail1"
+                                          aria-describedby="emailHelp" placeholder="Empty Field" value={val.companyaddress} readOnly style={{ fontWeight: "Bold" }} />
+                                      </div>
+                                      {/* </form> */}
+                                    </div>
+                                  </div>
 
-                <div className="col-sm-6">
-                  <div className="setting_area">
-                    {/* <form> */}
+                                  <div className="col-sm-6">
+                                    <div className="setting_area">
+                                      {/* <form> */}
 
-                    <div className="form-group mt-3">
-                      <label htmlFor="exampleInputEmail1">Phone No</label>
-                      <input name='phone' type="text"
-                        className="form-control setting_input" id="exampleInputEmail1"
-                        aria-describedby="emailHelp" placeholder="Empty Field" value={val.phone}  readOnly style={{fontWeight:"Bold"}}/>
-                    </div>
+                                      <div className="form-group mt-3">
+                                        <label htmlFor="exampleInputEmail1">Phone No</label>
+                                        <input name='phone' type="text"
+                                          className="form-control setting_input" id="exampleInputEmail1"
+                                          aria-describedby="emailHelp" placeholder="Empty Field" value={val.phone} readOnly style={{ fontWeight: "Bold" }} />
+                                      </div>
 
-                    <div className="form-group mt-3">
-                      <label htmlFor="exampleInputEmail1">FAX No</label>
-                      <input name='fax' type="number" className="form-control setting_input" id="exampleInputEmail1"
-                        aria-describedby="emailHelp" placeholder="Empty Field" value={val.fax}  readOnly style={{fontWeight:"Bold"}}/>
-                    </div>
+                                      <div className="form-group mt-3">
+                                        <label htmlFor="exampleInputEmail1">FAX No</label>
+                                        <input name='fax' type="number" className="form-control setting_input" id="exampleInputEmail1"
+                                          aria-describedby="emailHelp" placeholder="Empty Field" value={val.fax} readOnly style={{ fontWeight: "Bold" }} />
+                                      </div>
 
-                    {/* </form> */}
-                  </div>
-                </div>
-              </div>
+                                      {/* </form> */}
+                                    </div>
+                                  </div>
+                                </div>
 
-              <div className="Manager_area mt-5"></div>
+                                <div className="Manager_area mt-5"></div>
 
-              <div className="row">
-                <div className="col-sm-6">
-                  <div className="setting_area">
-                    {/* <form> */}
-                    <div className="form-group">
-                      <label htmlFor="exampleInputEmail1">Manager's Name/Who Ordered Temp</label>
-                      <input name='managernamewhoorderedtemp' type="text" className="form-control setting_input" id="exampleInputEmail1"
-                        aria-describedby="emailHelp" placeholder="Empty Field" value={val.managernamewhoorderedtemp}  readOnly style={{fontWeight:"Bold"}}/>
-                    </div>
-                    {/* </form> */}
-                  </div>
-                </div>
+                                <div className="row">
+                                  <div className="col-sm-6">
+                                    <div className="setting_area">
+                                      {/* <form> */}
+                                      <div className="form-group">
+                                        <label htmlFor="exampleInputEmail1">Manager's Name/Who Ordered Temp</label>
+                                        <input name='managernamewhoorderedtemp' type="text" className="form-control setting_input" id="exampleInputEmail1"
+                                          aria-describedby="emailHelp" placeholder="Empty Field" value={val.managernamewhoorderedtemp} readOnly style={{ fontWeight: "Bold" }} />
+                                      </div>
+                                      {/* </form> */}
+                                    </div>
+                                  </div>
 
-                <div className="col-sm-6">
-                  <div className="setting_area">
-                    {/* <form> */}
-                    <div className="form-group">
-                      <label htmlFor="exampleInputEmail1">Manager's E-mail Address</label>
-                      <input name='manageremailaddress' type="email" className="form-control setting_input" id="exampleInputEmail1"
-                        aria-describedby="emailHelp" placeholder="Empty Field" value={val.manageremailaddress}  readOnly style={{fontWeight:"Bold"}}/>
-                    </div>
-                    {/* </form> */}
-                  </div>
-                </div>
-              </div>
+                                  <div className="col-sm-6">
+                                    <div className="setting_area">
+                                      {/* <form> */}
+                                      <div className="form-group">
+                                        <label htmlFor="exampleInputEmail1">Manager's E-mail Address</label>
+                                        <input name='manageremailaddress' type="email" className="form-control setting_input" id="exampleInputEmail1"
+                                          aria-describedby="emailHelp" placeholder="Empty Field" value={val.manageremailaddress} readOnly style={{ fontWeight: "Bold" }} />
+                                      </div>
+                                      {/* </form> */}
+                                    </div>
+                                  </div>
+                                </div>
 
-              <div className="row">
-                <div className="col-sm-4">
-                  <div className="setting_area">
-                    {/* <form> */}
-                    <div className="form-group mt-3">
-                      <label htmlFor="exampleFormControlSelect1">Property Grade</label>
-                      <input className="form-control setting_input" type="text" name="propertygrade" id="propertygrade" placeholder="Empty Field" value={val.propertygrade} readOnly style={{fontWeight:"Bold"}}/>
-                    </div>
-                    {/* </form> */}
-                  </div>
-                </div>
+                                <div className="row">
+                                  <div className="col-sm-4">
+                                    <div className="setting_area">
+                                      {/* <form> */}
+                                      <div className="form-group mt-3">
+                                        <label htmlFor="exampleFormControlSelect1">Property Grade</label>
+                                        <input className="form-control setting_input" type="text" name="propertygrade" id="propertygrade" placeholder="Empty Field" value={val.propertygrade} readOnly style={{ fontWeight: "Bold" }} />
+                                      </div>
+                                      {/* </form> */}
+                                    </div>
+                                  </div>
 
-                <div className="col-sm-4">
-                  <div className="setting_area">
-                    {/* <form> */}
-                    <div className="form-group mt-3">
-                      <label htmlFor="exampleInputEmail1">Number of Units</label>
-                      <input name='numberofunits' type="email" className="form-control setting_input" id="exampleInputEmail1"
-                        aria-describedby="emailHelp" placeholder="Empty Field" value={val.numberofunits}  readOnly style={{fontWeight:"Bold"}}/>
-                    </div>
-                    {/* </form> */}
-                  </div>
-                </div>
+                                  <div className="col-sm-4">
+                                    <div className="setting_area">
+                                      {/* <form> */}
+                                      <div className="form-group mt-3">
+                                        <label htmlFor="exampleInputEmail1">Number of Units</label>
+                                        <input name='numberofunits' type="email" className="form-control setting_input" id="exampleInputEmail1"
+                                          aria-describedby="emailHelp" placeholder="Empty Field" value={val.numberofunits} readOnly style={{ fontWeight: "Bold" }} />
+                                      </div>
+                                      {/* </form> */}
+                                    </div>
+                                  </div>
 
-                <div className="col-sm-4">
-                  <div className="setting_area">
-                    {/* <form> */}
-                    <div className="form-group mt-3">
-                      <label htmlFor="exampleInputEmail1">Bilingual</label>
-                      <input className="form-control setting_input" type="text" name="bilingual" id="bilingual" placeholder="Empty Field" value={val.bilingual} readOnly style={{fontWeight:"Bold"}}/>
-                    </div>
-                    {/* </form> */}
-                  </div>
-                </div>
-              </div>
+                                  <div className="col-sm-4">
+                                    <div className="setting_area">
+                                      {/* <form> */}
+                                      <div className="form-group mt-3">
+                                        <label htmlFor="exampleInputEmail1">Bilingual</label>
+                                        <input className="form-control setting_input" type="text" name="bilingual" id="bilingual" placeholder="Empty Field" value={val.bilingual} readOnly style={{ fontWeight: "Bold" }} />
+                                      </div>
+                                      {/* </form> */}
+                                    </div>
+                                  </div>
+                                </div>
 
-              <div className="row">
-                <div className="col-sm-6">
-                  <div className="setting_area">
-                    {/* <form> */}
-                    <div className="form-group mt-3">
-                      <label htmlFor="exampleInputEmail1">Software</label>
-                      <input name='software' type="text" className="form-control setting_input" id="exampleInputEmail1"
-                        aria-describedby="emailHelp" placeholder="Empty Field" value={val.software}  readOnly style={{fontWeight:"Bold"}}/>
-                    </div>
-                    {/* </form> */}
-                  </div>
-                </div>
+                                <div className="row">
+                                  <div className="col-sm-6">
+                                    <div className="setting_area">
+                                      {/* <form> */}
+                                      <div className="form-group mt-3">
+                                        <label htmlFor="exampleInputEmail1">Software</label>
+                                        <input name='software' type="text" className="form-control setting_input" id="exampleInputEmail1"
+                                          aria-describedby="emailHelp" placeholder="Empty Field" value={val.software} readOnly style={{ fontWeight: "Bold" }} />
+                                      </div>
+                                      {/* </form> */}
+                                    </div>
+                                  </div>
 
-                <div className="col-sm-6">
-                  <div className="setting_area">
-                    {/* <form> */}
-                    <div className="form-group mt-3">
-                      <label htmlFor="exampleInputEmail1">Permanent Pay Rate</label>
-                      <input name='permanentpayrate' type="email" className="form-control setting_input" id="exampleInputEmail1"
-                        aria-describedby="emailHelp" placeholder="Empty Field" value={val.permanentpayrate}  readOnly style={{fontWeight:"Bold"}}/>
-                    </div>
-                    {/* </form> */}
-                  </div>
-                </div>
-              </div>
+                                  <div className="col-sm-6">
+                                    <div className="setting_area">
+                                      {/* <form> */}
+                                      <div className="form-group mt-3">
+                                        <label htmlFor="exampleInputEmail1">Permanent Pay Rate</label>
+                                        <input name='permanentpayrate' type="email" className="form-control setting_input" id="exampleInputEmail1"
+                                          aria-describedby="emailHelp" placeholder="Empty Field" value={val.permanentpayrate} readOnly style={{ fontWeight: "Bold" }} />
+                                      </div>
+                                      {/* </form> */}
+                                    </div>
+                                  </div>
+                                </div>
 
-              <div className="row">
-                <div className="col-sm-4">
-                  <div className="setting_area">
-                    {/* <form> */}
-                    <div className="form-group mt-3">
-                      <label htmlFor="exampleFormControlSelect1">Tax Credit</label>
-                      <input className="form-control setting_input" type="text" name="taxcredit" id="taxcredit" placeholder="Empty Field" value={val.taxcredit} readOnly style={{fontWeight:"Bold"}}/>
-                    </div>
-                    {/* </form> */}
-                  </div>
-                </div>
+                                <div className="row">
+                                  <div className="col-sm-4">
+                                    <div className="setting_area">
+                                      {/* <form> */}
+                                      <div className="form-group mt-3">
+                                        <label htmlFor="exampleFormControlSelect1">Tax Credit</label>
+                                        <input className="form-control setting_input" type="text" name="taxcredit" id="taxcredit" placeholder="Empty Field" value={val.taxcredit} readOnly style={{ fontWeight: "Bold" }} />
+                                      </div>
+                                      {/* </form> */}
+                                    </div>
+                                  </div>
 
-                <div className="col-sm-4">
-                  <div className="setting_area">
-                    {/* <form> */}
-                    <div className="form-group mt-3">
-                      <label htmlFor="exampleFormControlSelect1">Type of Assignment</label>
-                      <input className="form-control setting_input" type="text" name="typeofassignment" id="typeofassignment" placeholder="Empty Field" value={val.typeofassignment} readOnly style={{fontWeight:"Bold"}}/>
-                    </div>
-                    {/* </form> */}
-                  </div>
-                </div>
+                                  <div className="col-sm-4">
+                                    <div className="setting_area">
+                                      {/* <form> */}
+                                      <div className="form-group mt-3">
+                                        <label htmlFor="exampleFormControlSelect1">Type of Assignment</label>
+                                        <input className="form-control setting_input" type="text" name="typeofassignment" id="typeofassignment" placeholder="Empty Field" value={val.typeofassignment} readOnly style={{ fontWeight: "Bold" }} />
+                                      </div>
+                                      {/* </form> */}
+                                    </div>
+                                  </div>
 
-                <div className="col-sm-4">
-                  <div className="setting_area">
-                    {/* <form> */}
-                    <div className="form-group mt-3">
-                      <label htmlFor="exampleInputEmail1">EPA Certified</label>
-                      <input className="form-control setting_input" type="text" name="epacertified" id="epacertified" placeholder="Empty Field" value={val.epacertified} readOnly style={{fontWeight:"Bold"}}/>
-                    </div>
-                    {/* </form> */}
-                  </div>
-                </div>
-              </div>
+                                  <div className="col-sm-4">
+                                    <div className="setting_area">
+                                      {/* <form> */}
+                                      <div className="form-group mt-3">
+                                        <label htmlFor="exampleInputEmail1">EPA Certified</label>
+                                        <input className="form-control setting_input" type="text" name="epacertified" id="epacertified" placeholder="Empty Field" value={val.epacertified} readOnly style={{ fontWeight: "Bold" }} />
+                                      </div>
+                                      {/* </form> */}
+                                    </div>
+                                  </div>
+                                </div>
 
-              <div className="row">
-                <div className="col-sm-6">
-                  <div className="setting_area">
-                    {/* <form> */}
-                    <div className="form-group mt-3">
-                      <label htmlFor="exampleInputEmail1">Temp's Name</label>
-                      <input type="text" name='tempname' className="form-control setting_input" id="exampleInputEmail1"
-                        aria-describedby="emailHelp" placeholder="Empty Field"
-                        value={val.tempname}  readOnly style={{fontWeight:"Bold"}}
-                      // value={userData.temp}
-                      // onChange={handleInputs}
-                      />
-                    </div>
-                    <div className="form-group mt-3">
-                      <label htmlFor="exampleInputEmail1">Phone No</label>
-                      <input name='phoneno' type="number" className="form-control setting_input" id="exampleInputEmail1"
-                        aria-describedby="emailHelp" placeholder="Empty Field" value={val.phoneno}  readOnly style={{fontWeight:"Bold"}}/>
-                    </div>
-                    <div className="form-group mt-3">
-                      <label htmlFor="exampleInputEmail1">Temporaray Pay Rate</label>
-                      <input name='temporaraypayrate' type="text" className="form-control setting_input" id="exampleInputEmail1"
-                        aria-describedby="emailHelp" placeholder="Empty Field" value={val.temporaraypayrate}  readOnly style={{fontWeight:"Bold"}}/>
-                    </div>
-                    {/* </form> */}
-                  </div>
-                </div>
+                                <div className="row">
+                                  <div className="col-sm-6">
+                                    <div className="setting_area">
+                                      {/* <form> */}
+                                      <div className="form-group mt-3">
+                                        <label htmlFor="exampleInputEmail1">Temp's Name</label>
+                                        <input type="text" name='tempname' className="form-control setting_input" id="exampleInputEmail1"
+                                          aria-describedby="emailHelp" placeholder="Empty Field"
+                                          value={val.tempname} readOnly style={{ fontWeight: "Bold" }}
+                                        // value={userData.temp}
+                                        // onChange={handleInputs}
+                                        />
+                                      </div>
+                                      <div className="form-group mt-3">
+                                        <label htmlFor="exampleInputEmail1">Phone No</label>
+                                        <input name='phoneno' type="number" className="form-control setting_input" id="exampleInputEmail1"
+                                          aria-describedby="emailHelp" placeholder="Empty Field" value={val.phoneno} readOnly style={{ fontWeight: "Bold" }} />
+                                      </div>
+                                      <div className="form-group mt-3">
+                                        <label htmlFor="exampleInputEmail1">Temporaray Pay Rate</label>
+                                        <input name='temporaraypayrate' type="text" className="form-control setting_input" id="exampleInputEmail1"
+                                          aria-describedby="emailHelp" placeholder="Empty Field" value={val.temporaraypayrate} readOnly style={{ fontWeight: "Bold" }} />
+                                      </div>
+                                      {/* </form> */}
+                                    </div>
+                                  </div>
 
-                <div className="col-sm-6">
-                  <div className="setting_area">
-                    {/* <form> */}
-                    <div className="form-group mt-3">
-                      <label htmlFor="exampleInputEmail1">Start Date</label>
-                      <input name='startdate' type="text" className="form-control setting_input" id="exampleInputEmail1"
-                        aria-describedby="emailHelp" placeholder="Empty Field" value={val.startdate}  readOnly style={{fontWeight:"Bold"}}/>
-                    </div>
-                    <div className="form-group mt-3">
-                      <label htmlFor="exampleInputEmail1">End Date</label>
-                      <input name='enddate' type="text" className="form-control setting_input" id="exampleInputEmail1"
-                        aria-describedby="emailHelp" placeholder="Empty Field" value={val.enddate}  readOnly style={{fontWeight:"Bold"}}/>
-                    </div>
-                    {/* </form> */}
-                  </div>
-                </div>
+                                  <div className="col-sm-6">
+                                    <div className="setting_area">
+                                      {/* <form> */}
+                                      <div className="form-group mt-3">
+                                        <label htmlFor="exampleInputEmail1">Start Date</label>
+                                        <input name='startdate' type="text" className="form-control setting_input" id="exampleInputEmail1"
+                                          aria-describedby="emailHelp" placeholder="Empty Field" value={val.startdate} readOnly style={{ fontWeight: "Bold" }} />
+                                      </div>
+                                      <div className="form-group mt-3">
+                                        <label htmlFor="exampleInputEmail1">End Date</label>
+                                        <input name='enddate' type="text" className="form-control setting_input" id="exampleInputEmail1"
+                                          aria-describedby="emailHelp" placeholder="Empty Field" value={val.enddate} readOnly style={{ fontWeight: "Bold" }} />
+                                      </div>
+                                      {/* </form> */}
+                                    </div>
+                                  </div>
 
-                <div className="col-sm-12">
-                  <div className="setting_area">
-                    {/* <form> */}
-                    <div className="form-group mt-3">
-                      <label htmlFor="exampleFormControlTextarea1">Your Message(Optional)</label>
-                      <textarea name='yourmessage' className="form-control setting_input" id="exampleFormControlTextarea1" rows="4"
-                        placeholder="Empty Field" value={val.yourmessage}  readOnly style={{fontWeight:"Bold"}}></textarea>
-                    </div>
-                    {/* </form> */}
-                  </div>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </section>
+                                  <div className="col-sm-12">
+                                    <div className="setting_area">
+                                      {/* <form> */}
+                                      <div className="form-group mt-3">
+                                        <label htmlFor="exampleFormControlTextarea1">Your Message(Optional)</label>
+                                        <textarea name='yourmessage' className="form-control setting_input" id="exampleFormControlTextarea1" rows="4"
+                                          placeholder="Empty Field" value={val.yourmessage} readOnly style={{ fontWeight: "Bold" }}></textarea>
+                                      </div>
+                                      {/* </form> */}
+                                    </div>
+                                  </div>
+                                </div>
+                              </form>
+                            </div>
+                          </div>
+                        </section>
 
 
 
@@ -1162,40 +1142,300 @@ export default function AdminDashboard() {
 
 
 
-
-
-
             {/* <!-- View Form Dallas Modal --> */}
-            <div className="modal fade" id="formDetailD" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            {employeeUserListDallas.map((val) => {
+              return (
+                <div key={val._id} className="modal fade" id="formDetailD" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 
-              <div className="modal-dialog modal-dialog-centered modal-xl">
-                <div className="modal-content">
-                  <div className="modal-header text-center">
-                    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100vw" }}>
-                      <h4 className="text-center" style={{ fontWeight: "bold", color: "#ff5959" }} >Total Closed Orders</h4>
+                  <div className="modal-dialog modal-dialog-centered modal-xl">
+                    <div className="modal-content">
+                      <div className="modal-header text-center">
+                        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100vw" }}>
+
+                          <h4 className="text-center" style={{ fontWeight: "bold" }} >{val.name}</h4>
+                        </div>
+                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div className="modal-body">
+                        <section className="setting_sec">
+                          <div className="container">
+                            <div className="setting_box">
+                              <form method="POST">
+                                <div className="row">
+                                  <div className="col-sm-6">
+                                    <div className="setting_area">
+
+                                      {/* <form> */}
+                                      <div className="form-group">
+                                        <label htmlFor="exampleInputEmail1">Name</label>
+                                        <input type="text" name='name' className="form-control setting_input" id="exampleInputEmail1"
+                                          aria-describedby="emailHelp" placeholder="Empty Field"
+                                          value={val.name} readOnly style={{ fontWeight: "Bold" }}
+
+                                        />
+                                      </div>
+
+                                    </div>
+                                  </div>
+
+                                  <div className="col-sm-6">
+                                    <div className="setting_area">
+                                      {/* <form> */}
+                                      <div className="form-group">
+                                        <label htmlFor="exampleInputEmail1">Staffing Manager</label>
+                                        <input type="text" name='staffingmanager' className="form-control setting_input" id="exampleInputEmail1"
+                                          aria-describedby="emailHelp" placeholder="Empty Field"
+                                          value={val.staffingmanager} readOnly style={{ fontWeight: "Bold" }} />
+                                      </div>
+                                      {/* <div className="form-group" style={{ marginTop: "3%" }}>
+                      <label htmlFor="exampleInputEmail1" style={{ marginBottom: "3.1%" }}>Hourly Billing Rate</label> */}
+                                      {/* <input type="text" className="form-control setting_input" id="exampleInputEmail1"
+                        aria-describedby="emailHelp" placeholder="" onChange={handleOnChange} readonly="readonly" value={text1} /> */}
+
+                                      {/* <input style={{ fontWeight: "bold", color: "#7d7d7d", backgroundColor: "white" }} className="form-control setting_input" type="text" placeholder="" name='hourlybillingrate'  readOnly />
+                    </div> */}
+                                      {/* </form> */}
+                                    </div>
+                                  </div>
+
+                                  <div className="col-sm-6">
+                                    <div className="setting_area">
+                                      {/* <form> */}
+                                      <div className="form-group mt-3">
+                                        <label htmlFor="exampleInputEmail1">Company Name</label>
+                                        <input name='companyname' type="text" className="form-control setting_input" id="exampleInputEmail1"
+                                          aria-describedby="emailHelp" placeholder="Empty Field" value={val.companyname} readOnly style={{ fontWeight: "Bold" }} />
+                                      </div>
+                                      <div className="form-group mt-3">
+                                        <label htmlFor="exampleInputEmail1">Company Address</label>
+                                        <input name='companyaddress' type="text" className="form-control setting_input" id="exampleInputEmail1"
+                                          aria-describedby="emailHelp" placeholder="Empty Field" value={val.companyaddress} readOnly style={{ fontWeight: "Bold" }} />
+                                      </div>
+                                      {/* </form> */}
+                                    </div>
+                                  </div>
+
+                                  <div className="col-sm-6">
+                                    <div className="setting_area">
+                                      {/* <form> */}
+
+                                      <div className="form-group mt-3">
+                                        <label htmlFor="exampleInputEmail1">Phone No</label>
+                                        <input name='phone' type="text"
+                                          className="form-control setting_input" id="exampleInputEmail1"
+                                          aria-describedby="emailHelp" placeholder="Empty Field" value={val.phone} readOnly style={{ fontWeight: "Bold" }} />
+                                      </div>
+
+                                      <div className="form-group mt-3">
+                                        <label htmlFor="exampleInputEmail1">FAX No</label>
+                                        <input name='fax' type="number" className="form-control setting_input" id="exampleInputEmail1"
+                                          aria-describedby="emailHelp" placeholder="Empty Field" value={val.fax} readOnly style={{ fontWeight: "Bold" }} />
+                                      </div>
+
+                                      {/* </form> */}
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div className="Manager_area mt-5"></div>
+
+                                <div className="row">
+                                  <div className="col-sm-6">
+                                    <div className="setting_area">
+                                      {/* <form> */}
+                                      <div className="form-group">
+                                        <label htmlFor="exampleInputEmail1">Manager's Name/Who Ordered Temp</label>
+                                        <input name='managernamewhoorderedtemp' type="text" className="form-control setting_input" id="exampleInputEmail1"
+                                          aria-describedby="emailHelp" placeholder="Empty Field" value={val.managernamewhoorderedtemp} readOnly style={{ fontWeight: "Bold" }} />
+                                      </div>
+                                      {/* </form> */}
+                                    </div>
+                                  </div>
+
+                                  <div className="col-sm-6">
+                                    <div className="setting_area">
+                                      {/* <form> */}
+                                      <div className="form-group">
+                                        <label htmlFor="exampleInputEmail1">Manager's E-mail Address</label>
+                                        <input name='manageremailaddress' type="email" className="form-control setting_input" id="exampleInputEmail1"
+                                          aria-describedby="emailHelp" placeholder="Empty Field" value={val.manageremailaddress} readOnly style={{ fontWeight: "Bold" }} />
+                                      </div>
+                                      {/* </form> */}
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div className="row">
+                                  <div className="col-sm-4">
+                                    <div className="setting_area">
+                                      {/* <form> */}
+                                      <div className="form-group mt-3">
+                                        <label htmlFor="exampleFormControlSelect1">Property Grade</label>
+                                        <input className="form-control setting_input" type="text" name="propertygrade" id="propertygrade" placeholder="Empty Field" value={val.propertygrade} readOnly style={{ fontWeight: "Bold" }} />
+                                      </div>
+                                      {/* </form> */}
+                                    </div>
+                                  </div>
+
+                                  <div className="col-sm-4">
+                                    <div className="setting_area">
+                                      {/* <form> */}
+                                      <div className="form-group mt-3">
+                                        <label htmlFor="exampleInputEmail1">Number of Units</label>
+                                        <input name='numberofunits' type="email" className="form-control setting_input" id="exampleInputEmail1"
+                                          aria-describedby="emailHelp" placeholder="Empty Field" value={val.numberofunits} readOnly style={{ fontWeight: "Bold" }} />
+                                      </div>
+                                      {/* </form> */}
+                                    </div>
+                                  </div>
+
+                                  <div className="col-sm-4">
+                                    <div className="setting_area">
+                                      {/* <form> */}
+                                      <div className="form-group mt-3">
+                                        <label htmlFor="exampleInputEmail1">Bilingual</label>
+                                        <input className="form-control setting_input" type="text" name="bilingual" id="bilingual" placeholder="Empty Field" value={val.bilingual} readOnly style={{ fontWeight: "Bold" }} />
+                                      </div>
+                                      {/* </form> */}
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div className="row">
+                                  <div className="col-sm-6">
+                                    <div className="setting_area">
+                                      {/* <form> */}
+                                      <div className="form-group mt-3">
+                                        <label htmlFor="exampleInputEmail1">Software</label>
+                                        <input name='software' type="text" className="form-control setting_input" id="exampleInputEmail1"
+                                          aria-describedby="emailHelp" placeholder="Empty Field" value={val.software} readOnly style={{ fontWeight: "Bold" }} />
+                                      </div>
+                                      {/* </form> */}
+                                    </div>
+                                  </div>
+
+                                  <div className="col-sm-6">
+                                    <div className="setting_area">
+                                      {/* <form> */}
+                                      <div className="form-group mt-3">
+                                        <label htmlFor="exampleInputEmail1">Permanent Pay Rate</label>
+                                        <input name='permanentpayrate' type="email" className="form-control setting_input" id="exampleInputEmail1"
+                                          aria-describedby="emailHelp" placeholder="Empty Field" value={val.permanentpayrate} readOnly style={{ fontWeight: "Bold" }} />
+                                      </div>
+                                      {/* </form> */}
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div className="row">
+                                  <div className="col-sm-4">
+                                    <div className="setting_area">
+                                      {/* <form> */}
+                                      <div className="form-group mt-3">
+                                        <label htmlFor="exampleFormControlSelect1">Tax Credit</label>
+                                        <input className="form-control setting_input" type="text" name="taxcredit" id="taxcredit" placeholder="Empty Field" value={val.taxcredit} readOnly style={{ fontWeight: "Bold" }} />
+                                      </div>
+                                      {/* </form> */}
+                                    </div>
+                                  </div>
+
+                                  <div className="col-sm-4">
+                                    <div className="setting_area">
+                                      {/* <form> */}
+                                      <div className="form-group mt-3">
+                                        <label htmlFor="exampleFormControlSelect1">Type of Assignment</label>
+                                        <input className="form-control setting_input" type="text" name="typeofassignment" id="typeofassignment" placeholder="Empty Field" value={val.typeofassignment} readOnly style={{ fontWeight: "Bold" }} />
+                                      </div>
+                                      {/* </form> */}
+                                    </div>
+                                  </div>
+
+                                  <div className="col-sm-4">
+                                    <div className="setting_area">
+                                      {/* <form> */}
+                                      <div className="form-group mt-3">
+                                        <label htmlFor="exampleInputEmail1">EPA Certified</label>
+                                        <input className="form-control setting_input" type="text" name="epacertified" id="epacertified" placeholder="Empty Field" value={val.epacertified} readOnly style={{ fontWeight: "Bold" }} />
+                                      </div>
+                                      {/* </form> */}
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div className="row">
+                                  <div className="col-sm-6">
+                                    <div className="setting_area">
+                                      {/* <form> */}
+                                      <div className="form-group mt-3">
+                                        <label htmlFor="exampleInputEmail1">Temp's Name</label>
+                                        <input type="text" name='tempname' className="form-control setting_input" id="exampleInputEmail1"
+                                          aria-describedby="emailHelp" placeholder="Empty Field"
+                                          value={val.tempname} readOnly style={{ fontWeight: "Bold" }}
+                                        // value={userData.temp}
+                                        // onChange={handleInputs}
+                                        />
+                                      </div>
+                                      <div className="form-group mt-3">
+                                        <label htmlFor="exampleInputEmail1">Phone No</label>
+                                        <input name='phoneno' type="number" className="form-control setting_input" id="exampleInputEmail1"
+                                          aria-describedby="emailHelp" placeholder="Empty Field" value={val.phoneno} readOnly style={{ fontWeight: "Bold" }} />
+                                      </div>
+                                      <div className="form-group mt-3">
+                                        <label htmlFor="exampleInputEmail1">Temporaray Pay Rate</label>
+                                        <input name='temporaraypayrate' type="text" className="form-control setting_input" id="exampleInputEmail1"
+                                          aria-describedby="emailHelp" placeholder="Empty Field" value={val.temporaraypayrate} readOnly style={{ fontWeight: "Bold" }} />
+                                      </div>
+                                      {/* </form> */}
+                                    </div>
+                                  </div>
+
+                                  <div className="col-sm-6">
+                                    <div className="setting_area">
+                                      {/* <form> */}
+                                      <div className="form-group mt-3">
+                                        <label htmlFor="exampleInputEmail1">Start Date</label>
+                                        <input name='startdate' type="text" className="form-control setting_input" id="exampleInputEmail1"
+                                          aria-describedby="emailHelp" placeholder="Empty Field" value={val.startdate} readOnly style={{ fontWeight: "Bold" }} />
+                                      </div>
+                                      <div className="form-group mt-3">
+                                        <label htmlFor="exampleInputEmail1">End Date</label>
+                                        <input name='enddate' type="text" className="form-control setting_input" id="exampleInputEmail1"
+                                          aria-describedby="emailHelp" placeholder="Empty Field" value={val.enddate} readOnly style={{ fontWeight: "Bold" }} />
+                                      </div>
+                                      {/* </form> */}
+                                    </div>
+                                  </div>
+
+                                  <div className="col-sm-12">
+                                    <div className="setting_area">
+                                      {/* <form> */}
+                                      <div className="form-group mt-3">
+                                        <label htmlFor="exampleFormControlTextarea1">Your Message(Optional)</label>
+                                        <textarea name='yourmessage' className="form-control setting_input" id="exampleFormControlTextarea1" rows="4"
+                                          placeholder="Empty Field" value={val.yourmessage} readOnly style={{ fontWeight: "Bold" }}></textarea>
+                                      </div>
+                                      {/* </form> */}
+                                    </div>
+                                  </div>
+                                </div>
+                              </form>
+                            </div>
+                          </div>
+                        </section>
+
+
+
+
+                      </div>
+
+                      <div className="modal-footer">
+
+                      </div>
                     </div>
-                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div className="modal-body">
-
-                    Form Dallas
-
-                  </div>
-                  <div className="modal-footer">
-
                   </div>
                 </div>
-              </div>
-            </div>
-
-
-
-
-
-
-
-
-
+              )
+            })}
 
 
 
@@ -1220,7 +1460,7 @@ export default function AdminDashboard() {
                         <option >Please select a location</option>
                         <option>Houston</option>
                         <option>Dallas</option>
-                        <option>Texas</option>
+                        {/* <option>Texas</option> */}
                         {selectState}
                       </select>
 

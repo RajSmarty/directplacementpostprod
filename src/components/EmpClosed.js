@@ -44,7 +44,7 @@ export default function EmpClosed() {
                                     <tr style={{ fontWeight: "bold", color: "#141414" }}>
                                         <td style={{ color: "grey" }}>{val.startdate}</td>
                                         <td>{val.name}</td>
-                                        <td>Houstan</td>
+                                        <td>Houston</td>
                                         <td>{val.phone}</td>
                                         <td>{val.enddate}</td>
                                         <td>{val.tempname}</td>

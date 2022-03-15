@@ -232,7 +232,7 @@ export default function EmpDashboard() {
                                       aria-label="hourglass outline"></ion-icon>
                                   </div>
                                   <div className="order_content" id="active_job" >
-                                    <h4>active job order</h4>
+                                    <h4>active job orders</h4>
                                     <h2>{activeHoustonCount}</h2>
                                   </div>
                                 </div>
@@ -242,7 +242,7 @@ export default function EmpDashboard() {
                                     <ion-icon name="layers-outline"></ion-icon>
                                   </div>
                                   <div className="order_content" id="active_job">
-                                    <h4>total job order</h4>
+                                    <h4>total job orders</h4>
                                     <h2>{allOrderCount}</h2>
                                   </div>
                                 </div>
