@@ -1,15 +1,50 @@
 import React, { useContext, useEffect, useState, useRef } from 'react'
+// import React, { useContext, useEffect, useState } from 'react'
 import { Link, useHistory } from 'react-router-dom';
 import navLogoImg from '../images/logo.png';
-import userDP from '../images/customer2.png';
+// import userDP from '../images/customer2.png';
 import Axios from 'axios';
 import AccessDenied from './AccessDenied';
 import codeContext from "../context/codes/codeContext"
+import FileBase64 from 'react-file-base64';
+import { createItem, getItems } from '../functions';
 
 export default function EmpDashboard() {
   let history = useHistory()
+  // const ref = useRef(null)
+  const refClose = useRef(null)
 
-  
+
+  // Upload Images coding starts from here: 
+
+  const [item, setItem] = useState({ image: '' });
+  const [items, setItems] = useState([])
+  const onSubmitHandler = async (e) => {
+    e.preventDefault();
+    // ref.current.click();
+
+    const result = await createItem(item);
+
+    setItems([...items, result]);
+    setTimeout(() => {
+      refClose.current.click();
+    }, 0);
+
+  }
+
+  useEffect(() => {
+    const fetchData = async () => {
+      
+      const result = await getItems();
+      console.log('fetch data from', result)
+      setItems(result)
+    }
+    fetchData()
+  }, [])
+
+
+
+
   // GET EMPLOYEE DETAILS MAPPING LOGIC
   useEffect(() => {
     if (localStorage.getItem("token")) {
@@ -24,7 +59,7 @@ export default function EmpDashboard() {
 
   // LOGOUT LOGIC 
   const handleLogout = () => {
-    
+
     setTimeout(() => {
       localStorage.removeItem("token");
     }, 0);
@@ -43,7 +78,7 @@ export default function EmpDashboard() {
       setActiveHoustonCount(response.data)
     })
   }, [])
-   
+
   // VIEW ACTIVE ORDERS LISTS LOGIC 
   const [activejob, setActivejob] = useState([]);
   useEffect(() => {
@@ -69,7 +104,7 @@ export default function EmpDashboard() {
       setAllOrderCount(response.data)
     })
   }, [])
-  
+
   // MODAL FOR VIEWING ACTIVE & CLOSED ORDERS IN DETAIL BY SELECTING ONE OF THEM
   const [selectState, setSelectState] = useState([]);
   const onClickProceed = () => {
@@ -82,7 +117,7 @@ export default function EmpDashboard() {
     }
 
   }
-  
+
   // GET USER FORMS DETAILS MAPPING LOGIC
   useEffect(() => {
     if (localStorage.getItem("token")) {
@@ -111,34 +146,33 @@ export default function EmpDashboard() {
     // paraStatusH.innerHTML = "Closed"
     // paraStatusH.style.color = "Red"
     setTimeout(() => {
-      
+
       Axios.put(`https://directplacement.herokuapp.com/updateclosed/${_id}`)
-      
+
     }, 1000);
-    
+
   }
 
   // CONTEXT API LOGIC
   const context = useContext(codeContext);
-  const { updateName } = context;
-  const [editName, setEditName] = useState({ id: "", ename: "" })
+  // const { updateName } = context;
+  // const [editName, setEditName] = useState({ id: "", ename: "" })
 
-  const ref = useRef(null)
-  const refClose = useRef(null)
 
-  const updatenewname = (currentCode) => {
-    ref.current.click();
-    setEditName({ id: currentCode._id, ename: currentCode.name })
-  }
 
-  const handleClickEdit = (e) => {
-    updateName(editName.id, editName.ename)
-    refClose.current.click();
-  }
+  // const updatenewname = (currentCode) => {
+  //   ref.current.click();
+  //   setEditName({ id: currentCode._id, ename: currentCode.name })
+  // }
 
-  const onChange = (e) => {
-    setEditName({ ...editName, [e.target.name]: e.target.value })
-  }
+  // const handleClickEdit = (e) => {
+  //   updateName(editName.id, editName.ename)
+  //   refClose.current.click();
+  // }
+
+  // const onChange = (e) => {
+  //   setEditName({ ...editName, [e.target.name]: e.target.value })
+  // }
 
 
   const { codes, json, getCodes, getUserDetails } = context;
@@ -175,19 +209,28 @@ export default function EmpDashboard() {
                       <div className="dashboard_tab sticky">
                         {/* {image.map((jsonimg) => {
                                       return ( */}
-                        <div className="user_id_img">
-                          {/* <img style={{ cursor: "pointer" }} src={jsonobj.pic} alt="" data-bs-toggle="modal" data-bs-target="#changeImg" /> */}
-                          <img style={{ cursor: "pointer" }} src={userDP} alt="Images" data-bs-toggle="modal" data-bs-target="#changeImg" />
+                        {/* <img style={{ cursor: "pointer" }} src={jsonobj.pic} alt="" data-bs-toggle="modal" data-bs-target="#changeImg" /> */}
+                        {/* <img style={{ cursor: "pointer" }} src={userDP} alt="Images" data-bs-toggle="modal" data-bs-target="#changeImg" /> */}
 
 
+                        <div className="user_id_img" data-bs-toggle="modal" data-bs-target="#changeImg" style={{ cursor: "pointer" }}>
+                          {items?.reverse().map(item => (
+
+                            <div className="card" key={item._id}>
+                              <div className="card-image waves-effect waves-block waves-light">
+                                <img className="activator" style={{ width: '100%', height: "5.5rem", borderRadius: "50%" }} src={item.image} alt="" />
+                              </div>
+                            </div>
+                          ))}
                         </div>
+
                         {/* ) */}
                         {/* })} */}
 
                         {json.map((jsonobj) => {
                           return (
                             <>
-                              <section key={jsonobj._id} updatenewname={updatenewname} jsonobj={jsonobj}>
+                              <section key={jsonobj._id} jsonobj={jsonobj}>
                                 <div className="user_id_name" style={{ display: "flex", justifyContent: "space-between" }}>
                                   <p style={{ marginLeft: "6.5em", fontWeight: "bold" }}>{jsonobj.name}{" "}</p>
                                   <ion-icon name="create-outline" style={{ fontSize: "20px", marginRight: "4.5em", cursor: "pointer" }} data-bs-toggle="modal" data-bs-target="#changeName"></ion-icon>
@@ -201,7 +244,7 @@ export default function EmpDashboard() {
                           )
                         })}
                         <div className="user_setting">
-                          
+
                           <h6 style={{ marginLeft: "2em" }} onClick={handleLogout}><span>
                             <ion-icon name="log-out-outline"></ion-icon>
                           </span> log out</h6>
@@ -352,18 +395,18 @@ export default function EmpDashboard() {
 
 
             </form>
-              {/* <!-- Active Order Modal --> */}
-              <div className="modal fade" id="ActiveJobOrder" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            {/* <!-- Active Order Modal --> */}
+            <div className="modal fade" id="ActiveJobOrder" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 
-                <div className="modal-dialog modal-dialog-centered modal-xl">
-                  <div className="modal-content">
-                    <div className="modal-header text-center">
-                      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100vw" }}>
-                        <h4 className="text-center" style={{ fontWeight: "bold", color: "#0a9900" }} >Total Active Orders</h4>
-                      </div>
-                      <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              <div className="modal-dialog modal-dialog-centered modal-xl">
+                <div className="modal-content">
+                  <div className="modal-header text-center">
+                    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100vw" }}>
+                      <h4 className="text-center" style={{ fontWeight: "bold", color: "#0a9900" }} >Total Active Orders</h4>
                     </div>
-                    <div className="modal-body">
+                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div className="modal-body">
 
 
 
@@ -375,114 +418,123 @@ export default function EmpDashboard() {
 
 
 
-                      <div className="home_overview job_table table-responsive">
-                        <table className="table">
-                          <thead style={{ borderBottom: "2px solid #dee2e6", borderTop: "1px solid #dee2e6" }}>
-                            <tr >
-                              <th scope="col">Date</th>
-                              <th scope="col">Name</th>
-                              <th scope="col">State</th>
-                              <th scope="col">Property</th>
-                              <th scope="col">Position</th>
-                              <th scope="col">Temp Name</th>
-                              <th scope="col">Status</th>
-                            </tr>
-                          </thead>
+                    <div className="home_overview job_table table-responsive">
+                      <table className="table">
+                        <thead style={{ borderBottom: "2px solid #dee2e6", borderTop: "1px solid #dee2e6" }}>
+                          <tr >
+                            <th scope="col">Date</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">State</th>
+                            <th scope="col">Property</th>
+                            <th scope="col">Position</th>
+                            <th scope="col">Temp Name</th>
+                            <th scope="col">Status</th>
+                          </tr>
+                        </thead>
 
-                          {/* Mapping */}
-                          {activejob.map((val, key) => {
-                            return (
-                              <tbody key={key} >
-                                <tr style={{ fontWeight: "bold", color: "#141414" }}>
-                                  <td style={{ color: "grey" }}>{val.startdate}</td>
-                                  <td>{val.name}</td>
-                                  <td>Houston</td>
-                                  <td>{val.phone}</td>
-                                  <td>{val.enddate}</td>
-                                  <td>{val.tempname}</td>
+                        {/* Mapping */}
+                        {activejob.map((val, key) => {
+                          return (
+                            <tbody key={key} >
+                              <tr style={{ fontWeight: "bold", color: "#141414" }}>
+                                <td style={{ color: "grey" }}>{val.startdate}</td>
+                                <td>{val.name}</td>
+                                <td>Houston</td>
+                                <td>{val.phone}</td>
+                                <td>{val.enddate}</td>
+                                <td>{val.tempname}</td>
 
-                                  <td className="active_status">
-                                    <div >
-                                      <p type="text"
-                                        placeholder='Active'
-                                        style={{ cursor: "pointer" }} data-bs-toggle="dropdown" aria-expanded="false"
+                                <td className="active_status">
+                                  <div >
+                                    <p type="text"
+                                      placeholder='Active'
+                                      style={{ cursor: "pointer" }} data-bs-toggle="dropdown" aria-expanded="false"
 
-                                      >
-                                        {val.status}
-                                      </p>
+                                    >
+                                      {val.status}
+                                    </p>
 
-                                      <ul className="dropdown-menu">
-                                        <li><p className="activeDesign dropdown-item"
+                                    <ul className="dropdown-menu">
+                                      <li><p className="activeDesign dropdown-item"
 
-                                        >Active</p></li>
+                                      >Active</p></li>
 
-                                        <li><p className="closedDesign dropdown-item">Closed</p></li>
-                                      </ul>
+                                      <li><p className="closedDesign dropdown-item">Closed</p></li>
+                                    </ul>
 
-                                    </div>
-                                  </td>
-                                </tr>
-                              </tbody>
-                            )
-                          })}
-                        </table>
-                      </div>
-
-
-
+                                  </div>
+                                </td>
+                              </tr>
+                            </tbody>
+                          )
+                        })}
+                      </table>
                     </div>
-                    <div className="modal-footer">
 
+
+
+                  </div>
+                  <div className="modal-footer">
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            {/* <!--Edit Name Modal --> */}
+            {/* <div className="modal fade" id="changeName" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div className="modal-dialog">
+                <div className="modal-content">
+                  <div className="modal-header">
+                    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100vw" }}>
+                      <h5 className="modal-title" id="exampleModalLabel">Edit Name</h5>
+                    </div>
+                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div className="modal-body"><input type="text" className="form-control" id="ename" name="ename" value={editName.ename} aria-describedby="emailHelp" onChange={onChange} minLength={5} required />
+                  </div>
+                  <div className="modal-footer">
+                    <button ref={refClose} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" className="btn btn-primary" onClick={handleClickEdit}>Save changes</button>
+                  </div>
+                </div>
+              </div>
+            </div> */}
+
+
+            {/* <!--Edit Pic Modal --> */}
+            <div className="modal fade" id="changeImg" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div className="modal-dialog">
+                <div className="modal-content">
+                  <div className="modal-header">
+                    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100vw" }}>
+                      <h5 className="modal-title" id="exampleModalLabel">Change Profile Picture</h5>
+                    </div>
+                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div className="modal-body">
+                    <form>
+                      <input type="text" className="form-control "
+
+                        onChange={e => setItem({ ...item, title: e.target.value })}
+                      />
+                      <FileBase64
+                        type="file"
+                        multiple={false}
+                        onDone={({ base64 }) => setItem({ ...item, image: base64 })}
+                      />
+
+                    </form>
+                  </div>
+                  <div className="modal-footer">
+                    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100vw" }}>
+                      {/* <button onClick={onFormSubmit} type="button" className="btn btn-primary" >Upload</button> */}
+                      <span ref={refClose} className="" data-bs-dismiss="modal"></span>
+                      <button onClick={onSubmitHandler} type="button" className="btn btn-primary" >Upload</button>
                     </div>
                   </div>
                 </div>
               </div>
-              {/* <!--Edit Name Modal --> */}
-              <div className="modal fade" id="changeName" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div className="modal-dialog">
-                  <div className="modal-content">
-                    <div className="modal-header">
-                      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100vw" }}>
-                        <h5 className="modal-title" id="exampleModalLabel">Edit Name</h5>
-                      </div>
-                      <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div className="modal-body"><input type="text" className="form-control" id="ename" name="ename" value={editName.ename} aria-describedby="emailHelp" onChange={onChange} minLength={5} required />
-                    </div>
-                    <div className="modal-footer">
-                      <button ref={refClose} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      <button type="button" className="btn btn-primary" onClick={handleClickEdit}>Save changes</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-
-              {/* <!--Edit Pic Modal --> */}
-              <div className="modal fade" id="changeImg" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div className="modal-dialog">
-                  <div className="modal-content">
-                    <div className="modal-header">
-                      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100vw" }}>
-                        <h5 className="modal-title" id="exampleModalLabel">Change Profile Picture</h5>
-                      </div>
-                      <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div className="modal-body">
-                      <form method="post">
-                        {/* <input onChange={onInputChange} className='form-control' type="file" id="myFile" name="photo" /> */}
-                        <input className='form-control' type="file" id="myFile" name="photo" />
-                      </form>
-                    </div>
-                    <div className="modal-footer">
-                      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100vw" }}>
-                        {/* <button onClick={onFormSubmit} type="button" className="btn btn-primary" >Upload</button> */}
-                        <button type="button" className="btn btn-primary" >Upload</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            </div>
 
             {/* Choose Active/Closed Modal  */}
             <div className="modal fade" id="activeClosedOrder" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
