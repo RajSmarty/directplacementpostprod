@@ -14,6 +14,8 @@ export default function AdminDashboard() {
   const [closedDList, setClosedDList] = useState([]);
 
 
+
+
   // ACTIVE ORDERS HOUSTON
   useEffect(() => {
 
@@ -38,15 +40,6 @@ export default function AdminDashboard() {
       setClosedDList(response.data)
     })
   }, [])
-
-
-
-
-
-
-
-
-
 
 
 
@@ -94,7 +87,7 @@ export default function AdminDashboard() {
         },
       });
 
-      
+
       const resd = await fetch("https://directplacement.herokuapp.com/api/empuserformd/activecount", {
         method: "GET",
         headers: {
@@ -107,13 +100,13 @@ export default function AdminDashboard() {
 
       console.log(data);
       console.log(datad);
-     
-        setActiveHoustonCount(data + datad);
+
+      setActiveHoustonCount(data + datad);
 
       if (!res.status === 200) {
-          const error = new Error(res.error);
-          throw error;
-        }
+        const error = new Error(res.error);
+        throw error;
+      }
     }
     catch (err) {
       console.log(err)
@@ -153,9 +146,9 @@ export default function AdminDashboard() {
       }
       else if (datad === 0) {
         setClosedHoustonCount(data);
-        
+
       }
-      else if(data && datad !== 0){
+      else if (data && datad !== 0) {
         setClosedHoustonCount(data + datad);
 
       }
@@ -229,19 +222,21 @@ export default function AdminDashboard() {
 
 
 
-  const paraStatusH = document.getElementById("paraStatusH");
+  // const paraStatusH = document.getElementById("paraStatusH");
   // const paraStatusD = document.getElementById("paraStatusD");
   // const statusColorH = document.getElementById("statusColorH");
   // const statusColorD = document.getElementById("statusColorD");
+  // let p = document.getElementsByTagName("p")
+  
 
   setTimeout(() => {
 
-    if (paraStatusH.innerHTML === "Closed") {
-      paraStatusH.style.color = "Red"
-    }
-    else if (paraStatusH.innerHTML === "Active") {
-      paraStatusH.style.color = "Green"
-    }
+    // if (paraStatusH.innerHTML === "Closed") {
+    //   paraStatusH.style.color = "Red"
+    // }
+    // else if (paraStatusH.innerHTML === "Active") {
+    //   paraStatusH.style.color = "Green"
+    // }
 
   }, 1000);
 
@@ -252,8 +247,8 @@ export default function AdminDashboard() {
   // const onClickActiveH = (_id) => {
 
 
-  //   paraStatusH.innerHTML = "Active"
-  //   paraStatusH.style.color = "Green"
+  // paraStatusH.innerHTML = "Active"
+  // paraStatusH.style.color = "Green"
   //   setTimeout(() => {
 
   //     Axios.put(`https://directplacement.herokuapp.com/api/empuserformh/updateactiveh/${_id}`)
@@ -401,6 +396,13 @@ export default function AdminDashboard() {
   // const [text2, setText2] = useState("")
   // const [text3, setText3] = useState("")
 
+  // Switch Colors Active/Closed
+  // if (p.innerHTML === "Active") {
+  //   p.style.color = "Green"
+  // }
+  // else {
+  //   p.style.color = "Red"
+  // }
 
 
   return (
@@ -511,7 +513,7 @@ export default function AdminDashboard() {
                                 </div>
                                 <div className="your_orders">
                                   <div className="over_overview_heading">
-                                    <h4>total job orders</h4>
+                                    <h4>Recent job orders</h4>
                                   </div>
 
                                   <div style={{ height: "18em" }} className="home_overview job_table table-responsive">
@@ -546,9 +548,10 @@ export default function AdminDashboard() {
                                               <td>{val.tempname}</td>
 
 
-                                              <td id='statusColorH' className="active_status">
+                                              {/* <td id='statusColorH' className="active_status"> */}
+                                              <td>
                                                 <div >
-                                                  <p id='paraStatusH' type="text"
+                                                  <p id='paraStatusH' className='paraStatusH' type="text"
                                                     placeholder='Active'
                                                     style={{ cursor: "pointer" }} data-bs-toggle="dropdown" aria-expanded="false"
 
@@ -589,7 +592,7 @@ export default function AdminDashboard() {
                                               <td id='statusColorD' className="active_status">
 
                                                 <div >
-                                                  <p id='paraStatusD' style={{ cursor: "pointer" }} data-bs-toggle="dropdown" aria-expanded="false">
+                                                  <p id='paraStatusD' className='paraStatusH' style={{ cursor: "pointer" }} data-bs-toggle="dropdown" aria-expanded="false">
                                                     {val.employeeStatus}
                                                   </p>
 
@@ -697,7 +700,7 @@ export default function AdminDashboard() {
                                 <td>{val.enddate}</td>
                                 <td>{val.tempname}</td>
 
-                                <td id='statusColorH' className="">
+                                <td id='statusColorH' className="active_status">
                                   <div >
                                     <p id='paraStatusH' type="text"
                                       placeholder='Active'
@@ -727,7 +730,7 @@ export default function AdminDashboard() {
                                 <td>{val.phone}</td>
                                 <td>{val.enddate}</td>
                                 <td>{val.tempname}</td>
-                                <td id='statusColorD' className="active_status">
+                                <td id='statusColorH' className="active_status">
 
                                   <div >
                                     <p id='paraStatusD' style={{ cursor: "pointer" }} data-bs-toggle="dropdown" aria-expanded="false">
@@ -792,7 +795,7 @@ export default function AdminDashboard() {
                                 <td>{val.enddate}</td>
                                 <td>{val.tempname}</td>
 
-                                <td id='statusColorH' className="">
+                                <td id='statusColorH' className="deactive_status">
                                   <div >
                                     <p id='paraStatusH' type="text"
                                       placeholder='Active'
@@ -821,7 +824,7 @@ export default function AdminDashboard() {
                                 <td>{val.phone}</td>
                                 <td>{val.enddate}</td>
                                 <td>{val.tempname}</td>
-                                <td id='statusColorD' className="active_status">
+                                <td id='statusColorD' className="deactive_status">
 
                                   <div >
                                     <p id='paraStatusD' style={{ cursor: "pointer" }} data-bs-toggle="dropdown" aria-expanded="false">

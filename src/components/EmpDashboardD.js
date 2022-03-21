@@ -1,16 +1,50 @@
-// import Axios from 'axios';
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState, useRef } from 'react'
+// import React, { useContext, useEffect, useState } from 'react'
 import { Link, useHistory } from 'react-router-dom';
 import navLogoImg from '../images/logo.png';
-import userDP from '../images/customer2.png';
+// import userDP from '../images/customer2.png';
 import Axios from 'axios';
 import AccessDenied from './AccessDenied';
 import codeContext from "../context/codes/codeContext"
+import FileBase64 from 'react-file-base64';
+import { createItem, getItems } from '../functions';
+import Spinner from './SpinnerLogin';
 
 export default function EmpDashboardD() {
   let history = useHistory();
 
-  // GET EMPLOYEE DETAILS MAPPING LOGIC
+  const refClose = useRef(null)
+  const [spinner, setSpinner] = useState("")
+
+
+  // Upload Images coding starts from here: 
+  const [item, setItem] = useState({ image: '' });
+  const [items, setItems] = useState([])
+  const onSubmitHandler = async (e) => {
+    e.preventDefault();
+    
+    setSpinner(<Spinner />);
+    const result = await createItem(item);
+
+    setItems([...items, result]);
+    setTimeout(() => {
+      refClose.current.click();
+      setSpinner("");
+    }, 0);
+
+  }
+
+  useEffect(() => {
+    const fetchData = async () => {
+      
+      
+      const result = await getItems();
+      console.log('fetch data from', result)
+      setItems(result)
+    }
+    fetchData()
+  }, [])
+
   // GET EMPLOYEE DETAILS MAPPING LOGIC
   useEffect(() => {
     if (localStorage.getItem("token")) {
@@ -160,8 +194,15 @@ export default function EmpDashboardD() {
                     <div className="col-sm-3 tab_bg">
                       <div className="dashboard_tab sticky">
 
-                        <div className="user_id_img">
-                          <img src={userDP} alt="" />
+                      <div className="user_id_img" data-bs-toggle="modal" data-bs-target="#changeImg" style={{ cursor: "pointer" }}>
+                          {items?.reverse().map(item => (
+
+                            <div className="card" key={item._id}>
+                              <div className="card-image waves-effect waves-block waves-light">
+                                <img className="activator" style={{ width: '100%', height: "5.5rem", borderRadius: "50%" }} src={item.image} alt="" />
+                              </div>
+                            </div>
+                          ))}
                         </div>
 
                         {/* <h3 className="user_id_name">{userName}</h3> */}
@@ -277,7 +318,8 @@ export default function EmpDashboardD() {
                                             <td>{code.enddate}</td>
                                             <td>{code.tempname}</td>
 
-                                            <td className="active_status">
+                                            {/* <td id='statusColorH' className="active_status"> */}
+                                            <td>
                                               <div >
                                                 <p type="text"
                                                   placeholder='Active'
@@ -394,15 +436,24 @@ export default function EmpDashboardD() {
                     <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div className="modal-body">
-                    <form method="post">
-                      {/* <input onChange={onInputChange} className='form-control' type="file" id="myFile" name="photo" /> */}
-                      <input className='form-control' type="file" id="myFile" name="photo" />
+                    <form>
+                      <input type="text" className="form-control "
+
+                        onChange={e => setItem({ ...item, title: e.target.value })}
+                      />
+                      <FileBase64
+                        type="file"
+                        multiple={false}
+                        onDone={({ base64 }) => setItem({ ...item, image: base64 })}
+                      />
+
                     </form>
                   </div>
                   <div className="modal-footer">
                     <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100vw" }}>
                       {/* <button onClick={onFormSubmit} type="button" className="btn btn-primary" >Upload</button> */}
-                      <button type="button" className="btn btn-primary" >Upload</button>
+                      <span ref={refClose} className="" data-bs-dismiss="modal"></span>
+                      <button id='uploaderBtn' style={{ display: "flex", justifyContent: "center", width: "40%"}} onClick={onSubmitHandler} type="button" className="btn btn-primary" >Upload {spinner}</button>
                     </div>
                   </div>
                 </div>
@@ -459,7 +510,7 @@ export default function EmpDashboardD() {
                                 <td>{val.enddate}</td>
                                 <td>{val.tempname}</td>
 
-                                <td className="active_status">
+                                <td id='statusColorH' className="active_status">
                                   <div >
                                     <p type="text"
                                       placeholder='Active'

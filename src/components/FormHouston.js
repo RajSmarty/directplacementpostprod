@@ -15,18 +15,27 @@ export default function FormHouston() {
   const { addHoustonAdmin } = context;
 
 
-  const [code, setCode] = useState({ name: "", staffingmanager: "", companyname: "", phone: "", companyaddress: "", fax: "", managernamewhoorderedtemp: "", manageremailaddress: "", propertygrade: "", numberofunits: "", software: "", permanentpayrate: "", tempname: "", startdate: "", phoneno: "", enddate: "", temporaraypayrate: "", yourmessage: "", status: "Active" })
+  const [code, setCode] = useState({
+    name: "", staffingmanager: "", companyname: "", phone: "", companyaddress: "", fax: "", managernamewhoorderedtemp: "", manageremailaddress: "", propertygrade: "", numberofunits: "", bilingual: "", software: "", permanentpayrate: "", taxcredit: "",
+    typeofassignment: "", epacertified: "", tempname: "", startdate: "", phoneno: "", enddate: "", temporaraypayrate: "", yourmessage: "", status: "Active"
+  })
 
   const handleClick = (e) => {
     e.preventDefault();
-    addCode(code.name, code.staffingmanager, code.companyname, code.phone, code.companyaddress, code.fax, code.managernamewhoorderedtemp, code.manageremailaddress, code.propertygrade, code.numberofunits, code.software, code.permanentpayrate, code.tempname, code.startdate, code.phoneno, code.enddate, code.temporaraypayrate, code.yourmessage, code.status);
+    addCode(code.name, code.staffingmanager, code.companyname, code.phone, code.companyaddress, code.fax, code.managernamewhoorderedtemp, code.manageremailaddress, code.propertygrade, code.numberofunits, code.bilingual, code.software, code.permanentpayrate, code.taxcredit, code.typeofassignment, code.epacertified, code.tempname, code.startdate, code.phoneno, code.enddate, code.temporaraypayrate, code.yourmessage, code.status);
 
-    setCode({ name: "", staffingmanager: "", companyname: "", phone: "", companyaddress: "", fax: "", managernamewhoorderedtemp: "", manageremailaddress: "", propertygrade: "", numberofunits: "", software: "", permanentpayrate: "", tempname: "", startdate: "", phoneno: "", enddate: "", temporaraypayrate: "", yourmessage: "", status: "Active" })
+    setCode({
+      name: "", staffingmanager: "", companyname: "", phone: "", companyaddress: "", fax: "", managernamewhoorderedtemp: "", manageremailaddress: "", propertygrade: "", numberofunits: "", bilingual: "", software: "", permanentpayrate: "", taxcredit: "",
+      typeofassignment: "", epacertified: "", tempname: "", startdate: "", phoneno: "", enddate: "", temporaraypayrate: "", yourmessage: "", status: "Active"
+    })
     setTimeout(() => {
 
-      addHoustonAdmin(code.name, code.staffingmanager, code.companyname, code.phone, code.companyaddress, code.fax, code.managernamewhoorderedtemp, code.manageremailaddress, code.propertygrade, code.numberofunits, code.software, code.permanentpayrate, code.tempname, code.startdate, code.phoneno, code.enddate, code.temporaraypayrate, code.yourmessage, code.employeeStatus);
+      addHoustonAdmin(code.name, code.staffingmanager, code.companyname, code.phone, code.companyaddress, code.fax, code.managernamewhoorderedtemp, code.manageremailaddress, code.propertygrade, code.numberofunits, code.bilingual, code.software, code.permanentpayrate, code.taxcredit, code.typeofassignment, code.epacertified, code.tempname, code.startdate, code.phoneno, code.enddate, code.temporaraypayrate, code.yourmessage, code.employeeStatus);
 
-      setCode({ name: "", staffingmanager: "", companyname: "", phone: "", companyaddress: "", fax: "", managernamewhoorderedtemp: "", manageremailaddress: "", propertygrade: "", numberofunits: "", software: "", permanentpayrate: "", tempname: "", startdate: "", phoneno: "", enddate: "", temporaraypayrate: "", yourmessage: "", employeeStatus: "Active" })
+      setCode({
+        name: "", staffingmanager: "", companyname: "", phone: "", companyaddress: "", fax: "", managernamewhoorderedtemp: "", manageremailaddress: "", propertygrade: "", numberofunits: "", bilingual: "", software: "", permanentpayrate: "", taxcredit: "",
+        typeofassignment: "", epacertified: "", tempname: "", startdate: "", phoneno: "", enddate: "", temporaraypayrate: "", yourmessage: "", employeeStatus: "Active"
+      })
       setTimeout(() => {
         window.location.href = "/empdash"
       }, 500);
@@ -324,7 +333,8 @@ export default function FormHouston() {
                     {/* <form> */}
                     <div className="form-group mt-3">
                       <label htmlFor="exampleFormControlSelect1">Property Grade</label>
-                      <select name='propertygrade' className="form-control setting_input" id="exampleFormControlSelect1" value={code.propertygrade} onChange={onChange}>
+                      <select style={{color:"grey"}} name='propertygrade' className="form-control setting_input" id="exampleFormControlSelect1" value={code.propertygrade} onChange={onChange}>
+                        <option >Select from the given below</option>
                         <option>A</option>
                         <option>B</option>
                         <option>C</option>
@@ -349,7 +359,7 @@ export default function FormHouston() {
                 <div className="col-sm-4">
                   <div className="setting_area">
                     {/* <form> */}
-                    <div className="form-group mt-3">
+                    {/* <div className="form-group mt-3">
                       <label htmlFor="exampleInputEmail1">Bilingual</label>
                       <div className="check_area">
                         <div className="form-check">
@@ -365,6 +375,14 @@ export default function FormHouston() {
                           </label>
                         </div>
                       </div>
+                    </div> */}
+                    <div className="form-group mt-3">
+                      <label htmlFor="bilingual1">Bilingual</label>
+                      <select style={{color:"grey"}} name='bilingual' className="form-control setting_input" id="bilingual1" value={code.bilingual} onChange={onChange}>
+                        <option>Select from the given below</option>
+                        <option>Yes</option>
+                        <option>No</option>
+                      </select>
                     </div>
                     {/* </form> */}
                   </div>
@@ -401,7 +419,7 @@ export default function FormHouston() {
                 <div className="col-sm-4">
                   <div className="setting_area">
                     {/* <form> */}
-                    <div className="form-group mt-3">
+                    {/* <div className="form-group mt-3">
                       <label htmlFor="exampleFormControlSelect1">Tax Credit</label>
                       <div className="check_area">
                         <div className="form-check">
@@ -417,6 +435,14 @@ export default function FormHouston() {
                           </label>
                         </div>
                       </div>
+                    </div> */}
+                    <div className="form-group mt-3">
+                      <label htmlFor="taxcredit1">Tax Credit</label>
+                      <select style={{color:"grey"}} name='taxcredit' className="form-control setting_input" id="taxcredit1" value={code.taxcredit} onChange={onChange}>
+                        <option>Select from the given below</option>
+                        <option>Yes</option>
+                        <option>No</option>
+                      </select>
                     </div>
                     {/* </form> */}
                   </div>
@@ -425,7 +451,7 @@ export default function FormHouston() {
                 <div className="col-sm-4">
                   <div className="setting_area">
                     {/* <form> */}
-                    <div className="form-group mt-3">
+                    {/* <div className="form-group mt-3">
                       <label htmlFor="exampleFormControlSelect1">Type of Assignment</label>
                       <div className="check_area">
                         <div className="form-check">
@@ -441,6 +467,14 @@ export default function FormHouston() {
                           </label>
                         </div>
                       </div>
+                    </div> */}
+                    <div className="form-group mt-3">
+                      <label htmlFor="typeofassignment1">Type of Assignment</label>
+                      <select style={{color:"grey"}} name='typeofassignment' className="form-control setting_input" id="typeofassignment1" value={code.typeofassignment} onChange={onChange}>
+                        <option>Select from the given below</option>
+                        <option>Temp</option>
+                        <option>Perm</option>
+                      </select>
                     </div>
                     {/* </form> */}
                   </div>
@@ -449,7 +483,7 @@ export default function FormHouston() {
                 <div className="col-sm-4">
                   <div className="setting_area">
                     {/* <form> */}
-                    <div className="form-group mt-3">
+                    {/* <div className="form-group mt-3">
                       <label htmlFor="exampleInputEmail1">EPA Certified</label>
                       <div className="check_area">
                         <div className="form-check">
@@ -465,6 +499,14 @@ export default function FormHouston() {
                           </label>
                         </div>
                       </div>
+                    </div> */}
+                    <div className="form-group mt-3">
+                      <label htmlFor="epacertified1">EPA Certified</label>
+                      <select style={{color:"grey"}} name='epacertified' className="form-control setting_input" id="epacertified1" value={code.epacertified} onChange={onChange}>
+                        <option>Select from the given below</option>
+                        <option>Yes</option>
+                        <option>No</option>
+                      </select>
                     </div>
                     {/* </form> */}
                   </div>

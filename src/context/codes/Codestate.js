@@ -91,7 +91,7 @@ const getImages = async () => {
   }
 
   // Add a Code
-  const addCode = async (name, staffingmanager, companyname, phone, companyaddress, fax, managernamewhoorderedtemp, manageremailaddress, propertygrade, numberofunits, software, permanentpayrate, tempname, startdate, phoneno, enddate, temporaraypayrate, yourmessage, status, hourlybillingrate, textPosition) => {
+  const addCode = async (name, staffingmanager, companyname, phone, companyaddress, fax, managernamewhoorderedtemp, manageremailaddress, propertygrade, numberofunits, bilingual, software, permanentpayrate, taxcredit, typeofassignment, epacertified, tempname, startdate, phoneno, enddate, temporaraypayrate, yourmessage, status) => {
     // TODO: API Call
     // API Call 
     const response = await fetch(`${host}/addcode`, {
@@ -101,7 +101,7 @@ const getImages = async () => {
         "auth-token": localStorage.getItem("token"),
 
       },
-      body: JSON.stringify({ name, staffingmanager, companyname, phone, companyaddress, fax, managernamewhoorderedtemp, manageremailaddress, propertygrade, numberofunits, software, permanentpayrate, tempname, startdate, phoneno, enddate, temporaraypayrate, yourmessage, status, hourlybillingrate, textPosition})
+      body: JSON.stringify({ name, staffingmanager, companyname, phone, companyaddress, fax, managernamewhoorderedtemp, manageremailaddress, propertygrade, numberofunits, bilingual, software, permanentpayrate, taxcredit, typeofassignment, epacertified, tempname, startdate, phoneno, enddate, temporaraypayrate, yourmessage, status})
     });
 
     const code = await response.json();
@@ -110,7 +110,7 @@ const getImages = async () => {
 
 
   // Add Houston Admin Code
-  const addHoustonAdmin = async (name, staffingmanager, companyname, phone, companyaddress, fax, managernamewhoorderedtemp, manageremailaddress, propertygrade, numberofunits, software, permanentpayrate, tempname, startdate, phoneno, enddate, temporaraypayrate, yourmessage, employeeStatus) => {
+  const addHoustonAdmin = async (name, staffingmanager, companyname, phone, companyaddress, fax, managernamewhoorderedtemp, manageremailaddress, propertygrade, numberofunits, bilingual, software, permanentpayrate, taxcredit, typeofassignment, epacertified, tempname, startdate, phoneno, enddate, temporaraypayrate, yourmessage, employeeStatus) => {
     // TODO: API Call
     // API Call 
     const response = await fetch(`${host}/api/empuserformh/insert`, {
@@ -119,7 +119,7 @@ const getImages = async () => {
         'Content-Type': 'application/json',
 
       },
-      body: JSON.stringify({ name, staffingmanager, companyname, phone, companyaddress, fax, managernamewhoorderedtemp, manageremailaddress, propertygrade, numberofunits, software, permanentpayrate, tempname, startdate, phoneno, enddate, temporaraypayrate, yourmessage, employeeStatus})
+      body: JSON.stringify({ name, staffingmanager, companyname, phone, companyaddress, fax, managernamewhoorderedtemp, manageremailaddress, propertygrade, numberofunits, bilingual, software, permanentpayrate, taxcredit, typeofassignment, epacertified, tempname, startdate, phoneno, enddate, temporaraypayrate, yourmessage, employeeStatus})
     });
 
     const code = await response.json();
@@ -127,7 +127,7 @@ const getImages = async () => {
   }
 
   // Add Dallas Admin Code
-  const addDallasAdmin = async (name, staffingmanager, companyname, phone, companyaddress, fax, managernamewhoorderedtemp, manageremailaddress, propertygrade, numberofunits, software, permanentpayrate, tempname, startdate, phoneno, enddate, temporaraypayrate, yourmessage, employeeStatus) => {
+  const addDallasAdmin = async (name, staffingmanager, companyname, phone, companyaddress, fax, managernamewhoorderedtemp, manageremailaddress, propertygrade, numberofunits, bilingual, software, permanentpayrate, taxcredit, typeofassignment, epacertified, tempname, startdate, phoneno, enddate, temporaraypayrate, yourmessage, employeeStatus) => {
     // TODO: API Call
     // API Call 
     const response = await fetch(`${host}/api/empuserformd/insert`, {
@@ -136,7 +136,7 @@ const getImages = async () => {
         'Content-Type': 'application/json',
 
       },
-      body: JSON.stringify({ name, staffingmanager, companyname, phone, companyaddress, fax, managernamewhoorderedtemp, manageremailaddress, propertygrade, numberofunits, software, permanentpayrate, tempname, startdate, phoneno, enddate, temporaraypayrate, yourmessage, employeeStatus})
+      body: JSON.stringify({ name, staffingmanager, companyname, phone, companyaddress, fax, managernamewhoorderedtemp, manageremailaddress, propertygrade, numberofunits, bilingual, software, permanentpayrate, taxcredit, typeofassignment, epacertified, tempname, startdate, phoneno, enddate, temporaraypayrate, yourmessage, employeeStatus})
     });
 
     const code = await response.json();

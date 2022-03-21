@@ -8,26 +8,28 @@ import AccessDenied from './AccessDenied';
 import codeContext from "../context/codes/codeContext"
 import FileBase64 from 'react-file-base64';
 import { createItem, getItems } from '../functions';
+import Spinner from './SpinnerLogin';
+
 
 export default function EmpDashboard() {
   let history = useHistory()
-  // const ref = useRef(null)
   const refClose = useRef(null)
+  const [spinner, setSpinner] = useState("")
 
 
   // Upload Images coding starts from here: 
-
   const [item, setItem] = useState({ image: '' });
   const [items, setItems] = useState([])
   const onSubmitHandler = async (e) => {
     e.preventDefault();
-    // ref.current.click();
-
+    
+    setSpinner(<Spinner />);
     const result = await createItem(item);
 
     setItems([...items, result]);
     setTimeout(() => {
       refClose.current.click();
+      setSpinner("");
     }, 0);
 
   }
@@ -35,14 +37,13 @@ export default function EmpDashboard() {
   useEffect(() => {
     const fetchData = async () => {
       
+      
       const result = await getItems();
       console.log('fetch data from', result)
       setItems(result)
     }
     fetchData()
   }, [])
-
-
 
 
   // GET EMPLOYEE DETAILS MAPPING LOGIC
@@ -347,7 +348,8 @@ export default function EmpDashboard() {
                                             <td>{code.enddate}</td>
                                             <td>{code.tempname}</td>
 
-                                            <td className="active_status">
+                                            {/* <td id='statusColorH' className="active_status"> */}
+                                            <td>
                                               <div >
                                                 <p type="text"
                                                   placeholder='Active'
@@ -444,7 +446,7 @@ export default function EmpDashboard() {
                                 <td>{val.enddate}</td>
                                 <td>{val.tempname}</td>
 
-                                <td className="active_status">
+                                <td id='statusColorH' className="active_status">
                                   <div >
                                     <p type="text"
                                       placeholder='Active'
@@ -529,7 +531,7 @@ export default function EmpDashboard() {
                     <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100vw" }}>
                       {/* <button onClick={onFormSubmit} type="button" className="btn btn-primary" >Upload</button> */}
                       <span ref={refClose} className="" data-bs-dismiss="modal"></span>
-                      <button onClick={onSubmitHandler} type="button" className="btn btn-primary" >Upload</button>
+                      <button id='uploaderBtn' style={{ display: "flex", justifyContent: "center", width: "40%"}} onClick={onSubmitHandler} type="button" className="btn btn-primary" >Upload {spinner}</button>
                     </div>
                   </div>
                 </div>
