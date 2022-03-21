@@ -6,17 +6,20 @@ import userDP from '../images/user.jpg';
 import AccessDenied from './AccessDenied';
 
 export default function AdminDashboard() {
+  let history = useHistory();
 
-  const [activeList, setActiveList] = useState([]);
-  const [activeDList, setActiveDList] = useState([]);
-
-  const [closedList, setClosedList] = useState([]);
-  const [closedDList, setClosedDList] = useState([]);
-
-
+  // Logout Logic 
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setTimeout(() => {
+      history.push("/admin")
+    }, 1000);
+  }
 
 
   // ACTIVE ORDERS HOUSTON
+  const [activeList, setActiveList] = useState([]);
+  const [activeDList, setActiveDList] = useState([]);
   useEffect(() => {
 
     Axios.get("https://directplacement.herokuapp.com/api/empuserformh/activeorders").then((response) => {
@@ -29,7 +32,9 @@ export default function AdminDashboard() {
   }, [])
 
 
-  // CLOSED ORDERS
+  // CLOSED ORDERS 
+  const [closedList, setClosedList] = useState([]);
+  const [closedDList, setClosedDList] = useState([]);
   useEffect(() => {
 
     Axios.get("https://directplacement.herokuapp.com/api/empuserformh/closedorders").then((response) => {
@@ -42,42 +47,21 @@ export default function AdminDashboard() {
   }, [])
 
 
-
+  // Select Cities from Texas 
   const [selectState, setSelectState] = useState("");
-
-
   const onClickProceed = () => {
     if (selectState === "Dallas") {
-      // window.location.href = "/form"
       window.location.href = "/empdallasreg"
     }
 
     else if (selectState === "Houston") {
-      // window.location.href = "/formH"
       window.location.href = "/emphoustonreg"
-
     }
-
-    // else if (selectState === "Texas") {
-    //   window.location.href = "/formT"
-
-    // }
   }
 
 
-
-
-
-
-
-
-  let history = useHistory();
-
+  // All Active orders from Houston & Dallas 
   const [activeHoustonCount, setActiveHoustonCount] = useState();
-  const [closedHoustonCount, setClosedHoustonCount] = useState();
-  const [allOrderCount, setAllOrderCount] = useState()
-
-
   const numActiveHouston = async () => {
     try {
       const res = await fetch("https://directplacement.herokuapp.com/api/empuserformh/activecount", {
@@ -112,12 +96,13 @@ export default function AdminDashboard() {
       console.log(err)
     }
   }
-
   useEffect(() => {
     numActiveHouston();
   });
 
 
+  // All Closed orders from Houston & Dallas 
+  const [closedHoustonCount, setClosedHoustonCount] = useState();
   const numClosedHouston = async () => {
     try {
       const res = await fetch("https://directplacement.herokuapp.com/api/empuserformh/closedcount", {
@@ -162,12 +147,13 @@ export default function AdminDashboard() {
       console.log(err)
     }
   }
-
   useEffect(() => {
     numClosedHouston();
   });
 
 
+  // Total Orders from Houston & Dallas 
+  const [allOrderCount, setAllOrderCount] = useState()
   const totalOrders = async () => {
 
     try {
@@ -202,24 +188,26 @@ export default function AdminDashboard() {
       console.log(err)
     }
   }
-
   useEffect(() => {
     totalOrders();
   });
 
 
-  const ActiveJobOrdersList = () => {
+  // Houston Forms Map Logic 
+  const [employeeUserList, setEmployeeUserList] = useState([]);
+  useEffect(() => {
+    Axios.get("https://directplacement.herokuapp.com/api/empuserformh/read").then((response) => {
+      setEmployeeUserList(response.data)
+    })
+  }, [])
 
-  }
-
-  const ClosedJobOrdersList = () => {
-
-  }
-
-  const TotalJobOrdersList = () => {
-
-  }
-
+  // Dallas Forms Map Logic 
+  const [employeeUserListDallas, setEmployeeUserListDallas] = useState([]);
+  useEffect(() => {
+    Axios.get("https://directplacement.herokuapp.com/api/empuserformd/read").then((response) => {
+      setEmployeeUserListDallas(response.data)
+    })
+  }, [])
 
 
   // const paraStatusH = document.getElementById("paraStatusH");
@@ -239,9 +227,6 @@ export default function AdminDashboard() {
     // }
 
   }, 1000);
-
-
-
 
 
   // const onClickActiveH = (_id) => {
@@ -294,116 +279,14 @@ export default function AdminDashboard() {
 
 
 
-  useEffect(() => {
-    Axios.get("https://directplacement.herokuapp.com/api/empuserformh/read").then((response) => {
-      setEmployeeUserList(response.data)
-    })
-  }, [])
 
 
+  // const [employeeUserByID, setEmployeeUserByID] = useState([]);
   // useEffect((_id) => {
   //   Axios.get(`https://directplacement.herokuapp.com/api/empuserform/reads/${_id}`).then((response) => {
   //     setEmployeeUserByID(response.data)
   //   })
   // }, [])
-
-  useEffect(() => {
-    Axios.get("https://directplacement.herokuapp.com/api/empuserformd/read").then((response) => {
-      setEmployeeUserListDallas(response.data)
-    })
-  }, [])
-
-
-
-
-
-
-  const [employeeUserList, setEmployeeUserList] = useState([]);
-  // const [employeeUserByID, setEmployeeUserByID] = useState([]);
-  const [employeeUserListDallas, setEmployeeUserListDallas] = useState([]);
-
-
-
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    setTimeout(() => {
-      history.push("/admin")
-    }, 1000);
-  }
-
-
-
-
-  // const [credentials, setCredentials] = useState({ email: "", password: "" })
-  // let history = useHistory();
-
-
-
-  // const handleSubmit = async (event) => {
-  //   event.preventDefault()
-
-  //   if (credentials.email.length === 0) {
-  //     alert("Please Fill all the Inputs")
-  //     window.location.reload()
-  //   } else {
-  //   }
-
-
-  //   const { email, password } = credentials;
-  //   const response = await fetch("https://directplacement.herokuapp.com/api/auth/signup", {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     },
-  //     body: JSON.stringify({ email, password })
-  //   });
-  //   const json = await response.json()
-  //   setTimeout(() => {
-
-  //     console.log(json);
-  //     if (json.Response) {
-  //       // Save the auth token and redirect
-  //       localStorage.setItem('token', json.authtoken);
-  //       history.push("/admindashboard");
-  //       alert("Employee Added Successfully!");
-  //       setTimeout(() => {
-  //         console.log("Reloading Page...")
-  //         window.location.reload()
-  //       }, 0);
-  //     }
-  //     else {
-  //       alert("This employee already exists!");
-  //       setTimeout(() => {
-  //         console.log("Reloading Page...")
-  //         window.location.reload()
-  //       }, 0);
-  //     }
-  //   }, 1000);
-
-  // }
-
-
-  // const handleOnChange = (event) => {
-
-  //   setCredentials({ ...credentials, [event.target.name]: event.target.value })
-  //   setText1(event.target.value.text1)
-  //   setText2(event.target.value.text2)
-  //   setText3(event.target.value.text3)
-
-  // }
-
-  // const [text1, setText1] = useState("")
-  // const [text2, setText2] = useState("")
-  // const [text3, setText3] = useState("")
-
-  // Switch Colors Active/Closed
-  // if (p.innerHTML === "Active") {
-  //   p.style.color = "Green"
-  // }
-  // else {
-  //   p.style.color = "Red"
-  // }
-
 
   return (
     <>
@@ -1143,7 +1026,7 @@ export default function AdminDashboard() {
               )
             })}
 
-{/* TO DO DIFFERENT MAP HEADER  */}
+
 
             {/* <!-- View FULL Form Details of a particular Dallas User Modal --> */}
             {employeeUserListDallas.map((val) => {
