@@ -363,7 +363,7 @@ export default function AdminDashboard() {
                                 </div>
 
                                 <div className="oders_bar">
-                                  <div style={{ textShadow: "1px 1px 3px grey", boxShadow: "1px 1px 5px #999797" }} onClick={ActiveJobOrdersList} className="order_item active_order" data-bs-toggle="modal" data-bs-target="#ActiveJobOrder">
+                                  <div style={{ textShadow: "1px 1px 3px grey", boxShadow: "1px 1px 5px #999797" }} className="order_item active_order" data-bs-toggle="modal" data-bs-target="#ActiveJobOrder">
                                     <div className="order_icon">
                                       <ion-icon name="hourglass-outline"></ion-icon>
                                     </div>
@@ -374,7 +374,7 @@ export default function AdminDashboard() {
                                   </div>
 
 
-                                  <div style={{ textShadow: "1px 1px 3px grey", boxShadow: "1px 1px 5px #999797" }} onClick={ClosedJobOrdersList} className="order_item closed_order" id="closed_job" data-bs-toggle="modal" data-bs-target="#ClosedJobOrder" >
+                                  <div style={{ textShadow: "1px 1px 3px grey", boxShadow: "1px 1px 5px #999797" }} className="order_item closed_order" id="closed_job" data-bs-toggle="modal" data-bs-target="#ClosedJobOrder" >
                                     <div className="order_icon">
                                       <ion-icon name="checkmark-done-outline"></ion-icon>
                                     </div>
@@ -384,7 +384,7 @@ export default function AdminDashboard() {
                                     </div>
                                   </div>
 
-                                  <div style={{ textShadow: "1px 1px 3px grey", boxShadow: "1px 1px 5px #999797" }} onClick={TotalJobOrdersList} className="order_item total_order active_order_item" id="all_job">
+                                  <div style={{ textShadow: "1px 1px 3px grey", boxShadow: "1px 1px 5px #999797" }} className="order_item total_order active_order_item" id="all_job">
                                     <div className="order_icon">
                                       <ion-icon name="layers-outline"></ion-icon>
                                     </div>
