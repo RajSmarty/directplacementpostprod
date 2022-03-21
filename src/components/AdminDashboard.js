@@ -357,6 +357,7 @@ export default function AdminDashboard() {
                         <div className="dashboard_body">
                           <div className="row">
                             <div className="col-sm-12 col-md-12 col-lg-12">
+                              
                               <div className="home_overview">
                                 <div className="over_overview_heading">
                                   <h4>overview</h4>
@@ -472,8 +473,8 @@ export default function AdminDashboard() {
                                               <td>{val.phone}</td>
                                               <td>{val.enddate}</td>
                                               <td>{val.tempname}</td>
-                                              <td id='statusColorD' className="active_status">
-
+                                              {/* <td id='statusColorD' className="active_status"> */}
+                                              <td>
                                                 <div >
                                                   <p id='paraStatusD' className='paraStatusH' style={{ cursor: "pointer" }} data-bs-toggle="dropdown" aria-expanded="false">
                                                     {val.employeeStatus}
