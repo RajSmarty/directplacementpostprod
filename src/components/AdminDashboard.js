@@ -82,8 +82,6 @@ export default function AdminDashboard() {
       const data = await res.json();
       const datad = await resd.json();
 
-      console.log(data);
-      console.log(datad);
 
       setActiveHoustonCount(data + datad);
 
@@ -122,9 +120,6 @@ export default function AdminDashboard() {
 
       const data = await res.json();
       const datad = await resd.json();
-
-      console.log(data);
-      console.log(datad);
 
       if (data === 0) {
         setClosedHoustonCount(datad);
@@ -174,8 +169,6 @@ export default function AdminDashboard() {
       const data = await res.json();
       const datad = await resd.json();
 
-      console.log(data);
-      console.log(datad);
 
       setAllOrderCount(data + datad);
 
@@ -201,6 +194,14 @@ export default function AdminDashboard() {
     })
   }, [])
 
+  // View Particular Houston Form Map Logic 
+  // const [houstonForm, setHoustonForm] = useState([]);
+  // useEffect((_id) => {
+  //   Axios.get(`https://directplacement.herokuapp.com/api/empuserformh/reads/${_id}`).then((response) => {
+  //     setHoustonForm(response.data)
+  //   })
+  // }, [])
+
   // Dallas Forms Map Logic 
   const [employeeUserListDallas, setEmployeeUserListDallas] = useState([]);
   useEffect(() => {
@@ -208,6 +209,16 @@ export default function AdminDashboard() {
       setEmployeeUserListDallas(response.data)
     })
   }, [])
+
+  // View Particular Dallas Form Map Logic 
+  // const [dallasForm, setDallasForm] = useState([]);
+  // useEffect((_id) => {
+  //   Axios.get(`https://directplacement.herokuapp.com/api/empuserformd/reads/${_id}`).then((response) => {
+  //     setDallasForm(response.data)
+  //   })
+  // }, [])
+
+  
 
 
   // const paraStatusH = document.getElementById("paraStatusH");
@@ -357,7 +368,7 @@ export default function AdminDashboard() {
                         <div className="dashboard_body">
                           <div className="row">
                             <div className="col-sm-12 col-md-12 col-lg-12">
-                              
+
                               <div className="home_overview">
                                 <div className="over_overview_heading">
                                   <h4>overview</h4>
@@ -455,7 +466,7 @@ export default function AdminDashboard() {
                                               </td>
 
                                               {/* View Form Here */}
-                                              <td><button data-bs-toggle="modal" data-bs-target="#formDetailH" style={{ width: "5rem", height: "1.8em", borderRadius: "20%", boxShadow: "1px 1px 4.5px #303030" }} className="btn-primary">View</button></td>
+                                              <td ><button key={val._id} data-bs-toggle="modal" data-bs-target="#formDetailH" style={{ width: "5rem", height: "1.8em", borderRadius: "20%", boxShadow: "1px 1px 4.5px #303030" }} className="btn-primary">View</button></td>
                                             </tr>
                                           </tbody>
                                         )
@@ -755,7 +766,6 @@ export default function AdminDashboard() {
                                   <div className="col-sm-6">
                                     <div className="setting_area">
 
-                                      {/* <form> */}
                                       <div className="form-group">
                                         <label htmlFor="exampleInputEmail1">Name</label>
                                         <input type="text" name='name' className="form-control setting_input" id="exampleInputEmail1"
@@ -770,27 +780,17 @@ export default function AdminDashboard() {
 
                                   <div className="col-sm-6">
                                     <div className="setting_area">
-                                      {/* <form> */}
                                       <div className="form-group">
                                         <label htmlFor="exampleInputEmail1">Staffing Manager</label>
                                         <input type="text" name='staffingmanager' className="form-control setting_input" id="exampleInputEmail1"
                                           aria-describedby="emailHelp" placeholder="Empty Field"
                                           value={val.staffingmanager} readOnly style={{ fontWeight: "Bold" }} />
                                       </div>
-                                      {/* <div className="form-group" style={{ marginTop: "3%" }}>
-                      <label htmlFor="exampleInputEmail1" style={{ marginBottom: "3.1%" }}>Hourly Billing Rate</label> */}
-                                      {/* <input type="text" className="form-control setting_input" id="exampleInputEmail1"
-                        aria-describedby="emailHelp" placeholder="" onChange={handleOnChange} readonly="readonly" value={text1} /> */}
-
-                                      {/* <input style={{ fontWeight: "bold", color: "#7d7d7d", backgroundColor: "white" }} className="form-control setting_input" type="text" placeholder="" name='hourlybillingrate'  readOnly />
-                    </div> */}
-                                      {/* </form> */}
                                     </div>
                                   </div>
 
                                   <div className="col-sm-6">
                                     <div className="setting_area">
-                                      {/* <form> */}
                                       <div className="form-group mt-3">
                                         <label htmlFor="exampleInputEmail1">Company Name</label>
                                         <input name='companyname' type="text" className="form-control setting_input" id="exampleInputEmail1"
@@ -801,13 +801,11 @@ export default function AdminDashboard() {
                                         <input name='companyaddress' type="text" className="form-control setting_input" id="exampleInputEmail1"
                                           aria-describedby="emailHelp" placeholder="Empty Field" value={val.companyaddress} readOnly style={{ fontWeight: "Bold" }} />
                                       </div>
-                                      {/* </form> */}
                                     </div>
                                   </div>
 
                                   <div className="col-sm-6">
                                     <div className="setting_area">
-                                      {/* <form> */}
 
                                       <div className="form-group mt-3">
                                         <label htmlFor="exampleInputEmail1">Phone No</label>
@@ -822,7 +820,6 @@ export default function AdminDashboard() {
                                           aria-describedby="emailHelp" placeholder="Empty Field" value={val.fax} readOnly style={{ fontWeight: "Bold" }} />
                                       </div>
 
-                                      {/* </form> */}
                                     </div>
                                   </div>
                                 </div>
@@ -832,25 +829,21 @@ export default function AdminDashboard() {
                                 <div className="row">
                                   <div className="col-sm-6">
                                     <div className="setting_area">
-                                      {/* <form> */}
                                       <div className="form-group">
                                         <label htmlFor="exampleInputEmail1">Manager's Name/Who Ordered Temp</label>
                                         <input name='managernamewhoorderedtemp' type="text" className="form-control setting_input" id="exampleInputEmail1"
                                           aria-describedby="emailHelp" placeholder="Empty Field" value={val.managernamewhoorderedtemp} readOnly style={{ fontWeight: "Bold" }} />
                                       </div>
-                                      {/* </form> */}
                                     </div>
                                   </div>
 
                                   <div className="col-sm-6">
                                     <div className="setting_area">
-                                      {/* <form> */}
                                       <div className="form-group">
                                         <label htmlFor="exampleInputEmail1">Manager's E-mail Address</label>
                                         <input name='manageremailaddress' type="email" className="form-control setting_input" id="exampleInputEmail1"
                                           aria-describedby="emailHelp" placeholder="Empty Field" value={val.manageremailaddress} readOnly style={{ fontWeight: "Bold" }} />
                                       </div>
-                                      {/* </form> */}
                                     </div>
                                   </div>
                                 </div>
@@ -858,35 +851,29 @@ export default function AdminDashboard() {
                                 <div className="row">
                                   <div className="col-sm-4">
                                     <div className="setting_area">
-                                      {/* <form> */}
                                       <div className="form-group mt-3">
                                         <label htmlFor="exampleFormControlSelect1">Property Grade</label>
                                         <input className="form-control setting_input" type="text" name="propertygrade" id="propertygrade" placeholder="Empty Field" value={val.propertygrade} readOnly style={{ fontWeight: "Bold" }} />
                                       </div>
-                                      {/* </form> */}
                                     </div>
                                   </div>
 
                                   <div className="col-sm-4">
                                     <div className="setting_area">
-                                      {/* <form> */}
                                       <div className="form-group mt-3">
                                         <label htmlFor="exampleInputEmail1">Number of Units</label>
                                         <input name='numberofunits' type="email" className="form-control setting_input" id="exampleInputEmail1"
                                           aria-describedby="emailHelp" placeholder="Empty Field" value={val.numberofunits} readOnly style={{ fontWeight: "Bold" }} />
                                       </div>
-                                      {/* </form> */}
                                     </div>
                                   </div>
 
                                   <div className="col-sm-4">
                                     <div className="setting_area">
-                                      {/* <form> */}
                                       <div className="form-group mt-3">
                                         <label htmlFor="exampleInputEmail1">Bilingual</label>
                                         <input className="form-control setting_input" type="text" name="bilingual" id="bilingual" placeholder="Empty Field" value={val.bilingual} readOnly style={{ fontWeight: "Bold" }} />
                                       </div>
-                                      {/* </form> */}
                                     </div>
                                   </div>
                                 </div>
@@ -894,25 +881,21 @@ export default function AdminDashboard() {
                                 <div className="row">
                                   <div className="col-sm-6">
                                     <div className="setting_area">
-                                      {/* <form> */}
                                       <div className="form-group mt-3">
                                         <label htmlFor="exampleInputEmail1">Software</label>
                                         <input name='software' type="text" className="form-control setting_input" id="exampleInputEmail1"
                                           aria-describedby="emailHelp" placeholder="Empty Field" value={val.software} readOnly style={{ fontWeight: "Bold" }} />
                                       </div>
-                                      {/* </form> */}
                                     </div>
                                   </div>
 
                                   <div className="col-sm-6">
                                     <div className="setting_area">
-                                      {/* <form> */}
                                       <div className="form-group mt-3">
                                         <label htmlFor="exampleInputEmail1">Permanent Pay Rate</label>
                                         <input name='permanentpayrate' type="email" className="form-control setting_input" id="exampleInputEmail1"
                                           aria-describedby="emailHelp" placeholder="Empty Field" value={val.permanentpayrate} readOnly style={{ fontWeight: "Bold" }} />
                                       </div>
-                                      {/* </form> */}
                                     </div>
                                   </div>
                                 </div>
@@ -920,34 +903,28 @@ export default function AdminDashboard() {
                                 <div className="row">
                                   <div className="col-sm-4">
                                     <div className="setting_area">
-                                      {/* <form> */}
                                       <div className="form-group mt-3">
                                         <label htmlFor="exampleFormControlSelect1">Tax Credit</label>
                                         <input className="form-control setting_input" type="text" name="taxcredit" id="taxcredit" placeholder="Empty Field" value={val.taxcredit} readOnly style={{ fontWeight: "Bold" }} />
                                       </div>
-                                      {/* </form> */}
                                     </div>
                                   </div>
 
                                   <div className="col-sm-4">
                                     <div className="setting_area">
-                                      {/* <form> */}
                                       <div className="form-group mt-3">
                                         <label htmlFor="exampleFormControlSelect1">Type of Assignment</label>
                                         <input className="form-control setting_input" type="text" name="typeofassignment" id="typeofassignment" placeholder="Empty Field" value={val.typeofassignment} readOnly style={{ fontWeight: "Bold" }} />
                                       </div>
-                                      {/* </form> */}
                                     </div>
                                   </div>
 
                                   <div className="col-sm-4">
                                     <div className="setting_area">
-                                      {/* <form> */}
                                       <div className="form-group mt-3">
                                         <label htmlFor="exampleInputEmail1">EPA Certified</label>
                                         <input className="form-control setting_input" type="text" name="epacertified" id="epacertified" placeholder="Empty Field" value={val.epacertified} readOnly style={{ fontWeight: "Bold" }} />
                                       </div>
-                                      {/* </form> */}
                                     </div>
                                   </div>
                                 </div>
@@ -955,14 +932,11 @@ export default function AdminDashboard() {
                                 <div className="row">
                                   <div className="col-sm-6">
                                     <div className="setting_area">
-                                      {/* <form> */}
                                       <div className="form-group mt-3">
                                         <label htmlFor="exampleInputEmail1">Temp's Name</label>
                                         <input type="text" name='tempname' className="form-control setting_input" id="exampleInputEmail1"
                                           aria-describedby="emailHelp" placeholder="Empty Field"
                                           value={val.tempname} readOnly style={{ fontWeight: "Bold" }}
-                                        // value={userData.temp}
-                                        // onChange={handleInputs}
                                         />
                                       </div>
                                       <div className="form-group mt-3">
@@ -975,13 +949,11 @@ export default function AdminDashboard() {
                                         <input name='temporaraypayrate' type="text" className="form-control setting_input" id="exampleInputEmail1"
                                           aria-describedby="emailHelp" placeholder="Empty Field" value={val.temporaraypayrate} readOnly style={{ fontWeight: "Bold" }} />
                                       </div>
-                                      {/* </form> */}
                                     </div>
                                   </div>
 
                                   <div className="col-sm-6">
                                     <div className="setting_area">
-                                      {/* <form> */}
                                       <div className="form-group mt-3">
                                         <label htmlFor="exampleInputEmail1">Start Date</label>
                                         <input name='startdate' type="text" className="form-control setting_input" id="exampleInputEmail1"
@@ -992,19 +964,16 @@ export default function AdminDashboard() {
                                         <input name='enddate' type="text" className="form-control setting_input" id="exampleInputEmail1"
                                           aria-describedby="emailHelp" placeholder="Empty Field" value={val.enddate} readOnly style={{ fontWeight: "Bold" }} />
                                       </div>
-                                      {/* </form> */}
                                     </div>
                                   </div>
 
                                   <div className="col-sm-12">
                                     <div className="setting_area">
-                                      {/* <form> */}
                                       <div className="form-group mt-3">
                                         <label htmlFor="exampleFormControlTextarea1">Your Message(Optional)</label>
                                         <textarea name='yourmessage' className="form-control setting_input" id="exampleFormControlTextarea1" rows="4"
                                           placeholder="Empty Field" value={val.yourmessage} readOnly style={{ fontWeight: "Bold" }}></textarea>
                                       </div>
-                                      {/* </form> */}
                                     </div>
                                   </div>
                                 </div>
@@ -1012,10 +981,6 @@ export default function AdminDashboard() {
                             </div>
                           </div>
                         </section>
-
-
-
-
                       </div>
 
                       <div className="modal-footer">
