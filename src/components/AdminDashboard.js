@@ -227,7 +227,7 @@ export default function AdminDashboard() {
   // const statusColorH = document.getElementById("statusColorH");
   // const statusColorD = document.getElementById("statusColorD");
   // let p = document.getElementsByTagName("p")
-  
+
 
   setTimeout(() => {
 
@@ -655,7 +655,7 @@ export default function AdminDashboard() {
 
 
 
-
+            {/*<<<<<<<<---------- MODALS STARTS FROM HERE:- ------------->>>>>>> */}
 
             {/* <!-- Active Order Modal --> */}
             <div className="modal fade" id="ActiveJobOrder" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -824,7 +824,7 @@ export default function AdminDashboard() {
                                 <td>{val.phone}</td>
                                 <td>{val.enddate}</td>
                                 <td>{val.tempname}</td>
-                                <td id='statusColorD' className="deactive_status">
+                                <td id='statusColorD' className="active_status">
 
                                   <div >
                                     <p id='paraStatusD' style={{ cursor: "pointer" }} data-bs-toggle="dropdown" aria-expanded="false">
@@ -848,7 +848,7 @@ export default function AdminDashboard() {
 
 
 
-            {/* <!-- View Form Houston Modal --> */}
+            {/* <!-- View FULL Form Details of a particular Houston User Modal --> */}
             {employeeUserList.map((val) => {
               return (
                 <div key={val._id} className="modal fade" id="formDetailH" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -858,7 +858,7 @@ export default function AdminDashboard() {
                       <div className="modal-header text-center">
                         <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100vw" }}>
 
-                          <h4 className="text-center" style={{ fontWeight: "bold" }} >{val.name}</h4>
+                          <h4 className="text-center" style={{ fontWeight: "bold" }} ><span style={{ color: "grey" }}>User: </span>{val.name}</h4>
                         </div>
                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
@@ -1143,9 +1143,9 @@ export default function AdminDashboard() {
               )
             })}
 
+{/* TO DO DIFFERENT MAP HEADER  */}
 
-
-            {/* <!-- View Form Dallas Modal --> */}
+            {/* <!-- View FULL Form Details of a particular Dallas User Modal --> */}
             {employeeUserListDallas.map((val) => {
               return (
                 <div key={val._id} className="modal fade" id="formDetailD" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
