@@ -1306,7 +1306,7 @@ export default function AdminDashboard() {
 
                   <div className="modal-body">
                     <div className="form-group">
-                      <label htmlFor="exampleFormControlSelect1">Select State</label>
+                      <label htmlFor="exampleFormControlSelect1">Select City</label>
                       <select style={{ marginTop: "5px" }} className="form-control" id="exampleFormControlSelect1"
                         onChange={(e) => {
                           const selectedState = e.target.value;
