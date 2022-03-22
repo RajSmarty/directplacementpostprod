@@ -16,8 +16,21 @@ export default function AdminDashboard() {
     }, 1000);
   }
 
+  
+  // Select Cities from Texas 
+  const [selectState, setSelectState] = useState("");
+  const onClickProceed = () => {
+    if (selectState === "Dallas") {
+      window.location.href = "/empdallasreg"
+    }
 
-  // ACTIVE ORDERS HOUSTON
+    else if (selectState === "Houston") {
+      window.location.href = "/emphoustonreg"
+    }
+  }
+
+
+  // ACTIVE ORDERS HOUSTON + DALLAS
   const [activeList, setActiveList] = useState([]);
   const [activeDList, setActiveDList] = useState([]);
   useEffect(() => {
@@ -32,7 +45,7 @@ export default function AdminDashboard() {
   }, [])
 
 
-  // CLOSED ORDERS 
+  // CLOSED ORDERS HOUSTON + DALLAS
   const [closedList, setClosedList] = useState([]);
   const [closedDList, setClosedDList] = useState([]);
   useEffect(() => {
@@ -47,20 +60,7 @@ export default function AdminDashboard() {
   }, [])
 
 
-  // Select Cities from Texas 
-  const [selectState, setSelectState] = useState("");
-  const onClickProceed = () => {
-    if (selectState === "Dallas") {
-      window.location.href = "/empdallasreg"
-    }
-
-    else if (selectState === "Houston") {
-      window.location.href = "/emphoustonreg"
-    }
-  }
-
-
-  // All Active orders from Houston & Dallas 
+  // All ACTIVE ORDERS from Houston & Dallas 
   const [activeHoustonCount, setActiveHoustonCount] = useState();
   const numActiveHouston = async () => {
     try {
@@ -99,7 +99,7 @@ export default function AdminDashboard() {
   });
 
 
-  // All Closed orders from Houston & Dallas 
+  // All CLOSED ORDERS from Houston & Dallas 
   const [closedHoustonCount, setClosedHoustonCount] = useState();
   const numClosedHouston = async () => {
     try {
