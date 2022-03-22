@@ -221,14 +221,14 @@ a:hover {
 
 .user_id_img {
     width: 100px;
-    height: 100px;
+    height: 98px;
     border-radius: 50%;
-    overflow: hidden;
+    /* overflow: hidden; */
     margin: 30px auto 15px;
     border: 5px solid #00a2e5;
 }
 .user_id_img img {
-    width: 100%;
+    /* width: 100%; */
 }
 /* Style the tab content */
 .dashboard_area .tabcontent {

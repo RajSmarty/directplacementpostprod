@@ -22,7 +22,7 @@ export default function EmpDashboard() {
   const [items, setItems] = useState([])
   const onSubmitHandler = async (e) => {
     e.preventDefault();
-    
+
     setSpinner(<Spinner />);
     const result = await createItem(item);
 
@@ -36,8 +36,8 @@ export default function EmpDashboard() {
 
   useEffect(() => {
     const fetchData = async () => {
-      
-      
+
+
       const result = await getItems();
       console.log('fetch data from', result)
       setItems(result)
@@ -214,13 +214,10 @@ export default function EmpDashboard() {
                         {/* <img style={{ cursor: "pointer" }} src={userDP} alt="Images" data-bs-toggle="modal" data-bs-target="#changeImg" /> */}
 
 
-                        <div className="user_id_img" data-bs-toggle="modal" data-bs-target="#changeImg" style={{ cursor: "pointer" }}>
-                          {items?.reverse().map(item => (
-
-                            <div className="card" key={item._id}>
-                              <div className="card-image waves-effect waves-block waves-light">
-                                <img className="activator" style={{ width: '100%', height: "5.5rem", borderRadius: "50%" }} src={item.image} alt="" />
-                              </div>
+                        <div className="" data-bs-toggle="modal" data-bs-target="#changeImg" style={{ cursor: "pointer", display: "flex", flexDirection: "column-reverse" }}>
+                          {items?.map(item => (
+                            <div key={item._id}>
+                              <img className="activator" style={{ marginTop: "1rem", marginLeft: "7.5rem", width: '100px', height: "6rem", borderRadius: "50%", position: "absolute", border: "4px solid #00a2e5" }} src={item.image} alt="" />
                             </div>
                           ))}
                         </div>
@@ -231,7 +228,7 @@ export default function EmpDashboard() {
                         {json.map((jsonobj) => {
                           return (
                             <>
-                              <section key={jsonobj._id} jsonobj={jsonobj}>
+                              <section style={{ marginTop: "8rem" }} key={jsonobj._id} jsonobj={jsonobj}>
                                 <div className="user_id_name" style={{ display: "flex", justifyContent: "space-between" }}>
                                   <p style={{ marginLeft: "6.5em", fontWeight: "bold" }}>{jsonobj.name}{" "}</p>
                                   <ion-icon name="create-outline" style={{ fontSize: "20px", marginRight: "4.5em", cursor: "pointer" }} data-bs-toggle="modal" data-bs-target="#changeName"></ion-icon>
@@ -531,7 +528,7 @@ export default function EmpDashboard() {
                     <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100vw" }}>
                       {/* <button onClick={onFormSubmit} type="button" className="btn btn-primary" >Upload</button> */}
                       <span ref={refClose} className="" data-bs-dismiss="modal"></span>
-                      <button id='uploaderBtn' style={{ display: "flex", justifyContent: "center", width: "40%"}} onClick={onSubmitHandler} type="button" className="btn btn-primary" >Upload {spinner}</button>
+                      <button id='uploaderBtn' style={{ display: "flex", justifyContent: "center", width: "40%" }} onClick={onSubmitHandler} type="button" className="btn btn-primary" >Upload {spinner}</button>
                     </div>
                   </div>
                 </div>
