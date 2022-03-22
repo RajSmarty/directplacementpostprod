@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState, useRef } from 'react'
 // import React, { useContext, useEffect, useState } from 'react'
 import { Link, useHistory } from 'react-router-dom';
 import navLogoImg from '../images/logo.png';
-// import userDP from '../images/customer2.png';
+import userDP from '../images/dp.jpg';
 import Axios from 'axios';
 import AccessDenied from './AccessDenied';
 import codeContext from "../context/codes/codeContext"
@@ -215,6 +215,11 @@ export default function EmpDashboard() {
 
 
                         <div className="" data-bs-toggle="modal" data-bs-target="#changeImg" style={{ cursor: "pointer", display: "flex", flexDirection: "column-reverse" }}>
+                        {items.length===0 && 
+                        <div style={{  marginTop: "1rem", marginLeft: "7.5rem", width: '100px', height: "6.25rem", borderRadius: "50%",  border: "4px solid #00a2e5" }}>
+                          <img style={{borderRadius:"50%", width:"100%"}} src={userDP} alt="" />
+                        </div>
+                        }
                           {items?.map(item => (
                             <div key={item._id}>
                               <img className="activator" style={{ marginTop: "1rem", marginLeft: "7.5rem", width: '100px', height: "6rem", borderRadius: "50%", position: "absolute", border: "4px solid #00a2e5" }} src={item.image} alt="" />
