@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState, useRef } from 'react'
 // import React, { useContext, useEffect, useState } from 'react'
 import { Link, useHistory } from 'react-router-dom';
 import navLogoImg from '../images/logo.png';
-// import userDP from '../images/customer2.png';
+import userDP from '../images/customer2.png';
 import Axios from 'axios';
 import AccessDenied from './AccessDenied';
 import codeContext from "../context/codes/codeContext"
@@ -194,13 +194,15 @@ export default function EmpDashboardD() {
                     <div className="col-sm-3 tab_bg">
                       <div className="dashboard_tab sticky">
 
-                      <div className="user_id_img" data-bs-toggle="modal" data-bs-target="#changeImg" style={{ cursor: "pointer" }}>
-                          {items?.reverse().map(item => (
-
-                            <div className="card" key={item._id}>
-                              <div className="card-image waves-effect waves-block waves-light">
-                                <img className="activator" style={{ width: '100%', height: "5.5rem", borderRadius: "50%" }} src={item.image} alt="" />
-                              </div>
+                      <div className="" data-bs-toggle="modal" data-bs-target="#changeImg" style={{ cursor: "pointer", display: "flex", flexDirection: "column-reverse" }}>
+                        {items.length===0 && 
+                        <div style={{  marginTop: "1rem", marginLeft: "7.5rem", width: '100px', height: "6.25rem", borderRadius: "50%",  border: "4px solid #00a2e5" }}>
+                          <img style={{borderRadius:"50%", width:"100%"}} src={userDP} alt="" />
+                        </div>
+                        }
+                          {items?.map(item => (
+                            <div key={item._id}>
+                              <img className="activator" style={{ marginTop: "1rem", marginLeft: "7.5rem", width: '100px', height: "6rem", borderRadius: "50%", position: "absolute", border: "4px solid #00a2e5" }} src={item.image} alt="" />
                             </div>
                           ))}
                         </div>
@@ -209,7 +211,7 @@ export default function EmpDashboardD() {
                         {jsonD.map((jsonobjD) => {
                           return (
                             <>
-                              <section key={jsonobjD._id} jsonobjD={jsonobjD}>
+                              <section style={{ marginTop: "8rem" }} key={jsonobjD._id} jsonobjD={jsonobjD}>
                                 <div className="user_id_name" style={{ display: "flex", justifyContent: "space-between" }}>
                                   <p style={{ marginLeft: "6.5em", fontWeight: "bold" }}>{jsonobjD.name}{" "}</p>
                                   <ion-icon name="create-outline" style={{ fontSize: "20px", marginRight: "4.5em", cursor: "pointer" }} data-bs-toggle="modal" data-bs-target="#changeName"></ion-icon>

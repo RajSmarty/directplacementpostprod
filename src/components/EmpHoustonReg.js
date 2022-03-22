@@ -45,7 +45,7 @@ export default function EmpHoustonReg() {
 
                 setTimeout(() => {
                     localStorage.setItem('token', data.authtoken);
-                    history.push("/admindashboard");
+                    history.push("/adminempdash");
                 }, 11000);
                 // }, 0);
 

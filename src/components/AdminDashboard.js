@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import navLogoImg from '../images/logo.png';
 import userDP from '../images/user.jpg';
 import AccessDenied from './AccessDenied';
+import {Link} from "react-router-dom";
 
 export default function AdminDashboard() {
   let history = useHistory();
@@ -352,8 +353,8 @@ export default function AdminDashboard() {
 
                       <div className="tab">
                         <button className="tablinks active"><b></b><b></b><span><ion-icon name="home-outline"></ion-icon></span>home</button>
-                        {/* <button className="tablinks" ><b></b><b></b><span><ion-icon name="person-outline"></ion-icon></span>employee</button>
-                        <button className="tablinks"><b></b><b></b><span><ion-icon name="cart-outline"></ion-icon></span>Sales</button> */}
+                       <Link to="/adminempdash"><button className="tablinks" ><b></b><b></b><span><ion-icon name="person-outline"></ion-icon></span>employee</button></Link>
+                        {/* <button className="tablinks"><b></b><b></b><span><ion-icon name="cart-outline"></ion-icon></span>Sales</button> */}
 
                       </div>
                     </div>

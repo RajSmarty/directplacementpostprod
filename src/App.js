@@ -13,6 +13,7 @@ import EmpDashboardD from './components/EmpDashboardD';
 import Formtexas from './components/Formtexas';
 import FormHouston from './components/FormHouston';
 import AdminDashboard from './components/AdminDashboard';
+import AdminEMPDash from './components/AdminEMPDash';
 import Admin from './components/Admin';
 import AdminSignup from './components/AdminSignup';
 import AccessDenied from './components/AccessDenied';
@@ -58,6 +59,10 @@ function App() {
 
               <Route exact path="/admindashboard">
                 <AdminDashboard />
+              </Route>
+
+              <Route exact path="/adminempdash">
+                <AdminEMPDash/>
               </Route>
 
               <Route exact path="/empdash">
