@@ -753,9 +753,11 @@ export default function AdminDashboard() {
                   <div className="modal-dialog modal-dialog-centered modal-xl">
                     <div className="modal-content">
                       <div className="modal-header text-center">
-                        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100vw" }}>
+                        <div style={{ display: "flex" , justifyContent: "center", alignItems: "center", width: "100vw" }}>
 
-                          <h4 className="text-center" style={{ fontWeight: "bold" }} ><span style={{ color: "grey" }}>User: </span>{val.name}</h4>
+                          <h4 className="text-center" style={{ fontWeight: "bold" }} ><span style={{ color: "grey" }}>User: </span>{val.name} </h4>
+                          <span className='mx-2' style={{fontSize:"28px", marginBottom:"0.4rem", color:"#0293cf", fontWeight:"lighter"}}>|</span>
+                          <h4 className="text-center" style={{ fontWeight: "bold" }} ><span style={{ color: "grey" }}> Status: </span>{val.employeeStatus}</h4>
                         </div>
                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
