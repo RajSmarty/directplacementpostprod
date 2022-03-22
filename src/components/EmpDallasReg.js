@@ -1,11 +1,15 @@
 import React from 'react'
 import {  useHistory } from 'react-router-dom'
 import { useState } from 'react'
+import Spinner from './SpinnerLogin';
+
 
 export default function EmpDallasReg() {
 
     // const loaderBtn = document.getElementById("loaderBtn");
     let history = useHistory();
+  const [spinner, setSpinner] = useState("")
+
 
     const [credentials, setCredentials] = useState({ name: "", position: "", email: "", phone: "", password: "" })
 
@@ -24,7 +28,10 @@ export default function EmpDallasReg() {
             // setLoader(<LoaderMUI />);
             // setSpinner(<Spinner />);
         }
+        else {
 
+            setSpinner(<Spinner />);
+          }
 
         const { name, position, email, phone, password } = credentials;
         const response = await fetch("https://directplacement.herokuapp.com/api/authd/signup", {
@@ -46,7 +53,7 @@ export default function EmpDallasReg() {
                 setTimeout(() => {
                     localStorage.setItem('token', data.authtoken);
                     history.push("/adminempdash");
-                }, 11000);
+                }, 1000);
                 // }, 0);
 
             }
@@ -166,10 +173,10 @@ export default function EmpDallasReg() {
                             </div>
 
                             {/* Create Button Section */}
-                            <div className="container" style={{ width: "35%" }}>
-                                <button style={{ backgroundColor: "#019140", color: "white" }} id="loaderBtn" disabled={credentials.email.length === 0 || credentials.password.length === 0} type="submit" className="btn mt-3 my-1 mx-4"
+                            <div className="container" style={{ width: "100%", marginLeft:"18%" }}>
+                                <button style={{display: "flex", justifyContent: "center",  backgroundColor: "#019140", color: "white", width:"50%" }} id="loaderBtn" disabled={credentials.email.length === 0 || credentials.password.length === 0} type="submit" className="btn mt-3 my-1 mx-4"
                                  
-                                >Create</button>
+                                >Create{spinner}</button>
                             </div>
                         </form>
                     </div>

@@ -1,11 +1,15 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
 import { useState } from 'react'
+import Spinner from './SpinnerLogin';
+
 
 export default function EmpHoustonReg() {
 
     // const loaderBtn = document.getElementById("loaderBtn");
     let history = useHistory();
+  const [spinner, setSpinner] = useState("")
+
     const [credentials, setCredentials] = useState({ name: "", position: "", email: "", phone: "", password: "" })
 
 
@@ -24,7 +28,10 @@ export default function EmpHoustonReg() {
             // setLoader(<LoaderMUI />);
             // setSpinner(<Spinner />);
         }
+        else {
 
+            setSpinner(<Spinner />);
+          }
 
         const { name, position, email, phone, password, pic: url } = credentials;
         const response = await fetch("https://directplacement.herokuapp.com/signup", {
@@ -46,7 +53,7 @@ export default function EmpHoustonReg() {
                 setTimeout(() => {
                     localStorage.setItem('token', data.authtoken);
                     history.push("/adminempdash");
-                }, 11000);
+                }, 1000);
                 // }, 0);
 
             }
@@ -167,9 +174,9 @@ export default function EmpHoustonReg() {
                             </div>
 
                             {/* Create Button Section */}
-                            <div className="container" style={{ width: "35%" }}>
-                                <button style={{ backgroundColor: "#019140", color: "white" }} id="loaderBtn" disabled={credentials.email.length === 0 || credentials.password.length === 0} type="submit" className="btn mt-3 my-1 mx-4"
-                                >Create</button>
+                            <div className="container" style={{ width: "100%", marginLeft:"18%"  }}>
+                                <button style={{display: "flex", justifyContent: "center",  backgroundColor: "#019140", color: "white",width:"50%" }} id="loaderBtn" disabled={credentials.email.length === 0 || credentials.password.length === 0} type="submit" className="btn mt-3 my-1 mx-4"
+                                >Create{spinner}</button>
                             </div>
                         </form>
                     </div>
