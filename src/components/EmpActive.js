@@ -29,8 +29,8 @@ export default function EmpActive() {
                         <thead style={{ borderBottom: "2px solid #dee2e6", borderTop: "1px solid #dee2e6" }}>
                             <tr >
                                 <th scope="col">Date</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Place</th>
+                                <th scope="col">Property Name</th>
+                                <th scope="col">City</th>
                                 <th scope="col">Phone</th>
                                 <th scope="col">End Date</th>
                                 <th scope="col">Temp Name</th>
@@ -43,8 +43,8 @@ export default function EmpActive() {
                             return (
                                 <tbody key={key}>
                                     <tr style={{ fontWeight: "bold", color: "#141414" }}>
-                                        <td style={{ color: "grey" }}>{val.startdate}</td>
-                                        <td>{val.name}</td>
+                                        <td style={{ color: "grey" }}>{val.todaydate}</td>
+                                        <td>{val.propertyname}</td>
                                         <td>Houston</td>
                                         <td>{val.phone}</td>
                                         <td>{val.enddate}</td>

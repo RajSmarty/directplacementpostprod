@@ -11,56 +11,56 @@ const Codestate = (props) => {
 
 
 
-// Get Houston User Details
-const getUserDetails = async () => {
-  // API Call 
-  const response = await fetch(`${host}/getuser`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      "auth-token": localStorage.getItem("token"),
-    }
-  });
-  // const json = await response.json()
-  const jsonobj = await response.json();
+  // Get Houston User Details
+  const getUserDetails = async () => {
+    // API Call 
+    const response = await fetch(`${host}/getuser`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        "auth-token": localStorage.getItem("token"),
+      }
+    });
+    // const json = await response.json()
+    const jsonobj = await response.json();
     setJson(json.concat(jsonobj))
-  console.log(json)
-  // setJson(json)
-}
+    console.log(json)
+    // setJson(json)
+  }
 
-// Get Dallas User Details
-const getUserdDetails = async () => {
-  // API Call 
-  const response = await fetch(`${host}/api/authd/getuserd`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      "auth-token": localStorage.getItem("token"),
-    }
-  });
-  // const json = await response.json()
-  const jsonobjD = await response.json();
+  // Get Dallas User Details
+  const getUserdDetails = async () => {
+    // API Call 
+    const response = await fetch(`${host}/api/authd/getuserd`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        "auth-token": localStorage.getItem("token"),
+      }
+    });
+    // const json = await response.json()
+    const jsonobjD = await response.json();
     setJsonD(jsonD.concat(jsonobjD))
-  console.log(jsonD)
-  // setJson(json)
-}
+    console.log(jsonD)
+    // setJson(json)
+  }
 
 
-const getImages = async () => {
-  // API Call 
-  const response = await fetch(`${host}/api/img/getimage`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      "auth-token": localStorage.getItem("token"),
-    }
-  });
-  // const json = await response.json()
-  const jsonimg = await response.json();
+  const getImages = async () => {
+    // API Call 
+    const response = await fetch(`${host}/api/img/getimage`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        "auth-token": localStorage.getItem("token"),
+      }
+    });
+    // const json = await response.json()
+    const jsonimg = await response.json();
     setImage(image.concat(jsonimg))
-  console.log(image)
-  // setJson(json)
-}
+    console.log(image)
+    // setJson(json)
+  }
 
   // Get all Codes
   const getCodes = async () => {
@@ -91,7 +91,7 @@ const getImages = async () => {
   }
 
   // Add a Code
-  const addCode = async (name, staffingmanager, companyname, phone, companyaddress, fax, managernamewhoorderedtemp, manageremailaddress, propertygrade, numberofunits, bilingual, software, permanentpayrate, taxcredit, typeofassignment, epacertified, tempname, startdate, phoneno, enddate, temporaraypayrate, yourmessage, status) => {
+  const addCode = async (todaydate, staffingmanager, propertyname, phone, propertyaddress, fax, managementcompanyname, billingemailaddress, managernamewhoorderedtemp, manageremailaddress, propertygrade, numberofunits, bilingual, software, permanentpayrate, taxcredit, typeofassignment, epacertified, tempname, startdate, phoneno, enddate, temporaraypayrate, yourmessage, status) => {
     // TODO: API Call
     // API Call 
     const response = await fetch(`${host}/addcode`, {
@@ -101,7 +101,7 @@ const getImages = async () => {
         "auth-token": localStorage.getItem("token"),
 
       },
-      body: JSON.stringify({ name, staffingmanager, companyname, phone, companyaddress, fax, managernamewhoorderedtemp, manageremailaddress, propertygrade, numberofunits, bilingual, software, permanentpayrate, taxcredit, typeofassignment, epacertified, tempname, startdate, phoneno, enddate, temporaraypayrate, yourmessage, status})
+      body: JSON.stringify({ todaydate, staffingmanager, propertyname, phone, propertyaddress, fax, managementcompanyname, billingemailaddress, managernamewhoorderedtemp, manageremailaddress, propertygrade, numberofunits, bilingual, software, permanentpayrate, taxcredit, typeofassignment, epacertified, tempname, startdate, phoneno, enddate, temporaraypayrate, yourmessage, status })
     });
 
     const code = await response.json();
@@ -110,7 +110,7 @@ const getImages = async () => {
 
 
   // Add Houston Admin Code
-  const addHoustonAdmin = async (name, staffingmanager, companyname, phone, companyaddress, fax, managernamewhoorderedtemp, manageremailaddress, propertygrade, numberofunits, bilingual, software, permanentpayrate, taxcredit, typeofassignment, epacertified, tempname, startdate, phoneno, enddate, temporaraypayrate, yourmessage, employeeStatus) => {
+  const addHoustonAdmin = async (todaydate, staffingmanager, propertyname, phone, propertyaddress, fax, managementcompanyname, billingemailaddress, managernamewhoorderedtemp, manageremailaddress, propertygrade, numberofunits, bilingual, software, permanentpayrate, taxcredit, typeofassignment, epacertified, tempname, startdate, phoneno, enddate, temporaraypayrate, yourmessage, employeeStatus) => {
     // TODO: API Call
     // API Call 
     const response = await fetch(`${host}/api/empuserformh/insert`, {
@@ -119,7 +119,7 @@ const getImages = async () => {
         'Content-Type': 'application/json',
 
       },
-      body: JSON.stringify({ name, staffingmanager, companyname, phone, companyaddress, fax, managernamewhoorderedtemp, manageremailaddress, propertygrade, numberofunits, bilingual, software, permanentpayrate, taxcredit, typeofassignment, epacertified, tempname, startdate, phoneno, enddate, temporaraypayrate, yourmessage, employeeStatus})
+      body: JSON.stringify({ todaydate, staffingmanager, propertyname, phone, propertyaddress, fax, managementcompanyname, billingemailaddress, managernamewhoorderedtemp, manageremailaddress, propertygrade, numberofunits, bilingual, software, permanentpayrate, taxcredit, typeofassignment, epacertified, tempname, startdate, phoneno, enddate, temporaraypayrate, yourmessage, employeeStatus })
     });
 
     const code = await response.json();
@@ -127,7 +127,7 @@ const getImages = async () => {
   }
 
   // Add Dallas Admin Code
-  const addDallasAdmin = async (name, staffingmanager, companyname, phone, companyaddress, fax, managernamewhoorderedtemp, manageremailaddress, propertygrade, numberofunits, bilingual, software, permanentpayrate, taxcredit, typeofassignment, epacertified, tempname, startdate, phoneno, enddate, temporaraypayrate, yourmessage, employeeStatus) => {
+  const addDallasAdmin = async (todaydate, staffingmanager, propertyname, phone, propertyaddress, fax, managementcompanyname, billingemailaddress, managernamewhoorderedtemp, manageremailaddress, propertygrade, numberofunits, bilingual, software, permanentpayrate, taxcredit, typeofassignment, epacertified, tempname, startdate, phoneno, enddate, temporaraypayrate, yourmessage, employeeStatus) => {
     // TODO: API Call
     // API Call 
     const response = await fetch(`${host}/api/empuserformd/insert`, {
@@ -136,13 +136,13 @@ const getImages = async () => {
         'Content-Type': 'application/json',
 
       },
-      body: JSON.stringify({ name, staffingmanager, companyname, phone, companyaddress, fax, managernamewhoorderedtemp, manageremailaddress, propertygrade, numberofunits, bilingual, software, permanentpayrate, taxcredit, typeofassignment, epacertified, tempname, startdate, phoneno, enddate, temporaraypayrate, yourmessage, employeeStatus})
+      body: JSON.stringify({ todaydate, staffingmanager, propertyname, phone, propertyaddress, fax, managementcompanyname, billingemailaddress, managernamewhoorderedtemp, manageremailaddress, propertygrade, numberofunits, bilingual, software, permanentpayrate, taxcredit, typeofassignment, epacertified, tempname, startdate, phoneno, enddate, temporaraypayrate, yourmessage, employeeStatus })
     });
 
     const code = await response.json();
     setCodes(codes.concat(code))
   }
-  
+
   // Delete a Code
   const deleteCode = async (id) => {
     // API Call
@@ -219,7 +219,7 @@ const getImages = async () => {
 
 
   return (
-    <codeContext.Provider value={{ codes, json, jsonD, getUserDetails, addCode, addHoustonAdmin, addDallasAdmin, deleteCode, editCode, getCodes, getActiveCodes, updateName, getImages,getUserdDetails  }}>
+    <codeContext.Provider value={{ codes, json, jsonD, getUserDetails, addCode, addHoustonAdmin, addDallasAdmin, deleteCode, editCode, getCodes, getActiveCodes, updateName, getImages, getUserdDetails }}>
       {props.children}
     </codeContext.Provider>
   )

@@ -12,20 +12,29 @@ export default function FormDallas() {
   const { addDallasAdmin } = context;
 
 
-  const [code, setCode] = useState({ name: "", staffingmanager: "", companyname: "", phone: "", companyaddress: "", fax: "", managernamewhoorderedtemp: "", manageremailaddress: "", propertygrade: "", numberofunits: "", software: "", permanentpayrate: "", tempname: "", startdate: "", phoneno: "", enddate: "", temporaraypayrate: "", yourmessage: "", status: "Active" })
+  const [code, setCode] = useState({
+    todaydate: "", staffingmanager: "", propertyname: "", phone: "", propertyaddress: "", fax: "", managementcompanyname: "", billingemailaddress: "", managernamewhoorderedtemp: "", manageremailaddress: "", propertygrade: "", numberofunits: "", bilingual: "", software: "", permanentpayrate: "", taxcredit: "",
+    typeofassignment: "", epacertified: "", tempname: "", startdate: "", phoneno: "", enddate: "", temporaraypayrate: "", yourmessage: "", status: "Active"
+  })
 
   const handleClick = (e) => {
     e.preventDefault();
-    addCode(code.name, code.staffingmanager, code.companyname, code.phone, code.companyaddress, code.fax, code.managernamewhoorderedtemp, code.manageremailaddress, code.propertygrade, code.numberofunits, code.software, code.permanentpayrate, code.tempname, code.startdate, code.phoneno, code.enddate, code.temporaraypayrate, code.yourmessage, code.status);
+    addCode(code.todaydate, code.staffingmanager, code.propertyname, code.phone, code.propertyaddress, code.fax, code.managementcompanyname, code.billingemailaddress, code.managernamewhoorderedtemp, code.manageremailaddress, code.propertygrade, code.numberofunits, code.bilingual, code.software, code.permanentpayrate, code.taxcredit, code.typeofassignment, code.epacertified, code.tempname, code.startdate, code.phoneno, code.enddate, code.temporaraypayrate, code.yourmessage, code.status);
 
-    setCode({ name: "", staffingmanager: "", companyname: "", phone: "", companyaddress: "", fax: "", managernamewhoorderedtemp: "", manageremailaddress: "", propertygrade: "", numberofunits: "", software: "", permanentpayrate: "", tempname: "", startdate: "", phoneno: "", enddate: "", temporaraypayrate: "", yourmessage: "", status: "Active" })
+    setCode({
+      todaydate: "", staffingmanager: "", propertyname: "", phone: "", propertyaddress: "", fax: "", managementcompanyname: "", billingemailaddress: "", managernamewhoorderedtemp: "", manageremailaddress: "", propertygrade: "", numberofunits: "", bilingual: "", software: "", permanentpayrate: "", taxcredit: "",
+      typeofassignment: "", epacertified: "", tempname: "", startdate: "", phoneno: "", enddate: "", temporaraypayrate: "", yourmessage: "", status: "Active"
+    })
     setTimeout(() => {
 
-      addDallasAdmin(code.name, code.staffingmanager, code.companyname, code.phone, code.companyaddress, code.fax, code.managernamewhoorderedtemp, code.manageremailaddress, code.propertygrade, code.numberofunits, code.software, code.permanentpayrate, code.tempname, code.startdate, code.phoneno, code.enddate, code.temporaraypayrate, code.yourmessage, code.employeeStatus);
+      addDallasAdmin(code.todaydate, code.staffingmanager, code.propertyname, code.phone, code.propertyaddress, code.fax, code.managementcompanyname, code.billingemailaddress, code.managernamewhoorderedtemp, code.manageremailaddress, code.propertygrade, code.numberofunits, code.bilingual, code.software, code.permanentpayrate, code.taxcredit, code.typeofassignment, code.epacertified, code.tempname, code.startdate, code.phoneno, code.enddate, code.temporaraypayrate, code.yourmessage, code.employeeStatus);
 
-      setCode({ name: "", staffingmanager: "", companyname: "", phone: "", companyaddress: "", fax: "", managernamewhoorderedtemp: "", manageremailaddress: "", propertygrade: "", numberofunits: "", software: "", permanentpayrate: "", tempname: "", startdate: "", phoneno: "", enddate: "", temporaraypayrate: "", yourmessage: "", employeeStatus: "Active" })
+      setCode({
+        todaydate: "", staffingmanager: "", propertyname: "", phone: "", propertyaddress: "", fax: "", managementcompanyname: "", billingemailaddress: "", managernamewhoorderedtemp: "", manageremailaddress: "", propertygrade: "", numberofunits: "", bilingual: "", software: "", permanentpayrate: "", taxcredit: "",
+        typeofassignment: "", epacertified: "", tempname: "", startdate: "", phoneno: "", enddate: "", temporaraypayrate: "", yourmessage: "", employeeStatus: "Active"
+      })
       setTimeout(() => {
-        window.location.href = "/empdashd"
+        window.location.href = "/empdash"
       }, 500);
     }, 1000);
   }
@@ -219,10 +228,10 @@ export default function FormDallas() {
 
                     {/* <form> */}
                     <div className="form-group">
-                      <label htmlFor="exampleInputEmail1">Name</label>
-                      <input type="text" name='name' className="form-control setting_input" id="exampleInputEmail1"
-                        aria-describedby="emailHelp" placeholder="Enter Name"
-                        value={code.name} onChange={onChange}
+                      <label htmlFor="exampleInputEmail1">Today's Date</label>
+                      <input type="date" name='todaydate' className="form-control setting_input" id="exampleInputEmail1"
+                        aria-describedby="emailHelp" placeholder="01/01/2022"
+                        value={code.todaydate} onChange={onChange}
                       // value={userData.username}
                       // onChange={handleInputs}
                       // onChange={(event) => {
@@ -231,8 +240,9 @@ export default function FormDallas() {
                       />
                     </div>
 
+
                     <div className="form-group mt-3" style={{ borderBottom: "1px solid #00a2e5" }}>
-                      <label htmlFor="exampleFormControlSelect1">select position</label>
+                      <label htmlFor="exampleFormControlSelect1">Group positions together by category</label>
                       {/* <select className="form-control setting_input" id="exampleFormControlSelect1"> */}
                       <div className="mt-2 " style={{ width: "85%", textAlign: "start" }} >
                         <div >
@@ -299,14 +309,14 @@ export default function FormDallas() {
                   <div className="setting_area">
                     {/* <form> */}
                     <div className="form-group mt-3">
-                      <label htmlFor="exampleInputEmail1">Company Name</label>
-                      <input name='companyname' type="text" className="form-control setting_input" id="exampleInputEmail1"
-                        aria-describedby="emailHelp" placeholder="Company Name" value={code.companyname} onChange={onChange} />
+                      <label htmlFor="exampleInputEmail1">Property Name</label>
+                      <input name='propertyname' type="text" className="form-control setting_input" id="exampleInputEmail1"
+                        aria-describedby="emailHelp" placeholder="Property Name" value={code.propertyname} onChange={onChange} />
                     </div>
                     <div className="form-group mt-3">
-                      <label htmlFor="exampleInputEmail1">Company Address</label>
-                      <input name='companyaddress' type="text" className="form-control setting_input" id="exampleInputEmail1"
-                        aria-describedby="emailHelp" placeholder="Company Address" value={code.companyaddress} onChange={onChange} />
+                      <label htmlFor="exampleInputEmail1">Property Address</label>
+                      <input name='propertyaddress' type="text" className="form-control setting_input" id="exampleInputEmail1"
+                        aria-describedby="emailHelp" placeholder="Property Address" value={code.propertyaddress} onChange={onChange} />
                     </div>
                     {/* </form> */}
                   </div>
@@ -335,6 +345,33 @@ export default function FormDallas() {
               </div>
 
               <div className="Manager_area mt-5"></div>
+
+
+              <div className="row">
+                <div className="col-sm-6">
+                  <div className="setting_area">
+                    {/* <form> */}
+                    <div className="form-group">
+                      <label htmlFor="exampleInputEmail1">Management Company Name</label>
+                      <input name='managementcompanyname' type="text" className="form-control setting_input" id="exampleInputEmail1"
+                        aria-describedby="emailHelp" placeholder="Management Company Name" value={code.managementcompanyname} onChange={onChange} />
+                    </div>
+                    {/* </form> */}
+                  </div>
+                </div>
+
+                <div className="col-sm-6">
+                  <div className="setting_area">
+                    {/* <form> */}
+                    <div className="form-group">
+                      <label htmlFor="exampleInputEmail1">Billing E-mail Address</label>
+                      <input name='billingemailaddress' type="email" className="form-control setting_input" id="exampleInputEmail1"
+                        aria-describedby="emailHelp" placeholder="Billing E-mail Address" value={code.billingemailaddress} onChange={onChange} />
+                    </div>
+                    {/* </form> */}
+                  </div>
+                </div>
+              </div>
 
               <div className="row">
                 <div className="col-sm-6">

@@ -22,7 +22,7 @@ export default function EmpDashboardD() {
   const [items, setItems] = useState([])
   const onSubmitHandler = async (e) => {
     e.preventDefault();
-    
+
     setSpinner(<Spinner />);
     const result = await createItem(item);
 
@@ -36,8 +36,8 @@ export default function EmpDashboardD() {
 
   useEffect(() => {
     const fetchData = async () => {
-      
-      
+
+
       const result = await getItems();
       console.log('fetch data from', result)
       setItems(result)
@@ -194,12 +194,12 @@ export default function EmpDashboardD() {
                     <div className="col-sm-3 tab_bg">
                       <div className="dashboard_tab sticky">
 
-                      <div className="" data-bs-toggle="modal" data-bs-target="#changeImg" style={{ cursor: "pointer", display: "flex", flexDirection: "column-reverse" }}>
-                        {items.length===0 && 
-                        <div style={{  marginTop: "1rem", marginLeft: "7.5rem", width: '100px', height: "6.25rem", borderRadius: "50%",  border: "4px solid #00a2e5" }}>
-                          <img style={{borderRadius:"50%", width:"100%"}} src={userDP} alt="" />
-                        </div>
-                        }
+                        <div className="" data-bs-toggle="modal" data-bs-target="#changeImg" style={{ cursor: "pointer", display: "flex", flexDirection: "column-reverse" }}>
+                          {items.length === 0 &&
+                            <div style={{ marginTop: "1rem", marginLeft: "7.5rem", width: '100px', height: "6.25rem", borderRadius: "50%", border: "4px solid #00a2e5" }}>
+                              <img style={{ borderRadius: "50%", width: "100%" }} src={userDP} alt="" />
+                            </div>
+                          }
                           {items?.map(item => (
                             <div key={item._id}>
                               <img className="activator" style={{ marginTop: "1rem", marginLeft: "7.5rem", width: '100px', height: "6rem", borderRadius: "50%", position: "absolute", border: "4px solid #00a2e5" }} src={item.image} alt="" />
@@ -216,8 +216,10 @@ export default function EmpDashboardD() {
                                   <p style={{ marginLeft: "6.5em", fontWeight: "bold" }}>{jsonobjD.name}{" "}</p>
                                   <ion-icon name="create-outline" style={{ fontSize: "20px", marginRight: "4.5em", cursor: "pointer" }} data-bs-toggle="modal" data-bs-target="#changeName"></ion-icon>
                                 </div>
-                                <div className="user_designation">
-                                  <p style={{ fontWeight: "bold" }} className="user_position">position: <span>{jsonobjD.position}</span></p>
+                                <div style={{ height: "18rem" }} className="user_designation">
+                                  <p style={{ fontWeight: "bold", textAlign: "left", marginLeft: "6rem" }} className="user_position">position: <span>{jsonobjD.position}</span></p>
+
+                                  <p style={{ fontWeight: "bold", textAlign: "left", marginLeft: "6rem" }} className="user_position">place: <span>{jsonobjD.place}</span></p>
 
                                 </div>
                               </section>
@@ -297,10 +299,10 @@ export default function EmpDashboardD() {
                                     <thead style={{ borderBottom: "2px solid #dee2e6", borderTop: "1px solid #dee2e6" }}>
                                       <tr>
                                         <th scope="col">Date</th>
-                                        <th scope="col">Name</th>
-                                        <th scope="col">State</th>
-                                        <th scope="col">Property</th>
-                                        <th scope="col">Position</th>
+                                        <th scope="col">Property Name</th>
+                                        <th scope="col">City</th>
+                                        <th scope="col">Phone</th>
+                                        <th scope="col">End Date</th>
                                         <th scope="col">Temp Name</th>
                                         <th scope="col">Status</th>
 
@@ -313,8 +315,8 @@ export default function EmpDashboardD() {
                                         // Codeitem  
                                         <tbody key={code._id} code={code}>
                                           <tr style={{ fontWeight: "bold", color: "#141414" }}>
-                                            <td style={{ color: "grey" }}>{code.startdate}</td>
-                                            <td>{code.name}</td>
+                                            <td style={{ color: "grey" }}>{code.todaydate}</td>
+                                            <td>{code.propertyname}</td>
                                             <td>Dallas</td>
                                             <td>{code.phone}</td>
                                             <td>{code.enddate}</td>
@@ -416,7 +418,7 @@ export default function EmpDashboardD() {
                     <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   {/* <div className="modal-body"><input type="text" className="form-control" id="ename" name="ename" value={editName.ename} aria-describedby="emailHelp" onChange={onChange} minLength={5} required /> */}
-                  <div className="modal-body"><input type="text" className="form-control" id="ename" name="ename"  aria-describedby="emailHelp"  minLength={5} required />
+                  <div className="modal-body"><input type="text" className="form-control" id="ename" name="ename" aria-describedby="emailHelp" minLength={5} required />
                   </div>
                   <div className="modal-footer">
                     {/* <button ref={refClose} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button> */}
@@ -455,7 +457,7 @@ export default function EmpDashboardD() {
                     <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100vw" }}>
                       {/* <button onClick={onFormSubmit} type="button" className="btn btn-primary" >Upload</button> */}
                       <span ref={refClose} className="" data-bs-dismiss="modal"></span>
-                      <button id='uploaderBtn' style={{ display: "flex", justifyContent: "center", width: "40%"}} onClick={onSubmitHandler} type="button" className="btn btn-primary" >Upload {spinner}</button>
+                      <button id='uploaderBtn' style={{ display: "flex", justifyContent: "center", width: "40%" }} onClick={onSubmitHandler} type="button" className="btn btn-primary" >Upload {spinner}</button>
                     </div>
                   </div>
                 </div>
@@ -491,10 +493,10 @@ export default function EmpDashboardD() {
                         <thead style={{ borderBottom: "2px solid #dee2e6", borderTop: "1px solid #dee2e6" }}>
                           <tr >
                             <th scope="col">Date</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">State</th>
-                            <th scope="col">Property</th>
-                            <th scope="col">Position</th>
+                            <th scope="col">Property Name</th>
+                            <th scope="col">City</th>
+                            <th scope="col">Phone</th>
+                            <th scope="col">End Date</th>
                             <th scope="col">Temp Name</th>
                             <th scope="col">Status</th>
                           </tr>
@@ -505,12 +507,12 @@ export default function EmpDashboardD() {
                           return (
                             <tbody key={key} >
                               <tr style={{ fontWeight: "bold", color: "#141414" }}>
-                                <td style={{ color: "grey" }}>{val.startdate}</td>
-                                <td>{val.name}</td>
-                                <td>Houston</td>
-                                <td>{val.phone}</td>
-                                <td>{val.enddate}</td>
-                                <td>{val.tempname}</td>
+                              <td style={{ color: "grey" }}>{val.todaydate}</td>
+                                            <td>{val.propertyname}</td>
+                                            <td>Dallas</td>
+                                            <td>{val.phone}</td>
+                                            <td>{val.enddate}</td>
+                                            <td>{val.tempname}</td>
 
                                 <td id='statusColorH' className="active_status">
                                   <div >

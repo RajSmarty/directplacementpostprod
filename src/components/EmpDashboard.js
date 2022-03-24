@@ -215,11 +215,11 @@ export default function EmpDashboard() {
 
 
                         <div className="" data-bs-toggle="modal" data-bs-target="#changeImg" style={{ cursor: "pointer", display: "flex", flexDirection: "column-reverse" }}>
-                        {items.length===0 && 
-                        <div style={{  marginTop: "1rem", marginLeft: "7.5rem", width: '100px', height: "6.25rem", borderRadius: "50%",  border: "4px solid #00a2e5" }}>
-                          <img style={{borderRadius:"50%", width:"100%"}} src={userDP} alt="" />
-                        </div>
-                        }
+                          {items.length === 0 &&
+                            <div style={{ marginTop: "1rem", marginLeft: "7.5rem", width: '100px', height: "6.25rem", borderRadius: "50%", border: "4px solid #00a2e5" }}>
+                              <img style={{ borderRadius: "50%", width: "100%" }} src={userDP} alt="" />
+                            </div>
+                          }
                           {items?.map(item => (
                             <div key={item._id}>
                               <img className="activator" style={{ marginTop: "1rem", marginLeft: "7.5rem", width: '100px', height: "6rem", borderRadius: "50%", position: "absolute", border: "4px solid #00a2e5" }} src={item.image} alt="" />
@@ -238,8 +238,10 @@ export default function EmpDashboard() {
                                   <p style={{ marginLeft: "6.5em", fontWeight: "bold" }}>{jsonobj.name}{" "}</p>
                                   <ion-icon name="create-outline" style={{ fontSize: "20px", marginRight: "4.5em", cursor: "pointer" }} data-bs-toggle="modal" data-bs-target="#changeName"></ion-icon>
                                 </div>
-                                <div className="user_designation">
-                                  <p style={{ fontWeight: "bold" }} className="user_position">position: <span>{jsonobj.position}</span></p>
+                                <div style={{ height: "18rem" }} className="user_designation">
+                                  <p style={{ fontWeight: "bold", textAlign: "left", marginLeft: "6rem" }} className="user_position">position: <span>{jsonobj.position}</span></p>
+
+                                  <p style={{ fontWeight: "bold", textAlign: "left", marginLeft: "6rem" }} className="user_position">place: <span>{jsonobj.place}</span></p>
 
                                 </div>
                               </section>
@@ -320,8 +322,8 @@ export default function EmpDashboard() {
                                     <thead style={{ borderBottom: "2px solid #dee2e6", borderTop: "1px solid #dee2e6" }}>
                                       <tr>
                                         <th scope="col">Date</th>
-                                        <th scope="col">Name</th>
-                                        <th scope="col">Place</th>
+                                        <th scope="col">Property Name</th>
+                                        <th scope="col">City</th>
                                         <th scope="col">Phone</th>
                                         <th scope="col">End Date</th>
                                         <th scope="col">Temp Name</th>
@@ -343,8 +345,8 @@ export default function EmpDashboard() {
                                         // Codeitem  
                                         <tbody key={code._id} code={code}>
                                           <tr style={{ fontWeight: "bold", color: "#141414" }}>
-                                            <td style={{ color: "grey" }}>{code.startdate}</td>
-                                            <td>{code.name}</td>
+                                            <td style={{ color: "grey" }}>{code.todaydate}</td>
+                                            <td>{code.propertyname}</td>
                                             <td>Houston</td>
                                             <td>{code.phone}</td>
                                             <td>{code.enddate}</td>
@@ -427,10 +429,10 @@ export default function EmpDashboard() {
                         <thead style={{ borderBottom: "2px solid #dee2e6", borderTop: "1px solid #dee2e6" }}>
                           <tr >
                             <th scope="col">Date</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">State</th>
-                            <th scope="col">Property</th>
-                            <th scope="col">Position</th>
+                            <th scope="col">Property Name</th>
+                            <th scope="col">City</th>
+                            <th scope="col">Phone</th>
+                            <th scope="col">End Date</th>
                             <th scope="col">Temp Name</th>
                             <th scope="col">Status</th>
                           </tr>
@@ -441,8 +443,8 @@ export default function EmpDashboard() {
                           return (
                             <tbody key={key} >
                               <tr style={{ fontWeight: "bold", color: "#141414" }}>
-                                <td style={{ color: "grey" }}>{val.startdate}</td>
-                                <td>{val.name}</td>
+                                <td style={{ color: "grey" }}>{val.todaydate}</td>
+                                <td>{val.propertyname}</td>
                                 <td>Houston</td>
                                 <td>{val.phone}</td>
                                 <td>{val.enddate}</td>

@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import navLogoImg from '../images/logo.png';
 import userDP from '../images/user.jpg';
 import AccessDenied from './AccessDenied';
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function AdminDashboard() {
   let history = useHistory();
@@ -353,7 +353,7 @@ export default function AdminDashboard() {
 
                       <div className="tab">
                         <button className="tablinks active"><b></b><b></b><span><ion-icon name="home-outline"></ion-icon></span>home</button>
-                       <Link to="/adminempdash"><button className="tablinks" ><b></b><b></b><span><ion-icon name="person-outline"></ion-icon></span>employee</button></Link>
+                        <Link to="/adminempdash"><button className="tablinks" ><b></b><b></b><span><ion-icon name="person-outline"></ion-icon></span>employee</button></Link>
                         {/* <button className="tablinks"><b></b><b></b><span><ion-icon name="cart-outline"></ion-icon></span>Sales</button> */}
 
                       </div>
@@ -419,7 +419,7 @@ export default function AdminDashboard() {
                                       <thead style={{ borderBottom: "2px solid #dee2e6", borderTop: "1px solid #dee2e6" }}>
                                         <tr >
                                           <th scope="col">Date</th>
-                                          <th scope="col">Name</th>
+                                          <th scope="col">Property Name</th>
                                           <th scope="col">Place</th>
                                           <th scope="col">Phone</th>
                                           <th scope="col">End Date</th>
@@ -430,23 +430,17 @@ export default function AdminDashboard() {
                                       </thead>
 
 
-                                      {/* <h4>Backend Database Data</h4> */}
-
-
                                       {/* Houston Employee Mapping */}
                                       {employeeUserList.map((val) => {
                                         return (
                                           <tbody key={val._id}>
                                             <tr style={{ fontWeight: "bold", color: "#141414" }}>
-                                              <td style={{ color: "grey" }}>{val.startdate}</td>
-                                              <td>{val.name}</td>
+                                              <td style={{ color: "grey" }}>{val.todaydate}</td>
+                                              <td>{val.propertyname}</td>
                                               <td>Houston</td>
                                               <td>{val.phone}</td>
                                               <td>{val.enddate}</td>
                                               <td>{val.tempname}</td>
-
-
-                                              {/* <td id='statusColorH' className="active_status"> */}
                                               <td>
                                                 <div >
                                                   <p id='paraStatusH' className='paraStatusH' type="text"
@@ -456,15 +450,6 @@ export default function AdminDashboard() {
                                                   >
                                                     {val.employeeStatus}
                                                   </p>
-
-                                                  {/* <ul className="dropdown-menu">
-                                                    <li><p onClick={() => onClickActiveH(val._id)} className="activeDesign dropdown-item"
-
-                                                    >Active</p></li>
-
-                                                    <li><p onClick={() => onClickClosedH(val._id)} className="closedDesign dropdown-item">Closed</p></li>
-                                                  </ul> */}
-
                                                 </div>
                                               </td>
 
@@ -481,25 +466,17 @@ export default function AdminDashboard() {
                                         return (
                                           <tbody key={key}>
                                             <tr style={{ fontWeight: "bold", color: "#141414" }}>
-                                              <td style={{ color: "grey" }}>{val.startdate}</td>
-                                              <td>{val.name}</td>
+                                              <td style={{ color: "grey" }}>{val.todaydate}</td>
+                                              <td>{val.propertyname}</td>
                                               <td>Dallas</td>
                                               <td>{val.phone}</td>
                                               <td>{val.enddate}</td>
                                               <td>{val.tempname}</td>
-                                              {/* <td id='statusColorD' className="active_status"> */}
                                               <td>
                                                 <div >
                                                   <p id='paraStatusD' className='paraStatusH' style={{ cursor: "pointer" }} data-bs-toggle="dropdown" aria-expanded="false">
                                                     {val.employeeStatus}
                                                   </p>
-
-                                                  {/* <ul className="dropdown-menu">
-                                                    <li><p onClick={() => onClickActiveD(val._id)} className="activeDesign dropdown-item" >Active</p></li>
-
-                                                    <li><p onClick={() => onClickClosedD(val._id)} className="closedDesign dropdown-item" >Closed</p></li>
-                                                  </ul> */}
-
                                                 </div>
 
                                               </td>
@@ -573,7 +550,7 @@ export default function AdminDashboard() {
                         <thead style={{ borderBottom: "2px solid #dee2e6", borderTop: "1px solid #dee2e6" }}>
                           <tr >
                             <th scope="col">Date</th>
-                            <th scope="col">Name</th>
+                            <th scope="col">Property Name</th>
                             <th scope="col">Place</th>
                             <th scope="col">Phone</th>
                             <th scope="col">End Date</th>
@@ -582,17 +559,13 @@ export default function AdminDashboard() {
                           </tr>
                         </thead>
 
-
-                        {/* <h4>Backend Database Data</h4> */}
-
-
-                        {/* Administrator Mapping */}
+                        {/* Active Houston Mapping */}
                         {activeList.map((val, key) => {
                           return (
                             <tbody key={key}>
                               <tr style={{ fontWeight: "bold", color: "#141414" }}>
-                                <td style={{ color: "grey" }}>{val.startdate}</td>
-                                <td>{val.name}</td>
+                                <td style={{ color: "grey" }}>{val.todaydate}</td>
+                                <td>{val.propertyname}</td>
                                 <td>Houston</td>
                                 <td>{val.phone}</td>
                                 <td>{val.enddate}</td>
@@ -617,13 +590,13 @@ export default function AdminDashboard() {
                         })}
 
 
-                        {/* Employee Mapping  */}
+                        {/* Active Dallas Mapping  */}
                         {activeDList.map((val, key) => {
                           return (
                             <tbody key={key}>
                               <tr style={{ fontWeight: "bold", color: "#141414" }}>
-                                <td style={{ color: "grey" }}>{val.startdate}</td>
-                                <td>{val.name}</td>
+                                <td style={{ color: "grey" }}>{val.todaydate}</td>
+                                <td>{val.propertyname}</td>
                                 <td>Dallas</td>
                                 <td>{val.phone}</td>
                                 <td>{val.enddate}</td>
@@ -672,7 +645,7 @@ export default function AdminDashboard() {
                         <thead style={{ borderBottom: "2px solid #dee2e6", borderTop: "1px solid #dee2e6" }}>
                           <tr >
                             <th scope="col">Date</th>
-                            <th scope="col">Name</th>
+                            <th scope="col">Property Name</th>
                             <th scope="col">Place</th>
                             <th scope="col">Phone</th>
                             <th scope="col">End Date</th>
@@ -681,13 +654,13 @@ export default function AdminDashboard() {
                           </tr>
                         </thead>
 
-                        {/* Closed Mapping */}
+                        {/* Closed Houston Mapping */}
                         {closedList.map((val, key) => {
                           return (
                             <tbody key={key}>
                               <tr style={{ fontWeight: "bold", color: "#141414" }}>
-                                <td style={{ color: "grey" }}>{val.startdate}</td>
-                                <td>{val.name}</td>
+                                <td style={{ color: "grey" }}>{val.todaydate}</td>
+                                <td>{val.propertyname}</td>
                                 <td>Houston</td>
                                 <td>{val.phone}</td>
                                 <td>{val.enddate}</td>
@@ -711,18 +684,18 @@ export default function AdminDashboard() {
                         })}
 
 
-                        {/* Employee Mapping  */}
+                        {/* Closed Dallas Mapping  */}
                         {closedDList.map((val, key) => {
                           return (
                             <tbody key={key}>
                               <tr style={{ fontWeight: "bold", color: "#141414" }}>
-                                <td style={{ color: "grey" }}>{val.startdate}</td>
-                                <td>{val.name}</td>
+                                <td style={{ color: "grey" }}>{val.todaydate}</td>
+                                <td>{val.propertyname}</td>
                                 <td>Dallas</td>
                                 <td>{val.phone}</td>
                                 <td>{val.enddate}</td>
                                 <td>{val.tempname}</td>
-                                <td id='statusColorD' className="active_status">
+                                <td id='statusColorD' className="deactive_status">
 
                                   <div >
                                     <p id='paraStatusD' style={{ cursor: "pointer" }} data-bs-toggle="dropdown" aria-expanded="false">
@@ -756,7 +729,7 @@ export default function AdminDashboard() {
                       <div className="modal-header text-center">
                         <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100vw" }}>
 
-                          <h4 className="text-center" style={{ fontWeight: "bold" }} ><span style={{ color: "grey" }}>User: </span>{val.name} </h4>
+                          <h4 className="text-center" style={{ fontWeight: "bold" }} ><span style={{ color: "grey" }}>User: </span>{val.tempname} </h4>
                           <span className='mx-2' style={{ fontSize: "28px", marginBottom: "0.4rem", color: "#0293cf", fontWeight: "lighter" }}>|</span>
                           <h4 className="text-center" style={{ fontWeight: "bold" }} ><span style={{ color: "grey" }}> Status: </span>{val.employeeStatus}</h4>
                         </div>
@@ -772,10 +745,10 @@ export default function AdminDashboard() {
                                     <div className="setting_area">
 
                                       <div className="form-group">
-                                        <label htmlFor="exampleInputEmail1">Name</label>
-                                        <input type="text" name='name' className="form-control setting_input" id="exampleInputEmail1"
+                                        <label htmlFor="exampleInputEmail1">Date</label>
+                                        <input type="text" name='todaydate' className="form-control setting_input" id="exampleInputEmail1"
                                           aria-describedby="emailHelp" placeholder="Empty Field"
-                                          value={val.name} readOnly style={{ fontWeight: "Bold" }}
+                                          value={val.todaydate} readOnly style={{ fontWeight: "Bold" }}
 
                                         />
                                       </div>
@@ -797,14 +770,14 @@ export default function AdminDashboard() {
                                   <div className="col-sm-6">
                                     <div className="setting_area">
                                       <div className="form-group mt-3">
-                                        <label htmlFor="exampleInputEmail1">Company Name</label>
-                                        <input name='companyname' type="text" className="form-control setting_input" id="exampleInputEmail1"
-                                          aria-describedby="emailHelp" placeholder="Empty Field" value={val.companyname} readOnly style={{ fontWeight: "Bold" }} />
+                                        <label htmlFor="exampleInputEmail1">Property Name</label>
+                                        <input name='propertyname' type="text" className="form-control setting_input" id="exampleInputEmail1"
+                                          aria-describedby="emailHelp" placeholder="Empty Field" value={val.propertyname} readOnly style={{ fontWeight: "Bold" }} />
                                       </div>
                                       <div className="form-group mt-3">
-                                        <label htmlFor="exampleInputEmail1">Company Address</label>
-                                        <input name='companyaddress' type="text" className="form-control setting_input" id="exampleInputEmail1"
-                                          aria-describedby="emailHelp" placeholder="Empty Field" value={val.companyaddress} readOnly style={{ fontWeight: "Bold" }} />
+                                        <label htmlFor="exampleInputEmail1">Property Address</label>
+                                        <input name='propertyaddress' type="text" className="form-control setting_input" id="exampleInputEmail1"
+                                          aria-describedby="emailHelp" placeholder="Empty Field" value={val.propertyaddress} readOnly style={{ fontWeight: "Bold" }} />
                                       </div>
                                     </div>
                                   </div>
@@ -830,6 +803,32 @@ export default function AdminDashboard() {
                                 </div>
 
                                 <div className="Manager_area mt-5"></div>
+
+                                <div className="row">
+                                  <div className="col-sm-6">
+                                    <div className="setting_area">
+                                      {/* <form> */}
+                                      <div className="form-group">
+                                        <label htmlFor="exampleInputEmail1">Management Company Name</label>
+                                        <input name='managementcompanyname' type="text" className="form-control setting_input" id="exampleInputEmail1"
+                                          aria-describedby="emailHelp" placeholder="Management Company Name" value={val.managementcompanyname} readOnly style={{ fontWeight: "Bold" }} />
+                                      </div>
+                                      {/* </form> */}
+                                    </div>
+                                  </div>
+
+                                  <div className="col-sm-6">
+                                    <div className="setting_area">
+                                      {/* <form> */}
+                                      <div className="form-group">
+                                        <label htmlFor="exampleInputEmail1">Billing E-mail Address</label>
+                                        <input name='billingemailaddress' type="email" className="form-control setting_input" id="exampleInputEmail1"
+                                          aria-describedby="emailHelp" placeholder="Billing E-mail Address" value={val.billingemailaddress} readOnly style={{ fontWeight: "Bold" }} />
+                                      </div>
+                                      {/* </form> */}
+                                    </div>
+                                  </div>
+                                </div>
 
                                 <div className="row">
                                   <div className="col-sm-6">
@@ -1009,7 +1008,9 @@ export default function AdminDashboard() {
                       <div className="modal-header text-center">
                         <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100vw" }}>
 
-                          <h4 className="text-center" style={{ fontWeight: "bold" }} >{val.name}</h4>
+                          <h4 className="text-center" style={{ fontWeight: "bold" }} ><span style={{ color: "grey" }}>User: </span>{val.tempname} </h4>
+                          <span className='mx-2' style={{ fontSize: "28px", marginBottom: "0.4rem", color: "#0293cf", fontWeight: "lighter" }}>|</span>
+                          <h4 className="text-center" style={{ fontWeight: "bold" }} ><span style={{ color: "grey" }}> Status: </span>{val.employeeStatus}</h4>
                         </div>
                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
@@ -1024,10 +1025,10 @@ export default function AdminDashboard() {
 
                                       {/* <form> */}
                                       <div className="form-group">
-                                        <label htmlFor="exampleInputEmail1">Name</label>
-                                        <input type="text" name='name' className="form-control setting_input" id="exampleInputEmail1"
+                                        <label htmlFor="exampleInputEmail1">Date</label>
+                                        <input type="text" name='todaydate' className="form-control setting_input" id="exampleInputEmail1"
                                           aria-describedby="emailHelp" placeholder="Empty Field"
-                                          value={val.name} readOnly style={{ fontWeight: "Bold" }}
+                                          value={val.todaydate} readOnly style={{ fontWeight: "Bold" }}
 
                                         />
                                       </div>
@@ -1059,14 +1060,14 @@ export default function AdminDashboard() {
                                     <div className="setting_area">
                                       {/* <form> */}
                                       <div className="form-group mt-3">
-                                        <label htmlFor="exampleInputEmail1">Company Name</label>
-                                        <input name='companyname' type="text" className="form-control setting_input" id="exampleInputEmail1"
-                                          aria-describedby="emailHelp" placeholder="Empty Field" value={val.companyname} readOnly style={{ fontWeight: "Bold" }} />
+                                        <label htmlFor="exampleInputEmail1">Property Name</label>
+                                        <input name='propertyname' type="text" className="form-control setting_input" id="exampleInputEmail1"
+                                          aria-describedby="emailHelp" placeholder="Empty Field" value={val.propertyname} readOnly style={{ fontWeight: "Bold" }} />
                                       </div>
                                       <div className="form-group mt-3">
-                                        <label htmlFor="exampleInputEmail1">Company Address</label>
-                                        <input name='companyaddress' type="text" className="form-control setting_input" id="exampleInputEmail1"
-                                          aria-describedby="emailHelp" placeholder="Empty Field" value={val.companyaddress} readOnly style={{ fontWeight: "Bold" }} />
+                                        <label htmlFor="exampleInputEmail1">Property Address</label>
+                                        <input name='propertyaddress' type="text" className="form-control setting_input" id="exampleInputEmail1"
+                                          aria-describedby="emailHelp" placeholder="Empty Field" value={val.propertyaddress} readOnly style={{ fontWeight: "Bold" }} />
                                       </div>
                                       {/* </form> */}
                                     </div>
@@ -1101,6 +1102,32 @@ export default function AdminDashboard() {
                                     <div className="setting_area">
                                       {/* <form> */}
                                       <div className="form-group">
+                                        <label htmlFor="exampleInputEmail1">Management Company Name</label>
+                                        <input name='managementcompanyname' type="text" className="form-control setting_input" id="exampleInputEmail1"
+                                          aria-describedby="emailHelp" placeholder="Management Company Name" value={val.managementcompanyname} readOnly style={{ fontWeight: "Bold" }} />
+                                      </div>
+                                      {/* </form> */}
+                                    </div>
+                                  </div>
+
+                                  <div className="col-sm-6">
+                                    <div className="setting_area">
+                                      {/* <form> */}
+                                      <div className="form-group">
+                                        <label htmlFor="exampleInputEmail1">Billing E-mail Address</label>
+                                        <input name='billingemailaddress' type="email" className="form-control setting_input" id="exampleInputEmail1"
+                                          aria-describedby="emailHelp" placeholder="Billing E-mail Address" value={val.billingemailaddress} readOnly style={{ fontWeight: "Bold" }} />
+                                      </div>
+                                      {/* </form> */}
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div className="row">
+                                  <div className="col-sm-6">
+                                    <div className="setting_area">
+                                      {/* <form> */}
+                                      <div className="form-group mt-3">
                                         <label htmlFor="exampleInputEmail1">Manager's Name/Who Ordered Temp</label>
                                         <input name='managernamewhoorderedtemp' type="text" className="form-control setting_input" id="exampleInputEmail1"
                                           aria-describedby="emailHelp" placeholder="Empty Field" value={val.managernamewhoorderedtemp} readOnly style={{ fontWeight: "Bold" }} />
@@ -1112,7 +1139,7 @@ export default function AdminDashboard() {
                                   <div className="col-sm-6">
                                     <div className="setting_area">
                                       {/* <form> */}
-                                      <div className="form-group">
+                                      <div className="form-group mt-3">
                                         <label htmlFor="exampleInputEmail1">Manager's E-mail Address</label>
                                         <input name='manageremailaddress' type="email" className="form-control setting_input" id="exampleInputEmail1"
                                           aria-describedby="emailHelp" placeholder="Empty Field" value={val.manageremailaddress} readOnly style={{ fontWeight: "Bold" }} />
