@@ -71,15 +71,6 @@ export default function UserLogin() {
       history.push("/empdash");
 
     }
-    // else {
-    //   alert("Invalid credentials");
-    //   setTimeout(() => {
-    //     console.log("Reloading Page...")
-    //     window.location.reload()
-    //   }, 0);
-    // }
-    // }, 1000);
-
   }
 
   const handleOnChange = (e) => {
