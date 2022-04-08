@@ -27,6 +27,11 @@ import EmpActive from './components/EmpActive';
 import EmpClosed from './components/EmpClosed';
 import EmpActiveD from './components/EmpActiveD';
 import EmpClosedD from './components/EmpClosedD';
+import FormArkansas from './components/FormArkansas';
+import EmpArkansasReg from './components/EmpArkansasReg';
+import EmpDashboardA from './components/EmpDashboardA';
+import EmpActiveA from './components/EmpActiveA';
+import EmpClosedA from './components/EmpClosedA';
 
 function App() {
 
@@ -42,8 +47,8 @@ function App() {
                 <UserLogin />
               </Route>
 
-              
-              
+
+
               <Route exact path="/contact">
                 <Contact />
               </Route>
@@ -61,7 +66,7 @@ function App() {
               </Route>
 
               <Route exact path="/adminempdash">
-                <AdminEMPDash/>
+                <AdminEMPDash />
               </Route>
 
               <Route exact path="/empdash">
@@ -84,12 +89,28 @@ function App() {
                 <EmpClosedD />
               </Route>
 
+              <Route exact path="/empactivepagea">
+                <EmpActiveA />
+              </Route>
+
+              <Route exact path="/empclosedpagea">
+                <EmpClosedA />
+              </Route>
+
               <Route exact path="/emphoustonreg">
                 <EmpHoustonReg />
               </Route>
 
+              <Route exact path="/emparkansasreg">
+                <EmpArkansasReg />
+              </Route>
+
               <Route exact path="/empdashd">
                 <EmpDashboardD />
+              </Route>
+
+              <Route exact path="/empdasha">
+                <EmpDashboardA />
               </Route>
 
               <Route exact path="/empdallasreg">
@@ -104,6 +125,10 @@ function App() {
                 <FormHouston />
               </Route>
 
+              <Route exact path="/formA">
+                <FormArkansas />
+              </Route>
+
               <Route exact path="/back">
                 <Backend />
               </Route>
@@ -113,8 +138,8 @@ function App() {
               </Route>
 
               <Route>
-              <Error heading="Error" />
-            </Route>
+                <Error heading="Error" />
+              </Route>
 
             </Switch>
           </div>
