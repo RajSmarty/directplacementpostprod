@@ -10,6 +10,7 @@ import Formdallas from './components/Formdallas';
 import UserLogin from './components/UserLogin';
 import EmpDashboard from './components/EmpDashboard';
 import EmpDashboardD from './components/EmpDashboardD';
+import Formtexas from './components/Formtexas';
 import FormHouston from './components/FormHouston';
 import AdminDashboard from './components/AdminDashboard';
 import AdminEMPDash from './components/AdminEMPDash';
@@ -27,6 +28,7 @@ import EmpActive from './components/EmpActive';
 import EmpClosed from './components/EmpClosed';
 import EmpActiveD from './components/EmpActiveD';
 import EmpClosedD from './components/EmpClosedD';
+
 import FormArkansas from './components/FormArkansas';
 import EmpArkansasReg from './components/EmpArkansasReg';
 import EmpDashboardA from './components/EmpDashboardA';
@@ -47,8 +49,8 @@ function App() {
                 <UserLogin />
               </Route>
 
-
-
+              
+              
               <Route exact path="/contact">
                 <Contact />
               </Route>
@@ -66,7 +68,7 @@ function App() {
               </Route>
 
               <Route exact path="/adminempdash">
-                <AdminEMPDash />
+                <AdminEMPDash/>
               </Route>
 
               <Route exact path="/empdash">
@@ -88,6 +90,7 @@ function App() {
               <Route exact path="/empclosedpaged">
                 <EmpClosedD />
               </Route>
+
 
               <Route exact path="/empactivepagea">
                 <EmpActiveA />
@@ -129,6 +132,10 @@ function App() {
                 <FormArkansas />
               </Route>
 
+              <Route exact path="/formT">
+                <Formtexas />
+              </Route>
+
               <Route exact path="/back">
                 <Backend />
               </Route>
@@ -138,8 +145,8 @@ function App() {
               </Route>
 
               <Route>
-                <Error heading="Error" />
-              </Route>
+              <Error heading="Error" />
+            </Route>
 
             </Switch>
           </div>

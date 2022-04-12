@@ -12,6 +12,7 @@ export default function UserLogin() {
   const [spinner, setSpinner] = useState("")
 
 
+  // LOGIN Credentials LOGIC
   const handleSubmit = async (event) => {
     event.preventDefault()
 
@@ -55,12 +56,39 @@ export default function UserLogin() {
         body: JSON.stringify({ email: credentials.email, password: credentials.password })
       });
       const datad = await response.json()
-      setTimeout(() => {
+
+      if (!data || response.status === 400) {
+        if (credentials.email.length === 0) {
+          alert("Please Fill all the Inputs")
+          window.location.reload()
+        }
+        else {
+    
+          loaderBtn.style.backgroundColor = "rgb(52 136 223)"
+          setSpinner(<Spinner />);
+        }
+        const response = await fetch("https://directplacement.herokuapp.com/api/authark/login", {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ email: credentials.email, password: credentials.password })
+        });
+        const datad = await response.json()
+        setTimeout(() => {
+  
+          localStorage.setItem('token', datad.authtoken);
+  
+          history.push("/empdasha");
+        }, 0);
+      }
+
+      else {
 
         localStorage.setItem('token', datad.authtoken);
 
         history.push("/empdashd");
-      }, 0);
+      }
     }
 
     else {
@@ -71,6 +99,15 @@ export default function UserLogin() {
       history.push("/empdash");
 
     }
+    // else {
+    //   alert("Invalid credentials");
+    //   setTimeout(() => {
+    //     console.log("Reloading Page...")
+    //     window.location.reload()
+    //   }, 0);
+    // }
+    // }, 1000);
+
   }
 
   const handleOnChange = (e) => {

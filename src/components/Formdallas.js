@@ -240,7 +240,6 @@ export default function FormDallas() {
                       />
                     </div>
 
-
                     <div className="form-group mt-3" style={{ borderBottom: "1px solid #00a2e5" }}>
                       <label htmlFor="exampleFormControlSelect1">Group positions together by category</label>
                       {/* <select className="form-control setting_input" id="exampleFormControlSelect1"> */}
@@ -347,6 +346,8 @@ export default function FormDallas() {
               <div className="Manager_area mt-5"></div>
 
 
+
+
               <div className="row">
                 <div className="col-sm-6">
                   <div className="setting_area">
@@ -373,11 +374,15 @@ export default function FormDallas() {
                 </div>
               </div>
 
+
+
+
+
               <div className="row">
                 <div className="col-sm-6">
                   <div className="setting_area">
                     {/* <form> */}
-                    <div className="form-group">
+                    <div className="form-group mt-3">
                       <label htmlFor="exampleInputEmail1">Manager's Name/Who Ordered Temp</label>
                       <input name='managernamewhoorderedtemp' type="text" className="form-control setting_input" id="exampleInputEmail1"
                         aria-describedby="emailHelp" placeholder="Manager's Name/Who Ordered Temp" value={code.managernamewhoorderedtemp} onChange={onChange} />
@@ -389,7 +394,7 @@ export default function FormDallas() {
                 <div className="col-sm-6">
                   <div className="setting_area">
                     {/* <form> */}
-                    <div className="form-group">
+                    <div className="form-group  mt-3">
                       <label htmlFor="exampleInputEmail1">Manager's E-mail Address</label>
                       <input name='manageremailaddress' type="email" className="form-control setting_input" id="exampleInputEmail1"
                         aria-describedby="emailHelp" placeholder="Manager's E-mail Address" value={code.manageremailaddress} onChange={onChange} />
@@ -405,7 +410,8 @@ export default function FormDallas() {
                     {/* <form> */}
                     <div className="form-group mt-3">
                       <label htmlFor="exampleFormControlSelect1">Property Grade</label>
-                      <select name='propertygrade' className="form-control setting_input" id="exampleFormControlSelect1" value={code.propertygrade} onChange={onChange}>
+                      <select style={{ color: "grey" }} name='propertygrade' className="form-control setting_input" id="exampleFormControlSelect1" value={code.propertygrade} onChange={onChange}>
+                        <option >Select from the given below</option>
                         <option>A</option>
                         <option>B</option>
                         <option>C</option>
@@ -430,7 +436,7 @@ export default function FormDallas() {
                 <div className="col-sm-4">
                   <div className="setting_area">
                     {/* <form> */}
-                    <div className="form-group mt-3">
+                    {/* <div className="form-group mt-3">
                       <label htmlFor="exampleInputEmail1">Bilingual</label>
                       <div className="check_area">
                         <div className="form-check">
@@ -446,6 +452,14 @@ export default function FormDallas() {
                           </label>
                         </div>
                       </div>
+                    </div> */}
+                    <div className="form-group mt-3">
+                      <label htmlFor="bilingual1">Bilingual</label>
+                      <select style={{ color: "grey" }} name='bilingual' className="form-control setting_input" id="bilingual1" value={code.bilingual} onChange={onChange}>
+                        <option>Select from the given below</option>
+                        <option>Yes</option>
+                        <option>No</option>
+                      </select>
                     </div>
                     {/* </form> */}
                   </div>
@@ -482,7 +496,7 @@ export default function FormDallas() {
                 <div className="col-sm-4">
                   <div className="setting_area">
                     {/* <form> */}
-                    <div className="form-group mt-3">
+                    {/* <div className="form-group mt-3">
                       <label htmlFor="exampleFormControlSelect1">Tax Credit</label>
                       <div className="check_area">
                         <div className="form-check">
@@ -498,6 +512,14 @@ export default function FormDallas() {
                           </label>
                         </div>
                       </div>
+                    </div> */}
+                    <div className="form-group mt-3">
+                      <label htmlFor="taxcredit1">Tax Credit</label>
+                      <select style={{ color: "grey" }} name='taxcredit' className="form-control setting_input" id="taxcredit1" value={code.taxcredit} onChange={onChange}>
+                        <option>Select from the given below</option>
+                        <option>Yes</option>
+                        <option>No</option>
+                      </select>
                     </div>
                     {/* </form> */}
                   </div>
@@ -506,7 +528,7 @@ export default function FormDallas() {
                 <div className="col-sm-4">
                   <div className="setting_area">
                     {/* <form> */}
-                    <div className="form-group mt-3">
+                    {/* <div className="form-group mt-3">
                       <label htmlFor="exampleFormControlSelect1">Type of Assignment</label>
                       <div className="check_area">
                         <div className="form-check">
@@ -522,6 +544,14 @@ export default function FormDallas() {
                           </label>
                         </div>
                       </div>
+                    </div> */}
+                    <div className="form-group mt-3">
+                      <label htmlFor="typeofassignment1">Type of Assignment</label>
+                      <select style={{ color: "grey" }} name='typeofassignment' className="form-control setting_input" id="typeofassignment1" value={code.typeofassignment} onChange={onChange}>
+                        <option>Select from the given below</option>
+                        <option>Temp</option>
+                        <option>Perm</option>
+                      </select>
                     </div>
                     {/* </form> */}
                   </div>
@@ -530,7 +560,7 @@ export default function FormDallas() {
                 <div className="col-sm-4">
                   <div className="setting_area">
                     {/* <form> */}
-                    <div className="form-group mt-3">
+                    {/* <div className="form-group mt-3">
                       <label htmlFor="exampleInputEmail1">EPA Certified</label>
                       <div className="check_area">
                         <div className="form-check">
@@ -546,6 +576,14 @@ export default function FormDallas() {
                           </label>
                         </div>
                       </div>
+                    </div> */}
+                    <div className="form-group mt-3">
+                      <label htmlFor="epacertified1">EPA Certified</label>
+                      <select style={{ color: "grey" }} name='epacertified' className="form-control setting_input" id="epacertified1" value={code.epacertified} onChange={onChange}>
+                        <option>Select from the given below</option>
+                        <option>Yes</option>
+                        <option>No</option>
+                      </select>
                     </div>
                     {/* </form> */}
                   </div>

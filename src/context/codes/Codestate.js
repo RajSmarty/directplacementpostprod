@@ -7,6 +7,7 @@ const Codestate = (props) => {
   const [codes, setCodes] = useState(codesInitial)
   const [json, setJson] = useState(codesInitial)
   const [jsonD, setJsonD] = useState(codesInitial)
+  const [jsonA, setJsonA] = useState(codesInitial)
   const [image, setImage] = useState(codesInitial)
 
 
@@ -43,6 +44,22 @@ const Codestate = (props) => {
     setJsonD(jsonD.concat(jsonobjD))
     console.log(jsonD)
     // setJson(json)
+  }
+
+  // Get Arkansas User Details
+  const getUserADetails = async () => {
+    // API Call 
+    const response = await fetch(`${host}/api/autha/getuser`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        "auth-token": localStorage.getItem("token"),
+      }
+    });
+    // const json = await response.json()
+    const jsonobjA = await response.json();
+    setJsonA(jsonA.concat(jsonobjA))
+    console.log(jsonA)
   }
 
 
@@ -143,6 +160,23 @@ const Codestate = (props) => {
     setCodes(codes.concat(code))
   }
 
+  // Add Arkansas Admin Code
+  const addArkansasAdmin = async (todaydate, staffingmanager, propertyname, phone, propertyaddress, fax, managementcompanyname, billingemailaddress, managernamewhoorderedtemp, manageremailaddress, propertygrade, numberofunits, bilingual, software, permanentpayrate, taxcredit, typeofassignment, epacertified, tempname, startdate, phoneno, enddate, temporaraypayrate, yourmessage, employeeStatus) => {
+    // TODO: API Call
+    // API Call 
+    const response = await fetch(`${host}/api/empuserforma/insert`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+
+      },
+      body: JSON.stringify({ todaydate, staffingmanager, propertyname, phone, propertyaddress, fax, managementcompanyname, billingemailaddress, managernamewhoorderedtemp, manageremailaddress, propertygrade, numberofunits, bilingual, software, permanentpayrate, taxcredit, typeofassignment, epacertified, tempname, startdate, phoneno, enddate, temporaraypayrate, yourmessage, employeeStatus })
+    });
+
+    const code = await response.json();
+    setCodes(codes.concat(code))
+  }
+
   // Delete a Code
   const deleteCode = async (id) => {
     // API Call
@@ -219,7 +253,7 @@ const Codestate = (props) => {
 
 
   return (
-    <codeContext.Provider value={{ codes, json, jsonD, getUserDetails, addCode, addHoustonAdmin, addDallasAdmin, deleteCode, editCode, getCodes, getActiveCodes, updateName, getImages, getUserdDetails }}>
+    <codeContext.Provider value={{ codes, json, jsonD, jsonA, getUserDetails, addCode, addHoustonAdmin, addDallasAdmin, addArkansasAdmin, deleteCode, editCode, getCodes, getActiveCodes, updateName, getImages, getUserdDetails, getUserADetails }}>
       {props.children}
     </codeContext.Provider>
   )
