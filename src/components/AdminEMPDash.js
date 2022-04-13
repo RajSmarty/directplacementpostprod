@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 import navLogoImg from '../images/logo.png';
 import userDP from '../images/user.jpg';
 import AccessDenied from './AccessDenied';
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom"
 
 export default function AdminEMPDash() {
   let history = useHistory();
@@ -18,18 +18,24 @@ export default function AdminEMPDash() {
     }, 1000);
   }
 
-  
-// Select Cities from Texas 
-const [selectState, setSelectState] = useState("");
-const onClickProceed = () => {
-  if (selectState === "Dallas") {
-    window.location.href = "/empdallasreg"
-  }
 
-  else if (selectState === "Houston") {
-    window.location.href = "/emphoustonreg"
+  // Select Cities from Texas 
+  const [selectState, setSelectState] = useState("");
+  const onClickProceed = () => {
+    if (selectState === "Dallas") {
+      window.location.href = "/empdallasreg"
+    }
+
+    else if (selectState === "Houston") {
+      window.location.href = "/emphoustonreg"
+    }
+
+    else if (selectState === "Arkansas") {
+      window.location.href = "/emparkansasreg"
+    }
+
+
   }
-}
 
 
   // Houston Forms Map Logic 
@@ -46,6 +52,14 @@ const onClickProceed = () => {
   useEffect(() => {
     Axios.get("https://directplacement.herokuapp.com/api/authd/totalemployeed").then((response) => {
       setEmployeeUserListDallas(response.data)
+    })
+  }, [])
+
+  // Dallas Forms Map Logic 
+  const [employeeUserListArkansas, setEmployeeUserListArkansas] = useState([]);
+  useEffect(() => {
+    Axios.get("https://directplacement.herokuapp.com/api/authark/totalemployeea").then((response) => {
+      setEmployeeUserListArkansas(response.data)
     })
   }, [])
 
@@ -117,12 +131,12 @@ const onClickProceed = () => {
                           <div className="row">
                             <div className="col-sm-12 col-md-12 col-lg-12">
 
-                            <div className="home_overview">
+                              <div className="home_overview">
                                 <div className="over_overview_heading">
                                 </div>
 
                                 <div className="oders_bar">
-                                  
+
                                 </div>
                                 <div className="your_orders">
                                   <div className="over_overview_heading d-flex justify-content-center">
@@ -160,7 +174,7 @@ const onClickProceed = () => {
                                       {/* Dallas Employee Mapping  */}
                                       {employeeUserListDallas.map((val, key) => {
                                         return (
-                                            <tbody key={key}>
+                                          <tbody key={key}>
                                             <tr style={{ fontWeight: "bold", color: "#141414" }}>
                                               <td>{val.name}</td>
                                               <td>{val.place}</td>
@@ -172,6 +186,21 @@ const onClickProceed = () => {
                                         )
                                       })}
 
+                                      {employeeUserListArkansas.map((val, key) => {
+                                        return (
+                                          <tbody key={key}>
+                                            <tr style={{ fontWeight: "bold", color: "#141414" }}>
+                                              <td>{val.name}</td>
+                                              <td>{val.place}</td>
+                                              <td>{val.position}</td>
+                                              <td>{val.email}</td>
+                                              <td>{val.phone}</td>
+                                            </tr>
+                                          </tbody>
+                                        )
+                                      })}
+
+                                      
 
                                     </table>
                                   </div>
@@ -179,7 +208,7 @@ const onClickProceed = () => {
 
                                 </div>
                               </div>
-                              
+
                             </div>
                           </div>
                         </div>
@@ -207,7 +236,7 @@ const onClickProceed = () => {
 
                   <div className="modal-body">
                     <div className="form-group">
-                      <label htmlFor="exampleFormControlSelect1">Select City</label>
+                      <label htmlFor="exampleFormControlSelect1">Select Region</label>
                       <select style={{ marginTop: "5px" }} className="form-control" id="exampleFormControlSelect1"
                         onChange={(e) => {
                           const selectedState = e.target.value;
@@ -217,7 +246,7 @@ const onClickProceed = () => {
                         <option >Please select a location</option>
                         <option>Houston</option>
                         <option>Dallas</option>
-                        {/* <option>Texas</option> */}
+                        <option>Arkansas</option>
                         {selectState}
                       </select>
 

@@ -18,7 +18,7 @@ export default function AdminDashboard() {
   }
 
 
-  // Select Cities from Texas 
+  // Select Cities from Different Region 
   const [selectState, setSelectState] = useState("");
   const onClickProceed = () => {
     if (selectState === "Dallas") {
@@ -28,12 +28,17 @@ export default function AdminDashboard() {
     else if (selectState === "Houston") {
       window.location.href = "/emphoustonreg"
     }
+
+    else if (selectState === "Arkansas") {
+      window.location.href = "/emparkansasreg"
+    }
   }
 
 
-  // ACTIVE ORDERS HOUSTON + DALLAS
+  // ACTIVE ORDERS HOUSTON + DALLAS + ARKANSAS
   const [activeList, setActiveList] = useState([]);
   const [activeDList, setActiveDList] = useState([]);
+  const [activeAList, setActiveAList] = useState([]);
   useEffect(() => {
 
     Axios.get("https://directplacement.herokuapp.com/api/empuserformh/activeorders").then((response) => {
@@ -43,12 +48,17 @@ export default function AdminDashboard() {
     Axios.get("https://directplacement.herokuapp.com/api/empuserformd/activeorders").then((response) => {
       setActiveDList(response.data)
     })
+
+    Axios.get("https://directplacement.herokuapp.com/api/empuserforma/activeorders").then((response) => {
+      setActiveAList(response.data)
+    })
   }, [])
 
 
-  // CLOSED ORDERS HOUSTON + DALLAS
+  // CLOSED ORDERS HOUSTON + DALLAS + ARKANSAS
   const [closedList, setClosedList] = useState([]);
   const [closedDList, setClosedDList] = useState([]);
+  const [closedAList, setClosedAList] = useState([]);
   useEffect(() => {
 
     Axios.get("https://directplacement.herokuapp.com/api/empuserformh/closedorders").then((response) => {
@@ -58,10 +68,14 @@ export default function AdminDashboard() {
     Axios.get("https://directplacement.herokuapp.com/api/empuserformd/closedorders").then((response) => {
       setClosedDList(response.data)
     })
+
+    Axios.get("https://directplacement.herokuapp.com/api/empuserforma/closedorders").then((response) => {
+      setClosedAList(response.data)
+    })
   }, [])
 
 
-  // All ACTIVE ORDERS from Houston & Dallas 
+  // All ACTIVE ORDERS from Houston, Dallas & Arkansas
   const [activeHoustonCount, setActiveHoustonCount] = useState();
   const numActiveHouston = async () => {
     try {
@@ -80,11 +94,20 @@ export default function AdminDashboard() {
         },
       });
 
+      const resa = await fetch("https://directplacement.herokuapp.com/api/empuserforma/activecount", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json"
+        },
+      });
+
       const data = await res.json();
       const datad = await resd.json();
+      const dataa = await resa.json();
 
 
-      setActiveHoustonCount(data + datad);
+
+      setActiveHoustonCount(data + datad + dataa);
 
       if (!res.status === 200) {
         const error = new Error(res.error);
@@ -100,7 +123,7 @@ export default function AdminDashboard() {
   });
 
 
-  // All CLOSED ORDERS from Houston & Dallas 
+  // All CLOSED ORDERS from Houston, Dallas & Arkansas
   const [closedHoustonCount, setClosedHoustonCount] = useState();
   const numClosedHouston = async () => {
     try {
@@ -118,21 +141,32 @@ export default function AdminDashboard() {
         },
       });
 
+      const resa = await fetch("https://directplacement.herokuapp.com/api/empuserforma/closedcount", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json"
+        },
+      });
+
 
       const data = await res.json();
       const datad = await resd.json();
+      const dataa = await resa.json();
 
-      if (data === 0) {
-        setClosedHoustonCount(datad);
-      }
-      else if (datad === 0) {
-        setClosedHoustonCount(data);
+      setClosedHoustonCount(data + datad + dataa);
 
-      }
-      else if (data && datad !== 0) {
-        setClosedHoustonCount(data + datad);
 
-      }
+      // if (data === 0) {
+      //   setClosedHoustonCount(datad);
+      // }
+      // else if (datad === 0) {
+      //   setClosedHoustonCount(data);
+
+      // }
+      // else if (data && datad !== 0) {
+      //   setClosedHoustonCount(data + datad);
+
+      // }
 
       if (!res.status === 200) {
         const error = new Error(res.error);
@@ -167,11 +201,18 @@ export default function AdminDashboard() {
         },
       });
 
+      const resa = await fetch("https://directplacement.herokuapp.com/api/empuserforma/allordercount", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json"
+        },
+      });
+
       const data = await res.json();
       const datad = await resd.json();
+      const dataa = await resa.json();
 
-
-      setAllOrderCount(data + datad);
+      setAllOrderCount(data + datad +dataa);
 
       if (!res.status === 200) {
         const error = new Error(res.error);
@@ -201,6 +242,14 @@ export default function AdminDashboard() {
   useEffect(() => {
     Axios.get("https://directplacement.herokuapp.com/api/empuserformd/read").then((response) => {
       setEmployeeUserListDallas(response.data)
+    })
+  }, [])
+
+  // Arkansas Forms Map Logic 
+  const [employeeUserListArkansas, setEmployeeUserListArkansas] = useState([]);
+  useEffect(() => {
+    Axios.get("https://directplacement.herokuapp.com/api/empuserforma/read").then((response) => {
+      setEmployeeUserListArkansas(response.data)
     })
   }, [])
 
@@ -488,6 +537,33 @@ export default function AdminDashboard() {
                                         )
                                       })}
 
+                                      {/* Arkansas Employee Mapping  */}
+                                      {employeeUserListArkansas.map((val, key) => {
+                                        return (
+                                          <tbody key={key}>
+                                            <tr style={{ fontWeight: "bold", color: "#141414" }}>
+                                              <td style={{ color: "grey" }}>{val.todaydate}</td>
+                                              <td>{val.propertyname}</td>
+                                              <td>Arkansas</td>
+                                              <td>{val.phone}</td>
+                                              <td>{val.enddate}</td>
+                                              <td>{val.tempname}</td>
+                                              <td>
+                                                <div >
+                                                  <p id='paraStatusD' className='paraStatusH' style={{ cursor: "pointer" }} data-bs-toggle="dropdown" aria-expanded="false">
+                                                    {val.employeeStatus}
+                                                  </p>
+                                                </div>
+
+                                              </td>
+
+                                              {/* View Form Here */}
+                                              <td><button data-bs-toggle="modal" data-bs-target="#formDetailD" style={{ width: "5rem", height: "1.8em", borderRadius: "20%", boxShadow: "1px 1px 4.5px #303030" }} className="btn-primary">View</button></td>
+                                            </tr>
+                                          </tbody>
+                                        )
+                                      })}
+
 
                                     </table>
                                   </div>
@@ -614,6 +690,31 @@ export default function AdminDashboard() {
                             </tbody>
                           )
                         })}
+
+                        {/* Active Arkansas Mapping  */}
+                        {activeAList.map((val, key) => {
+                          return (
+                            <tbody key={key}>
+                              <tr style={{ fontWeight: "bold", color: "#141414" }}>
+                                <td style={{ color: "grey" }}>{val.todaydate}</td>
+                                <td>{val.propertyname}</td>
+                                <td>Arkansas</td>
+                                <td>{val.phone}</td>
+                                <td>{val.enddate}</td>
+                                <td>{val.tempname}</td>
+                                <td id='statusColorH' className="active_status">
+
+                                  <div >
+                                    <p id='paraStatusD' style={{ cursor: "pointer" }} data-bs-toggle="dropdown" aria-expanded="false">
+                                      {val.employeeStatus}
+                                    </p>
+                                  </div>
+
+                                </td>
+                              </tr>
+                            </tbody>
+                          )
+                        })}
                       </table>
                     </div>
                   </div>
@@ -692,6 +793,31 @@ export default function AdminDashboard() {
                                 <td style={{ color: "grey" }}>{val.todaydate}</td>
                                 <td>{val.propertyname}</td>
                                 <td>Dallas</td>
+                                <td>{val.phone}</td>
+                                <td>{val.enddate}</td>
+                                <td>{val.tempname}</td>
+                                <td id='statusColorD' className="deactive_status">
+
+                                  <div >
+                                    <p id='paraStatusD' style={{ cursor: "pointer" }} data-bs-toggle="dropdown" aria-expanded="false">
+                                      {val.employeeStatus}
+                                    </p>
+                                  </div>
+
+                                </td>
+                              </tr>
+                            </tbody>
+                          )
+                        })}
+
+                        {/* Closed Dallas Mapping  */}
+                        {closedAList.map((val, key) => {
+                          return (
+                            <tbody key={key}>
+                              <tr style={{ fontWeight: "bold", color: "#141414" }}>
+                                <td style={{ color: "grey" }}>{val.todaydate}</td>
+                                <td>{val.propertyname}</td>
+                                <td>Arkansas</td>
                                 <td>{val.phone}</td>
                                 <td>{val.enddate}</td>
                                 <td>{val.tempname}</td>
@@ -1321,6 +1447,329 @@ export default function AdminDashboard() {
               )
             })}
 
+            {/* <!-- View FULL Form Details of a particular Arkansas User Modal --> */}
+            {employeeUserListArkansas.map((val) => {
+              return (
+                <div key={val._id} className="modal fade" id="formDetailD" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+                  <div className="modal-dialog modal-dialog-centered modal-xl">
+                    <div className="modal-content">
+                      <div className="modal-header text-center">
+                        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100vw" }}>
+
+                          <h4 className="text-center" style={{ fontWeight: "bold" }} ><span style={{ color: "grey" }}>User: </span>{val.tempname} </h4>
+                          <span className='mx-2' style={{ fontSize: "28px", marginBottom: "0.4rem", color: "#0293cf", fontWeight: "lighter" }}>|</span>
+                          <h4 className="text-center" style={{ fontWeight: "bold" }} ><span style={{ color: "grey" }}> Status: </span>{val.employeeStatus}</h4>
+                        </div>
+                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div className="modal-body">
+                        <section className="setting_sec">
+                          <div className="container">
+                            <div className="setting_box">
+                              <form method="POST">
+                                <div className="row">
+                                  <div className="col-sm-6">
+                                    <div className="setting_area">
+
+                                      {/* <form> */}
+                                      <div className="form-group">
+                                        <label htmlFor="exampleInputEmail1">Date</label>
+                                        <input type="text" name='todaydate' className="form-control setting_input" id="exampleInputEmail1"
+                                          aria-describedby="emailHelp" placeholder="Empty Field"
+                                          value={val.todaydate} readOnly style={{ fontWeight: "Bold" }}
+
+                                        />
+                                      </div>
+
+                                    </div>
+                                  </div>
+
+                                  <div className="col-sm-6">
+                                    <div className="setting_area">
+                                      {/* <form> */}
+                                      <div className="form-group">
+                                        <label htmlFor="exampleInputEmail1">Staffing Manager</label>
+                                        <input type="text" name='staffingmanager' className="form-control setting_input" id="exampleInputEmail1"
+                                          aria-describedby="emailHelp" placeholder="Empty Field"
+                                          value={val.staffingmanager} readOnly style={{ fontWeight: "Bold" }} />
+                                      </div>
+                                      {/* <div className="form-group" style={{ marginTop: "3%" }}>
+                      <label htmlFor="exampleInputEmail1" style={{ marginBottom: "3.1%" }}>Hourly Billing Rate</label> */}
+                                      {/* <input type="text" className="form-control setting_input" id="exampleInputEmail1"
+                        aria-describedby="emailHelp" placeholder="" onChange={handleOnChange} readonly="readonly" value={text1} /> */}
+
+                                      {/* <input style={{ fontWeight: "bold", color: "#7d7d7d", backgroundColor: "white" }} className="form-control setting_input" type="text" placeholder="" name='hourlybillingrate'  readOnly />
+                    </div> */}
+                                      {/* </form> */}
+                                    </div>
+                                  </div>
+
+                                  <div className="col-sm-6">
+                                    <div className="setting_area">
+                                      {/* <form> */}
+                                      <div className="form-group mt-3">
+                                        <label htmlFor="exampleInputEmail1">Property Name</label>
+                                        <input name='propertyname' type="text" className="form-control setting_input" id="exampleInputEmail1"
+                                          aria-describedby="emailHelp" placeholder="Empty Field" value={val.propertyname} readOnly style={{ fontWeight: "Bold" }} />
+                                      </div>
+                                      <div className="form-group mt-3">
+                                        <label htmlFor="exampleInputEmail1">Property Address</label>
+                                        <input name='propertyaddress' type="text" className="form-control setting_input" id="exampleInputEmail1"
+                                          aria-describedby="emailHelp" placeholder="Empty Field" value={val.propertyaddress} readOnly style={{ fontWeight: "Bold" }} />
+                                      </div>
+                                      {/* </form> */}
+                                    </div>
+                                  </div>
+
+                                  <div className="col-sm-6">
+                                    <div className="setting_area">
+                                      {/* <form> */}
+
+                                      <div className="form-group mt-3">
+                                        <label htmlFor="exampleInputEmail1">Phone No</label>
+                                        <input name='phone' type="text"
+                                          className="form-control setting_input" id="exampleInputEmail1"
+                                          aria-describedby="emailHelp" placeholder="Empty Field" value={val.phone} readOnly style={{ fontWeight: "Bold" }} />
+                                      </div>
+
+                                      <div className="form-group mt-3">
+                                        <label htmlFor="exampleInputEmail1">FAX No</label>
+                                        <input name='fax' type="number" className="form-control setting_input" id="exampleInputEmail1"
+                                          aria-describedby="emailHelp" placeholder="Empty Field" value={val.fax} readOnly style={{ fontWeight: "Bold" }} />
+                                      </div>
+
+                                      {/* </form> */}
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div className="Manager_area mt-5"></div>
+
+                                <div className="row">
+                                  <div className="col-sm-6">
+                                    <div className="setting_area">
+                                      {/* <form> */}
+                                      <div className="form-group">
+                                        <label htmlFor="exampleInputEmail1">Management Company Name</label>
+                                        <input name='managementcompanyname' type="text" className="form-control setting_input" id="exampleInputEmail1"
+                                          aria-describedby="emailHelp" placeholder="Management Company Name" value={val.managementcompanyname} readOnly style={{ fontWeight: "Bold" }} />
+                                      </div>
+                                      {/* </form> */}
+                                    </div>
+                                  </div>
+
+                                  <div className="col-sm-6">
+                                    <div className="setting_area">
+                                      {/* <form> */}
+                                      <div className="form-group">
+                                        <label htmlFor="exampleInputEmail1">Billing E-mail Address</label>
+                                        <input name='billingemailaddress' type="email" className="form-control setting_input" id="exampleInputEmail1"
+                                          aria-describedby="emailHelp" placeholder="Billing E-mail Address" value={val.billingemailaddress} readOnly style={{ fontWeight: "Bold" }} />
+                                      </div>
+                                      {/* </form> */}
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div className="row">
+                                  <div className="col-sm-6">
+                                    <div className="setting_area">
+                                      {/* <form> */}
+                                      <div className="form-group mt-3">
+                                        <label htmlFor="exampleInputEmail1">Manager's Name/Who Ordered Temp</label>
+                                        <input name='managernamewhoorderedtemp' type="text" className="form-control setting_input" id="exampleInputEmail1"
+                                          aria-describedby="emailHelp" placeholder="Empty Field" value={val.managernamewhoorderedtemp} readOnly style={{ fontWeight: "Bold" }} />
+                                      </div>
+                                      {/* </form> */}
+                                    </div>
+                                  </div>
+
+                                  <div className="col-sm-6">
+                                    <div className="setting_area">
+                                      {/* <form> */}
+                                      <div className="form-group mt-3">
+                                        <label htmlFor="exampleInputEmail1">Manager's E-mail Address</label>
+                                        <input name='manageremailaddress' type="email" className="form-control setting_input" id="exampleInputEmail1"
+                                          aria-describedby="emailHelp" placeholder="Empty Field" value={val.manageremailaddress} readOnly style={{ fontWeight: "Bold" }} />
+                                      </div>
+                                      {/* </form> */}
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div className="row">
+                                  <div className="col-sm-4">
+                                    <div className="setting_area">
+                                      {/* <form> */}
+                                      <div className="form-group mt-3">
+                                        <label htmlFor="exampleFormControlSelect1">Property Grade</label>
+                                        <input className="form-control setting_input" type="text" name="propertygrade" id="propertygrade" placeholder="Empty Field" value={val.propertygrade} readOnly style={{ fontWeight: "Bold" }} />
+                                      </div>
+                                      {/* </form> */}
+                                    </div>
+                                  </div>
+
+                                  <div className="col-sm-4">
+                                    <div className="setting_area">
+                                      {/* <form> */}
+                                      <div className="form-group mt-3">
+                                        <label htmlFor="exampleInputEmail1">Number of Units</label>
+                                        <input name='numberofunits' type="email" className="form-control setting_input" id="exampleInputEmail1"
+                                          aria-describedby="emailHelp" placeholder="Empty Field" value={val.numberofunits} readOnly style={{ fontWeight: "Bold" }} />
+                                      </div>
+                                      {/* </form> */}
+                                    </div>
+                                  </div>
+
+                                  <div className="col-sm-4">
+                                    <div className="setting_area">
+                                      {/* <form> */}
+                                      <div className="form-group mt-3">
+                                        <label htmlFor="exampleInputEmail1">Bilingual</label>
+                                        <input className="form-control setting_input" type="text" name="bilingual" id="bilingual" placeholder="Empty Field" value={val.bilingual} readOnly style={{ fontWeight: "Bold" }} />
+                                      </div>
+                                      {/* </form> */}
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div className="row">
+                                  <div className="col-sm-6">
+                                    <div className="setting_area">
+                                      {/* <form> */}
+                                      <div className="form-group mt-3">
+                                        <label htmlFor="exampleInputEmail1">Software</label>
+                                        <input name='software' type="text" className="form-control setting_input" id="exampleInputEmail1"
+                                          aria-describedby="emailHelp" placeholder="Empty Field" value={val.software} readOnly style={{ fontWeight: "Bold" }} />
+                                      </div>
+                                      {/* </form> */}
+                                    </div>
+                                  </div>
+
+                                  <div className="col-sm-6">
+                                    <div className="setting_area">
+                                      {/* <form> */}
+                                      <div className="form-group mt-3">
+                                        <label htmlFor="exampleInputEmail1">Permanent Pay Rate</label>
+                                        <input name='permanentpayrate' type="email" className="form-control setting_input" id="exampleInputEmail1"
+                                          aria-describedby="emailHelp" placeholder="Empty Field" value={val.permanentpayrate} readOnly style={{ fontWeight: "Bold" }} />
+                                      </div>
+                                      {/* </form> */}
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div className="row">
+                                  <div className="col-sm-4">
+                                    <div className="setting_area">
+                                      {/* <form> */}
+                                      <div className="form-group mt-3">
+                                        <label htmlFor="exampleFormControlSelect1">Tax Credit</label>
+                                        <input className="form-control setting_input" type="text" name="taxcredit" id="taxcredit" placeholder="Empty Field" value={val.taxcredit} readOnly style={{ fontWeight: "Bold" }} />
+                                      </div>
+                                      {/* </form> */}
+                                    </div>
+                                  </div>
+
+                                  <div className="col-sm-4">
+                                    <div className="setting_area">
+                                      {/* <form> */}
+                                      <div className="form-group mt-3">
+                                        <label htmlFor="exampleFormControlSelect1">Type of Assignment</label>
+                                        <input className="form-control setting_input" type="text" name="typeofassignment" id="typeofassignment" placeholder="Empty Field" value={val.typeofassignment} readOnly style={{ fontWeight: "Bold" }} />
+                                      </div>
+                                      {/* </form> */}
+                                    </div>
+                                  </div>
+
+                                  <div className="col-sm-4">
+                                    <div className="setting_area">
+                                      {/* <form> */}
+                                      <div className="form-group mt-3">
+                                        <label htmlFor="exampleInputEmail1">EPA Certified</label>
+                                        <input className="form-control setting_input" type="text" name="epacertified" id="epacertified" placeholder="Empty Field" value={val.epacertified} readOnly style={{ fontWeight: "Bold" }} />
+                                      </div>
+                                      {/* </form> */}
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div className="row">
+                                  <div className="col-sm-6">
+                                    <div className="setting_area">
+                                      {/* <form> */}
+                                      <div className="form-group mt-3">
+                                        <label htmlFor="exampleInputEmail1">Temp's Name</label>
+                                        <input type="text" name='tempname' className="form-control setting_input" id="exampleInputEmail1"
+                                          aria-describedby="emailHelp" placeholder="Empty Field"
+                                          value={val.tempname} readOnly style={{ fontWeight: "Bold" }}
+                                        // value={userData.temp}
+                                        // onChange={handleInputs}
+                                        />
+                                      </div>
+                                      <div className="form-group mt-3">
+                                        <label htmlFor="exampleInputEmail1">Phone No</label>
+                                        <input name='phoneno' type="number" className="form-control setting_input" id="exampleInputEmail1"
+                                          aria-describedby="emailHelp" placeholder="Empty Field" value={val.phoneno} readOnly style={{ fontWeight: "Bold" }} />
+                                      </div>
+                                      <div className="form-group mt-3">
+                                        <label htmlFor="exampleInputEmail1">Temporaray Pay Rate</label>
+                                        <input name='temporaraypayrate' type="text" className="form-control setting_input" id="exampleInputEmail1"
+                                          aria-describedby="emailHelp" placeholder="Empty Field" value={val.temporaraypayrate} readOnly style={{ fontWeight: "Bold" }} />
+                                      </div>
+                                      {/* </form> */}
+                                    </div>
+                                  </div>
+
+                                  <div className="col-sm-6">
+                                    <div className="setting_area">
+                                      {/* <form> */}
+                                      <div className="form-group mt-3">
+                                        <label htmlFor="exampleInputEmail1">Start Date</label>
+                                        <input name='startdate' type="text" className="form-control setting_input" id="exampleInputEmail1"
+                                          aria-describedby="emailHelp" placeholder="Empty Field" value={val.startdate} readOnly style={{ fontWeight: "Bold" }} />
+                                      </div>
+                                      <div className="form-group mt-3">
+                                        <label htmlFor="exampleInputEmail1">End Date</label>
+                                        <input name='enddate' type="text" className="form-control setting_input" id="exampleInputEmail1"
+                                          aria-describedby="emailHelp" placeholder="Empty Field" value={val.enddate} readOnly style={{ fontWeight: "Bold" }} />
+                                      </div>
+                                      {/* </form> */}
+                                    </div>
+                                  </div>
+
+                                  <div className="col-sm-12">
+                                    <div className="setting_area">
+                                      {/* <form> */}
+                                      <div className="form-group mt-3">
+                                        <label htmlFor="exampleFormControlTextarea1">Your Message(Optional)</label>
+                                        <textarea name='yourmessage' className="form-control setting_input" id="exampleFormControlTextarea1" rows="4"
+                                          placeholder="Empty Field" value={val.yourmessage} readOnly style={{ fontWeight: "Bold" }}></textarea>
+                                      </div>
+                                      {/* </form> */}
+                                    </div>
+                                  </div>
+                                </div>
+                              </form>
+                            </div>
+                          </div>
+                        </section>
+
+
+
+
+                      </div>
+
+                      <div className="modal-footer">
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )
+            })}
+
 
 
             {/* <!-- Location Select Modal --> */}
@@ -1334,7 +1783,7 @@ export default function AdminDashboard() {
 
                   <div className="modal-body">
                     <div className="form-group">
-                      <label htmlFor="exampleFormControlSelect1">Select City</label>
+                      <label htmlFor="exampleFormControlSelect1">Select Region</label>
                       <select style={{ marginTop: "5px" }} className="form-control" id="exampleFormControlSelect1"
                         onChange={(e) => {
                           const selectedState = e.target.value;
@@ -1344,7 +1793,7 @@ export default function AdminDashboard() {
                         <option >Please select a location</option>
                         <option>Houston</option>
                         <option>Dallas</option>
-                        {/* <option>Texas</option> */}
+                        <option>Arkansas</option>
                         {selectState}
                       </select>
 
