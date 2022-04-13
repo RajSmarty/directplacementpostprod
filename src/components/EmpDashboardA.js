@@ -316,7 +316,7 @@ export default function EmpDashboardA() {
 
 
 
-                                    {/* Employee Houston Mapping */}
+                                    {/* Employee Arkansas Mapping */}
 
                                     {/* <div > 
                 {codes.length===0 && ''}
@@ -328,7 +328,7 @@ export default function EmpDashboardA() {
                                           <tr style={{ fontWeight: "bold", color: "#141414" }}>
                                             <td style={{ color: "grey" }}>{code.todaydate}</td>
                                             <td>{code.propertyname}</td>
-                                            <td>Houston</td>
+                                            <td>Arkansas</td>
                                             <td>{code.phone}</td>
                                             <td>{code.enddate}</td>
                                             <td>{code.tempname}</td>
@@ -426,7 +426,7 @@ export default function EmpDashboardA() {
                               <tr style={{ fontWeight: "bold", color: "#141414" }}>
                                 <td style={{ color: "grey" }}>{val.todaydate}</td>
                                 <td>{val.propertyname}</td>
-                                <td>Houston</td>
+                                <td>Arkansas</td>
                                 <td>{val.phone}</td>
                                 <td>{val.enddate}</td>
                                 <td>{val.tempname}</td>

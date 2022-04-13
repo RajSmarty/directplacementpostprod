@@ -37,7 +37,7 @@ export default function EmpClosed() {
                             </tr>
                         </thead>
 
-                        {/* Active Mapping */}
+                        {/* Closed Mapping */}
                         {employeeUserList.map((val, key) => {
                             return (
                                 <tbody key={key}>

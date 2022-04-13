@@ -10,7 +10,6 @@ import Formdallas from './components/Formdallas';
 import UserLogin from './components/UserLogin';
 import EmpDashboard from './components/EmpDashboard';
 import EmpDashboardD from './components/EmpDashboardD';
-import Formtexas from './components/Formtexas';
 import FormHouston from './components/FormHouston';
 import AdminDashboard from './components/AdminDashboard';
 import AdminEMPDash from './components/AdminEMPDash';
@@ -130,10 +129,6 @@ function App() {
 
               <Route exact path="/formA">
                 <FormArkansas />
-              </Route>
-
-              <Route exact path="/formT">
-                <Formtexas />
               </Route>
 
               <Route exact path="/back">
