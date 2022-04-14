@@ -1,6 +1,5 @@
 import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
-// import React from 'react';
 import { useHistory } from 'react-router-dom';
 import navLogoImg from '../images/logo.png';
 import userDP from '../images/user.jpg';
@@ -9,6 +8,29 @@ import { Link } from "react-router-dom"
 
 export default function AdminEMPDash() {
   let history = useHistory();
+
+  // Copy Text Logic 1st
+  // const td = document.querySelector("td");
+
+  // td.onclick = function () {
+  //   document.execCommand("copy");
+  // }
+
+  // td.addEventListener("copy", function (event) {
+  //   event.preventDefault();
+  //   if (event.clipboardData) {
+  //     event.clipboardData.setData("text/plain", td.textContent);
+  //     console.log(event.clipboardData.getData("text"))
+  //   }
+  // });
+
+  // Copy Text Logic 2nd
+  // const handleCopy = () => {
+  //   const td = document.querySelector("td");
+
+  //   navigator.clipboard.writeText(td.value);
+  //   document.getSelection().removeAllRanges();
+  // }
 
   // Logout Logic 
   const handleLogout = () => {
@@ -19,7 +41,7 @@ export default function AdminEMPDash() {
   }
 
 
-  // Select Cities from Texas 
+  // Select Location Dallas, Houston & Arkansas
   const [selectState, setSelectState] = useState("");
   const onClickProceed = () => {
     if (selectState === "Dallas") {
@@ -55,7 +77,7 @@ export default function AdminEMPDash() {
     })
   }, [])
 
-  // Dallas Forms Map Logic 
+  // Arkansas Forms Map Logic 
   const [employeeUserListArkansas, setEmployeeUserListArkansas] = useState([]);
   useEffect(() => {
     Axios.get("https://directplacement.herokuapp.com/api/authark/totalemployeea").then((response) => {
@@ -170,7 +192,6 @@ export default function AdminEMPDash() {
                                         )
                                       })}
 
-
                                       {/* Dallas Employee Mapping  */}
                                       {employeeUserListDallas.map((val, key) => {
                                         return (
@@ -186,6 +207,7 @@ export default function AdminEMPDash() {
                                         )
                                       })}
 
+                                      {/* Arkansas Employee Mapping  */}
                                       {employeeUserListArkansas.map((val, key) => {
                                         return (
                                           <tbody key={key}>
@@ -200,7 +222,7 @@ export default function AdminEMPDash() {
                                         )
                                       })}
 
-                                      
+
 
                                     </table>
                                   </div>

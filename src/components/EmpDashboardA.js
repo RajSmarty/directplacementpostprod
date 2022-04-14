@@ -291,11 +291,9 @@ export default function EmpDashboardA() {
                               <div className="your_orders">
                                 <div className="over_overview_heading">
                                   <h4>recent job orders</h4>
-
                                 </div>
 
                                 <div className="row mb-3">
-
                                 </div>
 
                                 <div style={{ height: "18em" }} className="user_table table-responsive">
@@ -309,18 +307,12 @@ export default function EmpDashboardA() {
                                         <th scope="col">End Date</th>
                                         <th scope="col">Temp Name</th>
                                         <th scope="col">Status</th>
-
-
                                       </tr>
                                     </thead>
 
 
 
                                     {/* Employee Arkansas Mapping */}
-
-                                    {/* <div > 
-                {codes.length===0 && ''}
-                </div> */}
                                     {codes.map((code) => {
                                       return (
                                         // Codeitem  
@@ -333,7 +325,6 @@ export default function EmpDashboardA() {
                                             <td>{code.enddate}</td>
                                             <td>{code.tempname}</td>
 
-                                            {/* <td id='statusColorH' className="active_status"> */}
                                             <td>
                                               <div >
                                                 <p type="text"
@@ -360,8 +351,6 @@ export default function EmpDashboardA() {
                                       )
                                     })}
 
-
-
                                   </table>
                                 </div>
                               </div>
@@ -374,14 +363,9 @@ export default function EmpDashboardA() {
                 </div>
               </section>
 
-
-
-
-              {/* <!-- View Houston Modal --> */}
-
-
-
             </form>
+
+
             {/* <!-- Active Order Modal --> */}
             <div className="modal fade" id="ActiveJobOrder" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 
@@ -467,25 +451,6 @@ export default function EmpDashboardA() {
                 </div>
               </div>
             </div>
-            {/* <!--Edit Name Modal --> */}
-            {/* <div className="modal fade" id="changeName" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div className="modal-dialog">
-                <div className="modal-content">
-                  <div className="modal-header">
-                    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100vw" }}>
-                      <h5 className="modal-title" id="exampleModalLabel">Edit Name</h5>
-                    </div>
-                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div className="modal-body"><input type="text" className="form-control" id="ename" name="ename" value={editName.ename} aria-describedby="emailHelp" onChange={onChange} minLength={5} required />
-                  </div>
-                  <div className="modal-footer">
-                    <button ref={refClose} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" className="btn btn-primary" onClick={handleClickEdit}>Save changes</button>
-                  </div>
-                </div>
-              </div>
-            </div> */}
 
 
             {/* <!--Edit Pic Modal --> */}

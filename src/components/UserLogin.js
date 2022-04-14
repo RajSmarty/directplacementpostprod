@@ -18,7 +18,7 @@ export default function UserLogin() {
 
     if (credentials.email.length === 0) {
       alert("Please Fill all the Inputs")
-      
+
       window.location.reload()
     }
     else {
@@ -44,7 +44,7 @@ export default function UserLogin() {
         window.location.reload()
       }
       else {
-  
+
         loaderBtn.style.backgroundColor = "rgb(52 136 223)"
         setSpinner(<Spinner />);
       }
@@ -57,13 +57,13 @@ export default function UserLogin() {
       });
       const datad = await response.json()
 
-      if (!data || response.status === 400) {
+      if (!datad || response.status === 400) {
         if (credentials.email.length === 0) {
           alert("Please Fill all the Inputs")
           window.location.reload()
         }
         else {
-    
+
           loaderBtn.style.backgroundColor = "rgb(52 136 223)"
           setSpinner(<Spinner />);
         }
@@ -74,13 +74,23 @@ export default function UserLogin() {
           },
           body: JSON.stringify({ email: credentials.email, password: credentials.password })
         });
-        const datad = await response.json()
-        setTimeout(() => {
-  
-          localStorage.setItem('token', datad.authtoken);
-  
+        const dataa = await response.json()
+        // setTimeout(() => {
+
+
+        // }, 0);
+        if (!dataa || response.status === 400) {
+          alert("Invalid credentials");
+          setTimeout(() => {
+            console.log("Reloading Page...")
+            window.location.reload()
+          }, 0);
+        }
+        else {
+          localStorage.setItem('token', dataa.authtoken);
+
           history.push("/empdasha");
-        }, 0);
+        }
       }
 
       else {

@@ -49,7 +49,7 @@ const Codestate = (props) => {
   // Get Arkansas User Details
   const getUserADetails = async () => {
     // API Call 
-    const response = await fetch(`${host}/api/autha/getuser`, {
+    const response = await fetch(`${host}/api/authark/getuser`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
