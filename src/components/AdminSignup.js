@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 
 export default function AdminSignup(props) {
 
@@ -9,7 +9,7 @@ export default function AdminSignup(props) {
     const loaderBtn = document.getElementById("loaderBtn");
     const cardOpacity = document.getElementById("cardOpacity");
 
-    
+
 
     const handleSubmit = async (event) => {
         event.preventDefault()
@@ -75,28 +75,28 @@ export default function AdminSignup(props) {
     const [text2, setText2] = useState("")
     const [text3, setText3] = useState("")
     const [textName, setTextName] = useState("")
-    
+
     return (
         <>
-        {/* {loading} */}
+            {/* {loading} */}
 
-            <div style={{backgroundColor:"#e0e0e0", height:"99.99vh"}} className="">
-            {/* {spinner}{spinnerDark} */}
+            <div style={{ backgroundColor: "#e0e0e0", height: "99.99vh" }} className="">
+                {/* {spinner}{spinnerDark} */}
                 <div style={{ display: "flex", flexDirection: "column", height: "100%" }} className=" mb-3" >
                     <div style={{ display: "flex", margin: "auto", justifyContent: "center", width: "90%" }} >
-                        <div id="cardOpacity" className="card " style={{ width: " 28rem", borderRadius: "12px", backgroundColor:"#00a2e5", boxShadow: props.mode === "light" ? "#b5b0ff 9px 10px 13px" : "rgb(15 14 29) 9px 10px 13px", borderLeft: props.mode === "light" ? "1px solid rgba(0, 0, 0, 0.18)" : "", borderBottom: props.mode === "light" ? "1px solid rgb(0 0 0 / 6%)" : "", borderRight: props.mode === "light" ? "1px solid rgb(0 0 0 / 6%)" : "", borderTop: props.mode === "light" ? "1px solid rgba(0, 0, 0, 0.18)" : "" }}>
+                        <div id="cardOpacity" className="card " style={{ width: " 28rem", borderRadius: "12px", backgroundColor: "#00a2e5", boxShadow: props.mode === "light" ? "#b5b0ff 9px 10px 13px" : "rgb(15 14 29) 9px 10px 13px", borderLeft: props.mode === "light" ? "1px solid rgba(0, 0, 0, 0.18)" : "", borderBottom: props.mode === "light" ? "1px solid rgb(0 0 0 / 6%)" : "", borderRight: props.mode === "light" ? "1px solid rgb(0 0 0 / 6%)" : "", borderTop: props.mode === "light" ? "1px solid rgba(0, 0, 0, 0.18)" : "" }}>
                             {/* {loader} */}
 
                             <div className="card-body" style={{ paddingBottom: "0rem" }} >
 
-                                <h3 className="card-title mb-3" style={{ color: "black", marginLeft:"10%", fontWeight:"bold", fontSize:"1.5em" }} >Administrator Registration</h3>
+                                <h3 className="card-title mb-3" style={{ color: "black", marginLeft: "10%", fontWeight: "bold", fontSize: "1.5em" }} >Administrator Registration</h3>
                                 <form onSubmit={handleSubmit}>
 
 
                                     <div className="">
                                         <label htmlFor="exampleInputName" className="form-label"><strong style={{ color: "#262626" }}>Name</strong></label>
 
-                                        
+
                                         <input style={{ backgroundColor: props.mode === "light" ? "white" : "#eae4e4", border: props.mode === "light" ? "" : "1px solid grey" }} id="name" className="form-control" onChange={handleOnChange} value={textName} type="text" name="name" minLength="3" required placeholder="Enter your Name" />
 
                                     </div>
@@ -136,20 +136,22 @@ export default function AdminSignup(props) {
                                             <b style={{ color: "red" }}>Password didn't match</b>
                                         </small>
 
+                                        <Link to="/passwordreset" style={{ textDecoration: "none" }}><span style={{ color: "white", textShadow: "2px 2px 5px #1e1e1f" }} >Forgot password?</span></Link>
+
                                     </div>
 
 
-                                    <div className="container" style={{width:"35%"}}>
-                                    <button style={{backgroundColor:"#019140", color:"white"}} id="loaderBtn" disabled={credentials.email.length === 0 || credentials.password.length === 0} onChange={handleOnChange} type="submit" className="btn mt-3 my-1 ">Submit</button>
+                                    <div className="container" style={{ width: "35%" }}>
+                                        <button style={{ backgroundColor: "#019140", color: "white" }} id="loaderBtn" disabled={credentials.email.length === 0 || credentials.password.length === 0} onChange={handleOnChange} type="submit" className="btn mt-3 my-1 ">Submit</button>
                                     </div>
                                 </form>
-                                
+
                             </div>
                         </div>
                     </div>
-                    <div className='mx-2' style={{display:"flex", justifyContent:"end", color:"grey"}}>
-                <p>Powered by <span style={{color:"black"}}>nargeeks</span></p>
-                </div>
+                    <div className='mx-2' style={{ display: "flex", justifyContent: "end", color: "grey" }}>
+                        <p>Powered by <span style={{ color: "black" }}>nargeeks</span></p>
+                    </div>
                 </div>
             </div>
         </>
