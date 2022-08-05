@@ -13,7 +13,7 @@ import EmpDashboardD from './components/EmpDashboardD';
 import FormHouston from './components/FormHouston';
 import AdminDashboard from './components/AdminDashboard';
 import AdminEMPDash from './components/AdminEMPDash';
-import Admin from './components/Admin';
+// import Admin from './components/Admin';
 import AdminSignup from './components/AdminSignup';
 import AccessDenied from './components/AccessDenied';
 import Error from './components/Error';
@@ -33,6 +33,11 @@ import EmpArkansasReg from './components/EmpArkansasReg';
 import EmpDashboardA from './components/EmpDashboardA';
 import EmpActiveA from './components/EmpActiveA';
 import EmpClosedA from './components/EmpClosedA';
+import Signup from './components/Signup';
+import Login from './components/Login';
+import PasswordReset from './components/PasswordReset';
+import ForgotPassword from './components/ForgotPassword';
+
 
 function App() {
 
@@ -48,15 +53,15 @@ function App() {
                 <UserLogin />
               </Route>
 
-              
-              
+
+
               <Route exact path="/contact">
                 <Contact />
               </Route>
 
-              <Route exact path="/admin">
+              {/* <Route exact path="/admin">
                 <Admin />
-              </Route>
+              </Route> */}
 
               <Route exact path="/adminregX7gCvHkk7jkjjh3jfvBHJv8YGYG5ubjuBJbJNKJBKbj3jfvBHJv8YGYkbYG1yuugb">
                 <AdminSignup />
@@ -67,7 +72,7 @@ function App() {
               </Route>
 
               <Route exact path="/adminempdash">
-                <AdminEMPDash/>
+                <AdminEMPDash />
               </Route>
 
               <Route exact path="/empdash">
@@ -131,6 +136,22 @@ function App() {
                 <FormArkansas />
               </Route>
 
+              <Route exact path="/signup">
+                <Signup />
+              </Route>
+
+              <Route exact path="/admin">
+                <Login />
+              </Route>
+
+              <Route exact path="/forgot-password">
+                <ForgotPassword />
+              </Route>
+
+              <Route exact path="/password-reset/:id/:token">
+                <PasswordReset />
+              </Route>
+
               <Route exact path="/back">
                 <Backend />
               </Route>
@@ -140,8 +161,8 @@ function App() {
               </Route>
 
               <Route>
-              <Error heading="Error" />
-            </Route>
+                <Error heading="Error" />
+              </Route>
 
             </Switch>
           </div>

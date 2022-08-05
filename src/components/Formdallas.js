@@ -34,7 +34,7 @@ export default function FormDallas() {
         typeofassignment: "", epacertified: "", tempname: "", startdate: "", phoneno: "", enddate: "", temporaraypayrate: "", yourmessage: "", employeeStatus: "Active"
       })
       setTimeout(() => {
-        window.location.href = "/empdash"
+        window.location.href = "/empdashd"
       }, 500);
     }, 1000);
   }
