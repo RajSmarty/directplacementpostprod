@@ -212,7 +212,7 @@ export default function AdminDashboard() {
       const datad = await resd.json();
       const dataa = await resa.json();
 
-      setAllOrderCount(data + datad +dataa);
+      setAllOrderCount(data + datad + dataa);
 
       if (!res.status === 200) {
         const error = new Error(res.error);
@@ -448,7 +448,7 @@ export default function AdminDashboard() {
                                     </div>
                                   </div>
 
-                                  <div style={{ textShadow: "1px 1px 3px grey", boxShadow: "1px 1px 5px #999797" }} className="order_item total_order active_order_item" id="all_job">
+                                  <div style={{ textShadow: "1px 1px 3px grey", boxShadow: "1px 1px 5px #999797" }} className="order_item total_order active_order_item" id="all_job" data-bs-toggle="modal" data-bs-target="#TotalJobOrdered">
                                     <div className="order_icon">
                                       <ion-icon name="layers-outline"></ion-icon>
                                     </div>
@@ -810,7 +810,7 @@ export default function AdminDashboard() {
                           )
                         })}
 
-                        {/* Closed Dallas Mapping  */}
+                        {/* Closed Arkansas Mapping  */}
                         {closedAList.map((val, key) => {
                           return (
                             <tbody key={key}>
@@ -844,6 +844,136 @@ export default function AdminDashboard() {
             </div>
 
 
+
+            {/* <!-- Total Order Modal --> */}
+            <div className="modal fade" id="TotalJobOrdered" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+              <div className="modal-dialog modal-dialog-centered modal-xl">
+                <div className="modal-content">
+                  <div className="modal-header text-center">
+                    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100vw" }}>
+                      <h4 className="text-center" style={{ fontWeight: "bold", color: "blue" }} >Total Orders</h4>
+                    </div>
+                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div className="modal-body">
+
+
+                    <div className="home_overview job_table table-responsive">
+                      <table className="table">
+                        <thead style={{ borderBottom: "2px solid #dee2e6", borderTop: "1px solid #dee2e6" }}>
+                          <tr >
+                            <th scope="col">Date</th>
+                            <th scope="col">Property Name</th>
+                            <th scope="col">Place</th>
+                            <th scope="col">Phone</th>
+                            <th scope="col">End Date</th>
+                            <th scope="col">Temp Name</th>
+                            <th scope="col">Status</th>
+                          </tr>
+                        </thead>
+
+                        
+
+
+{/* Houston Employee Mapping */}
+{employeeUserList.map((val) => {
+                                        return (
+                                          <tbody key={val._id}>
+                                            <tr style={{ fontWeight: "bold", color: "#141414" }}>
+                                              <td style={{ color: "grey" }}>{val.todaydate}</td>
+                                              <td>{val.propertyname}</td>
+                                              <td>Houston</td>
+                                              <td>{val.phone}</td>
+                                              <td>{val.enddate}</td>
+                                              <td>{val.tempname}</td>
+                                              <td>
+                                                <div >
+                                                  <p id='paraStatusH' className='paraStatusH' type="text"
+                                                    placeholder='Active'
+                                                    style={{ cursor: "pointer" }} data-bs-toggle="dropdown" aria-expanded="false"
+
+                                                  >
+                                                    {val.employeeStatus}
+                                                  </p>
+                                                </div>
+                                              </td>
+
+                                              {/* View Form Here */}
+                                              <td ><button key={val._id} data-bs-toggle="modal" data-bs-target="#formDetailH" style={{ width: "5rem", height: "1.8em", borderRadius: "20%", boxShadow: "1px 1px 4.5px #303030" }} className="btn-primary">View</button></td>
+                                            </tr>
+                                          </tbody>
+                                        )
+                                      })}
+
+
+                                      {/* Dallas Employee Mapping  */}
+                                      {employeeUserListDallas.map((val, key) => {
+                                        return (
+                                          <tbody key={key}>
+                                            <tr style={{ fontWeight: "bold", color: "#141414" }}>
+                                              <td style={{ color: "grey" }}>{val.todaydate}</td>
+                                              <td>{val.propertyname}</td>
+                                              <td>Dallas</td>
+                                              <td>{val.phone}</td>
+                                              <td>{val.enddate}</td>
+                                              <td>{val.tempname}</td>
+                                              <td>
+                                                <div >
+                                                  <p id='paraStatusD' className='paraStatusH' style={{ cursor: "pointer" }} data-bs-toggle="dropdown" aria-expanded="false">
+                                                    {val.employeeStatus}
+                                                  </p>
+                                                </div>
+
+                                              </td>
+
+                                              {/* View Form Here */}
+                                              <td><button data-bs-toggle="modal" data-bs-target="#formDetailD" style={{ width: "5rem", height: "1.8em", borderRadius: "20%", boxShadow: "1px 1px 4.5px #303030" }} className="btn-primary">View</button></td>
+                                            </tr>
+                                          </tbody>
+                                        )
+                                      })}
+
+                                      {/* Arkansas Employee Mapping  */}
+                                      {employeeUserListArkansas.map((val, key) => {
+                                        return (
+                                          <tbody key={key}>
+                                            <tr style={{ fontWeight: "bold", color: "#141414" }}>
+                                              <td style={{ color: "grey" }}>{val.todaydate}</td>
+                                              <td>{val.propertyname}</td>
+                                              <td>Arkansas</td>
+                                              <td>{val.phone}</td>
+                                              <td>{val.enddate}</td>
+                                              <td>{val.tempname}</td>
+                                              <td>
+                                                <div >
+                                                  <p id='paraStatusD' className='paraStatusH' style={{ cursor: "pointer" }} data-bs-toggle="dropdown" aria-expanded="false">
+                                                    {val.employeeStatus}
+                                                  </p>
+                                                </div>
+
+                                              </td>
+
+                                              {/* View Form Here */}
+                                              <td><button data-bs-toggle="modal" data-bs-target="#formDetailD" style={{ width: "5rem", height: "1.8em", borderRadius: "20%", boxShadow: "1px 1px 4.5px #303030" }} className="btn-primary">View</button></td>
+                                            </tr>
+                                          </tbody>
+                                        )
+                                      })}
+
+
+
+
+
+
+                      </table>
+                    </div>
+                  </div>
+                  <div className="modal-footer">
+                  </div>
+                </div>
+              </div>
+            </div>
 
             {/* <!-- View FULL Form Details of a particular Houston User Modal --> */}
             {employeeUserList.map((val) => {
