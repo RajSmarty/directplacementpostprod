@@ -124,7 +124,7 @@ export default function AdminEMPDash() {
             < section className="dashboard_area" >
               <div className="container-fluid">
                 <div className="row">
-                  <div className="col-sm-3 tab_bg">
+                  <div className="col-sm-2 tab_bg">
                     <div className="dashboard_tab sticky">
 
                       <div className="user_id_img">
@@ -140,7 +140,7 @@ export default function AdminEMPDash() {
                       </div>
                     </div>
                   </div>
-                  <div className="col-sm-9">
+                  <div className="col-sm-10">
                     <div className="dashboard_body">
                       <div id="home" className="tabcontent" style={{ display: "block" }}>
                         <div className="row">

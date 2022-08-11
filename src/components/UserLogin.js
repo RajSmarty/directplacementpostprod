@@ -142,7 +142,7 @@ export default function UserLogin() {
                 <div className="form-group">
                   <input className="form-control login_inputs" id="email"
                     onChange={handleOnChange} value={credentials.email}
-                    type="text" name="email" aria-describedby="emailHelp" placeholder="User Name" />
+                    type="text" name="email" aria-describedby="emailHelp" placeholder="E-mail" />
                   <span><ion-icon name="person"></ion-icon></span>
                 </div>
 

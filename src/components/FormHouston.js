@@ -16,25 +16,25 @@ export default function FormHouston() {
 
 
   const [code, setCode] = useState({
-    todaydate: "", staffingmanager: "", propertyname: "", phone: "", propertyaddress: "", fax: "", managementcompanyname: "", billingemailaddress: "", managernamewhoorderedtemp: "", manageremailaddress: "", propertygrade: "", numberofunits: "", bilingual: "", software: "", permanentpayrate: "", taxcredit: "",
-    typeofassignment: "", epacertified: "", tempname: "", startdate: "", phoneno: "", enddate: "", temporaraypayrate: "", yourmessage: "", status: "Active"
+    todaydate: "", staffingmanager: "", hourlybillingrate: "$ ", propertyname: "", phone: "", propertyaddress: "", fax: "", managementcompanyname: "", billingemailaddress: "", managernamewhoorderedtemp: "", manageremailaddress: "", propertygrade: "", numberofunits: "", bilingual: "", software: "", permanentpayrate: "", taxcredit: "",
+    typeofassignment: "", epacertified: "", tempname: "", startdate: "", phoneno: "", enddate: "", temporarypayrate: "", yourmessage: "", status: "Active"
   })
 
   const handleClick = (e) => {
     e.preventDefault();
-    addCode(code.todaydate, code.staffingmanager, code.propertyname, code.phone, code.propertyaddress, code.fax, code.managementcompanyname, code.billingemailaddress, code.managernamewhoorderedtemp, code.manageremailaddress, code.propertygrade, code.numberofunits, code.bilingual, code.software, code.permanentpayrate, code.taxcredit, code.typeofassignment, code.epacertified, code.tempname, code.startdate, code.phoneno, code.enddate, code.temporaraypayrate, code.yourmessage, code.status);
+    addCode(code.todaydate, code.staffingmanager, code.hourlybillingrate, code.propertyname, code.phone, code.propertyaddress, code.fax, code.managementcompanyname, code.billingemailaddress, code.managernamewhoorderedtemp, code.manageremailaddress, code.propertygrade, code.numberofunits, code.bilingual, code.software, code.permanentpayrate, code.taxcredit, code.typeofassignment, code.epacertified, code.tempname, code.startdate, code.phoneno, code.enddate, code.temporarypayrate, code.yourmessage, code.status);
 
     setCode({
-      todaydate: "", staffingmanager: "", propertyname: "", phone: "", propertyaddress: "", fax: "", managementcompanyname: "", billingemailaddress: "", managernamewhoorderedtemp: "", manageremailaddress: "", propertygrade: "", numberofunits: "", bilingual: "", software: "", permanentpayrate: "", taxcredit: "",
-      typeofassignment: "", epacertified: "", tempname: "", startdate: "", phoneno: "", enddate: "", temporaraypayrate: "", yourmessage: "", status: "Active"
+      todaydate: "", staffingmanager: "", hourlybillingrate: "$ ", propertyname: "", phone: "", propertyaddress: "", fax: "", managementcompanyname: "", billingemailaddress: "", managernamewhoorderedtemp: "", manageremailaddress: "", propertygrade: "", numberofunits: "", bilingual: "", software: "", permanentpayrate: "", taxcredit: "",
+      typeofassignment: "", epacertified: "", tempname: "", startdate: "", phoneno: "", enddate: "", temporarypayrate: "", yourmessage: "", status: "Active"
     })
     setTimeout(() => {
 
-      addHoustonAdmin(code.todaydate, code.staffingmanager, code.propertyname, code.phone, code.propertyaddress, code.fax, code.managementcompanyname, code.billingemailaddress, code.managernamewhoorderedtemp, code.manageremailaddress, code.propertygrade, code.numberofunits, code.bilingual, code.software, code.permanentpayrate, code.taxcredit, code.typeofassignment, code.epacertified, code.tempname, code.startdate, code.phoneno, code.enddate, code.temporaraypayrate, code.yourmessage, code.employeeStatus);
+      addHoustonAdmin(code.todaydate, code.staffingmanager, code.hourlybillingrate, code.propertyname, code.phone, code.propertyaddress, code.fax, code.managementcompanyname, code.billingemailaddress, code.managernamewhoorderedtemp, code.manageremailaddress, code.propertygrade, code.numberofunits, code.bilingual, code.software, code.permanentpayrate, code.taxcredit, code.typeofassignment, code.epacertified, code.tempname, code.startdate, code.phoneno, code.enddate, code.temporarypayrate, code.yourmessage, code.employeeStatus);
 
       setCode({
-        todaydate: "", staffingmanager: "", propertyname: "", phone: "", propertyaddress: "", fax: "", managementcompanyname: "", billingemailaddress: "", managernamewhoorderedtemp: "", manageremailaddress: "", propertygrade: "", numberofunits: "", bilingual: "", software: "", permanentpayrate: "", taxcredit: "",
-        typeofassignment: "", epacertified: "", tempname: "", startdate: "", phoneno: "", enddate: "", temporaraypayrate: "", yourmessage: "", employeeStatus: "Active"
+        todaydate: "", staffingmanager: "", hourlybillingrate: "$ ", propertyname: "", phone: "", propertyaddress: "", fax: "", managementcompanyname: "", billingemailaddress: "", managernamewhoorderedtemp: "", manageremailaddress: "", propertygrade: "", numberofunits: "", bilingual: "", software: "", permanentpayrate: "", taxcredit: "",
+        typeofassignment: "", epacertified: "", tempname: "", startdate: "", phoneno: "", enddate: "", temporarypayrate: "", yourmessage: "", employeeStatus: "Active"
       })
       setTimeout(() => {
         window.location.href = "/empdash"
@@ -71,76 +71,76 @@ export default function FormHouston() {
 
   // FORM RATES 
   const handleLeadMaintainence = () => {
-    setText1("$ 32.95");
+    // setText1("$ 32.95");
     setTextPosition("Lead Maintainence");
   }
 
   const handlePropertyManager = () => {
-    setText1("$ 33.95");
+    // setText1("$ 33.95");
     setTextPosition("Property Manager");
 
   }
 
   const handleAssistantMaintenance = () => {
-    setText1("$ 30.95");
+    // setText1("$ 30.95");
     setTextPosition("Assistant Maintenance");
 
   }
 
   const handleAssistantPropertyManager = () => {
-    setText1("$ 30.95");
+    // setText1("$ 30.95");
     setTextPosition("Assistant Property Manager");
 
   }
 
   const handleMaintenanceTechNonCertified = () => {
-    setText1("$ 28.95");
+    // setText1("$ 28.95");
     setTextPosition("Maintenance Tech Non-Certified");
 
   }
 
   const handleBilingualLeasingConsultant = () => {
-    setText1("$ 27.95");
+    // setText1("$ 27.95");
     setTextPosition("Bilingual Leasing Consultant");
 
   }
 
   const handleMakeReady = () => {
-    setText1("$ 27.95");
+    // setText1("$ 27.95");
     setTextPosition("Make Ready");
 
   }
 
   const handleLeasingConsultant = () => {
-    setText1("$ 26.95");
+    // setText1("$ 26.95");
     setTextPosition("Leasing Consultant");
 
   }
 
 
   const handlePorter = () => {
-    setText1("$ 25.95");
+    // setText1("$ 25.95");
     setTextPosition("Porter");
 
   }
 
   const handleConcierge = () => {
-    setText1("$ 26.95");
+    // setText1("$ 26.95");
     setTextPosition("Concierge");
 
   }
 
   const handleHousekeeper = () => {
-    setText1("$ 25.95");
+    // setText1("$ 25.95");
     setTextPosition("Housekeeper");
 
   }
 
-  const handleOnChange = (event) => {
-    setText1(event.target.value);
-  }
+  // const handleOnChange = (event) => {
+  //   setText1(event.target.value);
+  // }
 
-  const [text1, setText1] = useState('$');
+  // const [text1, setText1] = useState('$');
   const [textPosition, setTextPosition] = useState('');
 
   return (
@@ -207,24 +207,24 @@ export default function FormHouston() {
                                 Positions
                               </Dropdown.Toggle>
 
-                              <input className="mt-2" style={{ fontWeight: "bold", backgroundColor: "white", border: "0px solid white", borderRadius: "4px", padding: "1px 1px", width: "70%", color: "rgb(0 143 203)" }} type="text" onChange={handleOnChange} value={textPosition} readOnly="readonly" />
+                              <input className="mt-2" style={{ fontWeight: "bold", backgroundColor: "white", border: "0px solid white", borderRadius: "4px", padding: "1px 1px", width: "70%", color: "rgb(0 143 203)" }} type="text" value={textPosition} />
 
 
 
 
                               <Dropdown.Menu style={{ border: "0px solid white", boxShadow: "0px 1px 1px blue", backgroundColor: "white", borderRadius: "4px", padding: "5px 5px", width: "98%" }}>
-                                <Dropdown.Item id="leadmaint" value={text1} onClick={handleLeadMaintainence} href="#/action-1" >Lead Maintenance</Dropdown.Item>
-                                <Dropdown.Item onClick={handlePropertyManager} href="#/action-2">Property Manager</Dropdown.Item>
-                                <Dropdown.Item onClick={handleAssistantMaintenance} href="#/action-3">Assistant Maintenance</Dropdown.Item>
-                                <Dropdown.Item onClick={handleAssistantPropertyManager} href="#/action-1">Assistant Property Manager</Dropdown.Item>
-                                <Dropdown.Item onClick={handleMaintenanceTechNonCertified} href="#/action-1">Maintenance Tech Non Certified</Dropdown.Item>
-                                <Dropdown.Item onClick={handleConcierge} href="#/action-1">Concierge</Dropdown.Item>
-                                <Dropdown.Item onClick={handleMakeReady} href="#/action-1">Make Ready</Dropdown.Item>
-                                <Dropdown.Item onClick={handleBilingualLeasingConsultant} href="#/action-1">Bilingual Leasing Consultant</Dropdown.Item>
-                                <Dropdown.Item onClick={handlePorter} href="#/action-1">Porter</Dropdown.Item>
+                                <Dropdown.Item id="leadmaint" onClick={handleLeadMaintainence}  >Lead Maintenance</Dropdown.Item>
+                                <Dropdown.Item onClick={handlePropertyManager} >Property Manager</Dropdown.Item>
+                                <Dropdown.Item onClick={handleAssistantMaintenance} >Assistant Maintenance</Dropdown.Item>
+                                <Dropdown.Item onClick={handleAssistantPropertyManager} >Assistant Property Manager</Dropdown.Item>
+                                <Dropdown.Item onClick={handleMaintenanceTechNonCertified} >Maintenance Tech Non Certified</Dropdown.Item>
+                                <Dropdown.Item onClick={handleConcierge} >Concierge</Dropdown.Item>
+                                <Dropdown.Item onClick={handleMakeReady} >Make Ready</Dropdown.Item>
+                                <Dropdown.Item onClick={handleBilingualLeasingConsultant} >Bilingual Leasing Consultant</Dropdown.Item>
+                                <Dropdown.Item onClick={handlePorter} >Porter</Dropdown.Item>
 
-                                <Dropdown.Item onClick={handleLeasingConsultant} href="#/action-1">Leasing Consultant</Dropdown.Item>
-                                <Dropdown.Item onClick={handleHousekeeper} href="#/action-1">Housekeeper</Dropdown.Item>
+                                <Dropdown.Item onClick={handleLeasingConsultant} >Leasing Consultant</Dropdown.Item>
+                                <Dropdown.Item onClick={handleHousekeeper} >Housekeeper</Dropdown.Item>
                               </Dropdown.Menu>
                             </Dropdown>
 
@@ -254,7 +254,7 @@ export default function FormHouston() {
                       {/* <input type="text" className="form-control setting_input" id="exampleInputEmail1"
                         aria-describedby="emailHelp" placeholder="" onChange={handleOnChange} readonly="readonly" value={text1} /> */}
 
-                      <input style={{ fontWeight: "bold", color: "#7d7d7d", backgroundColor: "white" }} className="form-control setting_input" type="text" placeholder="" name='hourlybillingrate' onChange={handleOnChange} value={text1} readOnly />
+                      <input style={{ fontWeight: "bold", color: "#7d7d7d", backgroundColor: "white" }} className="form-control setting_input" type="text" placeholder="0.00" name='hourlybillingrate' value={code.hourlybillingrate} onChange={onChange} />
                     </div>
                     {/* </form> */}
                   </div>
@@ -383,7 +383,7 @@ export default function FormHouston() {
                     <div className="form-group mt-3">
                       <label htmlFor="exampleInputEmail1">Number of Units</label>
                       <input name='numberofunits' type="email" className="form-control setting_input" id="exampleInputEmail1"
-                        aria-describedby="emailHelp" placeholder="50" value={code.numberofunits} onChange={onChange} />
+                        aria-describedby="emailHelp" placeholder="0" value={code.numberofunits} onChange={onChange} />
                     </div>
                     {/* </form> */}
                   </div>
@@ -441,7 +441,7 @@ export default function FormHouston() {
                     <div className="form-group mt-3">
                       <label htmlFor="exampleInputEmail1">Permanent Pay Rate</label>
                       <input name='permanentpayrate' type="email" className="form-control setting_input" id="exampleInputEmail1"
-                        aria-describedby="emailHelp" placeholder="$1000.00" value={code.permanentpayrate} onChange={onChange} />
+                        aria-describedby="emailHelp" placeholder="$ 0.00" value={code.permanentpayrate} onChange={onChange} />
                     </div>
                     {/* </form> */}
                   </div>
@@ -565,9 +565,9 @@ export default function FormHouston() {
                         aria-describedby="emailHelp" placeholder="Phone No" value={code.phoneno} onChange={onChange} />
                     </div>
                     <div className="form-group mt-3">
-                      <label htmlFor="exampleInputEmail1">Temporaray Pay Rate</label>
-                      <input name='temporaraypayrate' type="text" className="form-control setting_input" id="exampleInputEmail1"
-                        aria-describedby="emailHelp" placeholder="$ 1000.00" value={code.temporaraypayrate} onChange={onChange} />
+                      <label htmlFor="exampleInputEmail1">Temporary Pay Rate</label>
+                      <input name='temporarypayrate' type="text" className="form-control setting_input" id="exampleInputEmail1"
+                        aria-describedby="emailHelp" placeholder="$ 0.00" value={code.temporarypayrate} onChange={onChange} />
                     </div>
                     {/* </form> */}
                   </div>

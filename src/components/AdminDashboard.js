@@ -182,7 +182,7 @@ export default function AdminDashboard() {
   });
 
 
-  // Total Orders from Houston & Dallas 
+  // TOTAL ORDERS from Houston, Dallas & Arkansas
   const [allOrderCount, setAllOrderCount] = useState()
   const totalOrders = async () => {
 
@@ -254,6 +254,63 @@ export default function AdminDashboard() {
   }, [])
 
 
+
+  // STATUS CHANGE TO ACTIVE LOGIC (HOUSTON)
+  const onClickActiveH = (_id) => {
+
+    // paraStatusH.innerHTML = "Active"
+    // paraStatusH.style.color = "Green"
+    setTimeout(() => {
+      Axios.put(`https://directplacement.herokuapp.com/api/empuserformh/updateactiveh/${_id}`)
+    }, 1000);
+  }
+
+  // STATUS CHANGE TO CLOSED LOGIC 
+  const onClickClosedH = (_id) => {
+
+    // paraStatusH.innerHTML = "Closed"
+    // paraStatusH.style.color = "Red"
+    setTimeout(() => {
+      Axios.put(`https://directplacement.herokuapp.com/api/empuserformh/updateclosedh/${_id}`)
+    }, 1000);
+
+  }
+
+
+  // STATUS CHANGE TO ACTIVE LOGIC (DALLAS)
+  const onClickActiveD = (_id) => {
+
+    setTimeout(() => {
+      Axios.put(`https://directplacement.herokuapp.com/api/empuserformd/updateactived/${_id}`)
+    }, 1000);
+  }
+
+  // STATUS CHANGE TO CLOSED LOGIC (DALLAS)
+  const onClickClosedD = (_id) => {
+
+    setTimeout(() => {
+      Axios.put(`https://directplacement.herokuapp.com/api/empuserformd/updateclosedd/${_id}`)
+    }, 1000);
+
+  }
+
+
+  // STATUS CHANGE TO ACTIVE LOGIC (ARKANSAS)
+  const onClickActiveA = (_id) => {
+
+    setTimeout(() => {
+      Axios.put(`https://directplacement.herokuapp.com/api/empuserforma/updateactivea/${_id}`)
+    }, 1000);
+  }
+
+  // STATUS CHANGE TO CLOSED LOGIC (ARKANSAS)
+  const onClickClosedA = (_id) => {
+
+    setTimeout(() => {
+      Axios.put(`https://directplacement.herokuapp.com/api/empuserforma/updatecloseda/${_id}`)
+    }, 1000);
+  }
+
   // View Particular Houston Form Map Logic 
   // const [houstonForm, setHoustonForm] = useState([]);
   // useEffect((_id) => {
@@ -291,65 +348,6 @@ export default function AdminDashboard() {
 
   }, 1000);
 
-
-  // const onClickActiveH = (_id) => {
-
-
-  // paraStatusH.innerHTML = "Active"
-  // paraStatusH.style.color = "Green"
-  //   setTimeout(() => {
-
-  //     Axios.put(`https://directplacement.herokuapp.com/api/empuserformh/updateactiveh/${_id}`)
-
-  //   }, 1000);
-
-  // }
-
-  // const onClickClosedH = (_id) => {
-
-  //   paraStatusH.innerHTML = "Closed"
-  //   paraStatusH.style.color = "Red"
-  //   setTimeout(() => {
-
-  //     Axios.put(`https://directplacement.herokuapp.com/api/empuserformh/updateclosedh/${_id}`)
-
-  //   }, 1000);
-
-  // }
-
-  // const onClickActiveD = (_id) => {
-
-  //   paraStatusD.innerHTML = "Active"
-  //   paraStatusD.style.color = "Green"
-  //   setTimeout(() => {
-
-  //     Axios.put(`https://directplacement.herokuapp.com/api/empuserformd/updateactived/${_id}`)
-
-  //   }, 1000);
-
-  // }
-
-  // const onClickClosedD = (_id) => {
-
-  //   paraStatusD.innerHTML = "Closed"
-  //   paraStatusD.style.color = "Red"
-  //   setTimeout(() => {
-
-  //     Axios.put(`https://directplacement.herokuapp.com/api/empuserformd/updateclosedd/${_id}`)
-
-  //   }, 1000);
-  // }
-
-
-
-
-
-  // const [employeeUserByID, setEmployeeUserByID] = useState([]);
-  // useEffect((_id) => {
-  //   Axios.get(`https://directplacement.herokuapp.com/api/empuserform/reads/${_id}`).then((response) => {
-  //     setEmployeeUserByID(response.data)
-  //   })
-  // }, [])
 
   return (
     <>
@@ -392,7 +390,7 @@ export default function AdminDashboard() {
             < section className="dashboard_area" >
               <div className="container-fluid">
                 <div className="row">
-                  <div className="col-sm-3 tab_bg">
+                  <div className="col-sm-2 tab_bg">
                     <div className="dashboard_tab sticky">
 
                       <div className="user_id_img">
@@ -408,7 +406,7 @@ export default function AdminDashboard() {
                       </div>
                     </div>
                   </div>
-                  <div className="col-sm-9">
+                  <div className="col-sm-10">
                     <div className="dashboard_body">
                       <div id="home" className="tabcontent" style={{ display: "block" }}>
                         <div className="row">
@@ -472,6 +470,8 @@ export default function AdminDashboard() {
                                           <th scope="col">Place</th>
                                           <th scope="col">Phone</th>
                                           <th scope="col">End Date</th>
+                                          <th scope="col">Emp Name</th>
+                                          <th scope="col">Emp Phone</th>
                                           <th scope="col">Temp Name</th>
                                           <th scope="col">Status</th>
                                           <th scope="col">View Form</th>
@@ -489,16 +489,28 @@ export default function AdminDashboard() {
                                               <td>Houston</td>
                                               <td>{val.phone}</td>
                                               <td>{val.enddate}</td>
+                                              <td>Rishav</td>
+                                              <td>123456789</td>
                                               <td>{val.tempname}</td>
+
                                               <td>
                                                 <div >
-                                                  <p id='paraStatusH' className='paraStatusH' type="text"
+                                                  <p type="text"
                                                     placeholder='Active'
                                                     style={{ cursor: "pointer" }} data-bs-toggle="dropdown" aria-expanded="false"
 
                                                   >
                                                     {val.employeeStatus}
                                                   </p>
+
+                                                  <ul className="dropdown-menu">
+                                                    <li><p onClick={() => onClickActiveH(val._id)} className="activeDesign dropdown-item"
+
+                                                    >Active</p></li>
+
+                                                    <li><p onClick={() => onClickClosedH(val._id)} className="closedDesign dropdown-item">Closed</p></li>
+                                                  </ul>
+
                                                 </div>
                                               </td>
 
@@ -520,14 +532,28 @@ export default function AdminDashboard() {
                                               <td>Dallas</td>
                                               <td>{val.phone}</td>
                                               <td>{val.enddate}</td>
+                                              <td>Rishav</td>
+                                              <td>123456789</td>
                                               <td>{val.tempname}</td>
                                               <td>
                                                 <div >
-                                                  <p id='paraStatusD' className='paraStatusH' style={{ cursor: "pointer" }} data-bs-toggle="dropdown" aria-expanded="false">
+                                                  <p type="text"
+                                                    placeholder='Active'
+                                                    style={{ cursor: "pointer" }} data-bs-toggle="dropdown" aria-expanded="false"
+
+                                                  >
                                                     {val.employeeStatus}
                                                   </p>
-                                                </div>
 
+                                                  <ul className="dropdown-menu">
+                                                    <li><p onClick={() => onClickActiveD(val._id)} className="activeDesign dropdown-item"
+
+                                                    >Active</p></li>
+
+                                                    <li><p onClick={() => onClickClosedD(val._id)} className="closedDesign dropdown-item">Closed</p></li>
+                                                  </ul>
+
+                                                </div>
                                               </td>
 
                                               {/* View Form Here */}
@@ -547,14 +573,28 @@ export default function AdminDashboard() {
                                               <td>Arkansas</td>
                                               <td>{val.phone}</td>
                                               <td>{val.enddate}</td>
+                                              <td>Rishav</td>
+                                              <td>123456789</td>
                                               <td>{val.tempname}</td>
                                               <td>
                                                 <div >
-                                                  <p id='paraStatusD' className='paraStatusH' style={{ cursor: "pointer" }} data-bs-toggle="dropdown" aria-expanded="false">
+                                                  <p type="text"
+                                                    placeholder='Active'
+                                                    style={{ cursor: "pointer" }} data-bs-toggle="dropdown" aria-expanded="false"
+
+                                                  >
                                                     {val.employeeStatus}
                                                   </p>
-                                                </div>
 
+                                                  <ul className="dropdown-menu">
+                                                    <li><p onClick={() => onClickActiveA(val._id)} className="activeDesign dropdown-item"
+
+                                                    >Active</p></li>
+
+                                                    <li><p onClick={() => onClickClosedA(val._id)} className="closedDesign dropdown-item">Closed</p></li>
+                                                  </ul>
+
+                                                </div>
                                               </td>
 
                                               {/* View Form Here */}
@@ -606,7 +646,8 @@ export default function AdminDashboard() {
 
 
 
-            {/*<<<<<<<<---------- MODALS STARTS FROM HERE:- ------------->>>>>>> */}
+
+            {/*<<<<<<<<----------ACTIVE/CLOSE/TOTAL MODALS STARTS FROM HERE:- ------------->>>>>>> */}
 
             {/* <!-- Active Order Modal --> */}
             <div className="modal fade" id="ActiveJobOrder" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -630,6 +671,8 @@ export default function AdminDashboard() {
                             <th scope="col">Place</th>
                             <th scope="col">Phone</th>
                             <th scope="col">End Date</th>
+                            <th scope="col">Emp Name</th>
+                            <th scope="col">Emp Phone</th>
                             <th scope="col">Temp Name</th>
                             <th scope="col">Status</th>
                           </tr>
@@ -645,17 +688,27 @@ export default function AdminDashboard() {
                                 <td>Houston</td>
                                 <td>{val.phone}</td>
                                 <td>{val.enddate}</td>
+                                <td>Rishav</td>
+                                <td>123456789</td>
                                 <td>{val.tempname}</td>
 
-                                <td id='statusColorH' className="active_status">
+                                <td>
                                   <div >
-                                    <p id='paraStatusH' type="text"
+                                    <p type="text"
                                       placeholder='Active'
                                       style={{ cursor: "pointer" }} data-bs-toggle="dropdown" aria-expanded="false"
 
                                     >
                                       {val.employeeStatus}
                                     </p>
+
+                                    <ul className="dropdown-menu">
+                                      <li><p onClick={() => onClickActiveH(val._id)} className="activeDesign dropdown-item"
+
+                                      >Active</p></li>
+
+                                      <li><p onClick={() => onClickClosedH(val._id)} className="closedDesign dropdown-item">Closed</p></li>
+                                    </ul>
 
                                   </div>
                                 </td>
@@ -676,15 +729,28 @@ export default function AdminDashboard() {
                                 <td>Dallas</td>
                                 <td>{val.phone}</td>
                                 <td>{val.enddate}</td>
+                                <td>Rishav</td>
+                                <td>123456789</td>
                                 <td>{val.tempname}</td>
-                                <td id='statusColorH' className="active_status">
-
+                                <td>
                                   <div >
-                                    <p id='paraStatusD' style={{ cursor: "pointer" }} data-bs-toggle="dropdown" aria-expanded="false">
+                                    <p type="text"
+                                      placeholder='Active'
+                                      style={{ cursor: "pointer" }} data-bs-toggle="dropdown" aria-expanded="false"
+
+                                    >
                                       {val.employeeStatus}
                                     </p>
-                                  </div>
 
+                                    <ul className="dropdown-menu">
+                                      <li><p onClick={() => onClickActiveD(val._id)} className="activeDesign dropdown-item"
+
+                                      >Active</p></li>
+
+                                      <li><p onClick={() => onClickClosedD(val._id)} className="closedDesign dropdown-item">Closed</p></li>
+                                    </ul>
+
+                                  </div>
                                 </td>
                               </tr>
                             </tbody>
@@ -701,15 +767,28 @@ export default function AdminDashboard() {
                                 <td>Arkansas</td>
                                 <td>{val.phone}</td>
                                 <td>{val.enddate}</td>
+                                <td>Rishav</td>
+                                <td>123456789</td>
                                 <td>{val.tempname}</td>
-                                <td id='statusColorH' className="active_status">
-
+                                <td>
                                   <div >
-                                    <p id='paraStatusD' style={{ cursor: "pointer" }} data-bs-toggle="dropdown" aria-expanded="false">
+                                    <p type="text"
+                                      placeholder='Active'
+                                      style={{ cursor: "pointer" }} data-bs-toggle="dropdown" aria-expanded="false"
+
+                                    >
                                       {val.employeeStatus}
                                     </p>
-                                  </div>
 
+                                    <ul className="dropdown-menu">
+                                      <li><p onClick={() => onClickActiveA(val._id)} className="activeDesign dropdown-item"
+
+                                      >Active</p></li>
+
+                                      <li><p onClick={() => onClickClosedA(val._id)} className="closedDesign dropdown-item">Closed</p></li>
+                                    </ul>
+
+                                  </div>
                                 </td>
                               </tr>
                             </tbody>
@@ -750,6 +829,8 @@ export default function AdminDashboard() {
                             <th scope="col">Place</th>
                             <th scope="col">Phone</th>
                             <th scope="col">End Date</th>
+                            <th scope="col">Emp Name</th>
+                            <th scope="col">Emp Phone</th>
                             <th scope="col">Temp Name</th>
                             <th scope="col">Status</th>
                           </tr>
@@ -765,17 +846,28 @@ export default function AdminDashboard() {
                                 <td>Houston</td>
                                 <td>{val.phone}</td>
                                 <td>{val.enddate}</td>
+                                <td>Rishav</td>
+                                <td>123456789</td>
                                 <td>{val.tempname}</td>
 
-                                <td id='statusColorH' className="deactive_status">
+                                <td>
                                   <div >
-                                    <p id='paraStatusH' type="text"
+                                    <p type="text"
                                       placeholder='Active'
                                       style={{ cursor: "pointer" }} data-bs-toggle="dropdown" aria-expanded="false"
 
                                     >
                                       {val.employeeStatus}
                                     </p>
+
+                                    <ul className="dropdown-menu">
+                                      <li><p onClick={() => onClickActiveH(val._id)} className="activeDesign dropdown-item"
+
+                                      >Active</p></li>
+
+                                      <li><p onClick={() => onClickClosedH(val._id)} className="closedDesign dropdown-item">Closed</p></li>
+                                    </ul>
+
                                   </div>
                                 </td>
 
@@ -795,15 +887,28 @@ export default function AdminDashboard() {
                                 <td>Dallas</td>
                                 <td>{val.phone}</td>
                                 <td>{val.enddate}</td>
+                                <td>Rishav</td>
+                                <td>123456789</td>
                                 <td>{val.tempname}</td>
-                                <td id='statusColorD' className="deactive_status">
-
+                                <td>
                                   <div >
-                                    <p id='paraStatusD' style={{ cursor: "pointer" }} data-bs-toggle="dropdown" aria-expanded="false">
+                                    <p type="text"
+                                      placeholder='Active'
+                                      style={{ cursor: "pointer" }} data-bs-toggle="dropdown" aria-expanded="false"
+
+                                    >
                                       {val.employeeStatus}
                                     </p>
-                                  </div>
 
+                                    <ul className="dropdown-menu">
+                                      <li><p onClick={() => onClickActiveD(val._id)} className="activeDesign dropdown-item"
+
+                                      >Active</p></li>
+
+                                      <li><p onClick={() => onClickClosedD(val._id)} className="closedDesign dropdown-item">Closed</p></li>
+                                    </ul>
+
+                                  </div>
                                 </td>
                               </tr>
                             </tbody>
@@ -820,15 +925,28 @@ export default function AdminDashboard() {
                                 <td>Arkansas</td>
                                 <td>{val.phone}</td>
                                 <td>{val.enddate}</td>
+                                <td>Rishav</td>
+                                <td>123456789</td>
                                 <td>{val.tempname}</td>
-                                <td id='statusColorD' className="deactive_status">
-
+                                <td>
                                   <div >
-                                    <p id='paraStatusD' style={{ cursor: "pointer" }} data-bs-toggle="dropdown" aria-expanded="false">
+                                    <p type="text"
+                                      placeholder='Active'
+                                      style={{ cursor: "pointer" }} data-bs-toggle="dropdown" aria-expanded="false"
+
+                                    >
                                       {val.employeeStatus}
                                     </p>
-                                  </div>
 
+                                    <ul className="dropdown-menu">
+                                      <li><p onClick={() => onClickActiveA(val._id)} className="activeDesign dropdown-item"
+
+                                      >Active</p></li>
+
+                                      <li><p onClick={() => onClickClosedA(val._id)} className="closedDesign dropdown-item">Closed</p></li>
+                                    </ul>
+
+                                  </div>
                                 </td>
                               </tr>
                             </tbody>
@@ -868,98 +986,148 @@ export default function AdminDashboard() {
                             <th scope="col">Place</th>
                             <th scope="col">Phone</th>
                             <th scope="col">End Date</th>
+                            <th scope="col">Emp Name</th>
+                            <th scope="col">Emp Phone</th>
                             <th scope="col">Temp Name</th>
                             <th scope="col">Status</th>
                           </tr>
                         </thead>
 
-                        
 
 
-{/* Houston Employee Mapping */}
-{employeeUserList.map((val) => {
-                                        return (
-                                          <tbody key={val._id}>
-                                            <tr style={{ fontWeight: "bold", color: "#141414" }}>
-                                              <td style={{ color: "grey" }}>{val.todaydate}</td>
-                                              <td>{val.propertyname}</td>
-                                              <td>Houston</td>
-                                              <td>{val.phone}</td>
-                                              <td>{val.enddate}</td>
-                                              <td>{val.tempname}</td>
-                                              <td>
-                                                <div >
-                                                  <p id='paraStatusH' className='paraStatusH' type="text"
-                                                    placeholder='Active'
-                                                    style={{ cursor: "pointer" }} data-bs-toggle="dropdown" aria-expanded="false"
 
-                                                  >
-                                                    {val.employeeStatus}
-                                                  </p>
-                                                </div>
-                                              </td>
+                        {/* Houston Employee Mapping */}
+                        {employeeUserList.map((val) => {
+                          return (
+                            <tbody key={val._id} val={val}>
+                              <tr style={{ fontWeight: "bold", color: "#141414" }}>
+                                <td style={{ color: "grey" }}>{val.todaydate}</td>
+                                <td>{val.propertyname}</td>
+                                <td>Houston</td>
+                                <td>{val.phone}</td>
+                                <td>{val.enddate}</td>
+                                <td>Rishav</td>
+                                <td>123456789</td>
+                                <td>{val.tempname}</td>
 
-                                              {/* View Form Here */}
-                                              <td ><button key={val._id} data-bs-toggle="modal" data-bs-target="#formDetailH" style={{ width: "5rem", height: "1.8em", borderRadius: "20%", boxShadow: "1px 1px 4.5px #303030" }} className="btn-primary">View</button></td>
-                                            </tr>
-                                          </tbody>
-                                        )
-                                      })}
+                                <td>
+                                  <div >
+                                    <p type="text"
+                                      placeholder='Active'
+                                      style={{ cursor: "pointer" }} data-bs-toggle="dropdown" aria-expanded="false"
+
+                                    >
+                                      {val.employeeStatus}
+                                    </p>
+
+                                    <ul className="dropdown-menu">
+                                      <li><p onClick={() => onClickActiveH(val._id)} className="activeDesign dropdown-item"
+
+                                      >Active</p></li>
+
+                                      <li><p onClick={() => onClickClosedH(val._id)} className="closedDesign dropdown-item">Closed</p></li>
+                                    </ul>
+
+                                  </div>
+                                </td>
 
 
-                                      {/* Dallas Employee Mapping  */}
-                                      {employeeUserListDallas.map((val, key) => {
-                                        return (
-                                          <tbody key={key}>
-                                            <tr style={{ fontWeight: "bold", color: "#141414" }}>
-                                              <td style={{ color: "grey" }}>{val.todaydate}</td>
-                                              <td>{val.propertyname}</td>
-                                              <td>Dallas</td>
-                                              <td>{val.phone}</td>
-                                              <td>{val.enddate}</td>
-                                              <td>{val.tempname}</td>
-                                              <td>
-                                                <div >
-                                                  <p id='paraStatusD' className='paraStatusH' style={{ cursor: "pointer" }} data-bs-toggle="dropdown" aria-expanded="false">
-                                                    {val.employeeStatus}
-                                                  </p>
-                                                </div>
 
-                                              </td>
 
-                                              {/* View Form Here */}
-                                              <td><button data-bs-toggle="modal" data-bs-target="#formDetailD" style={{ width: "5rem", height: "1.8em", borderRadius: "20%", boxShadow: "1px 1px 4.5px #303030" }} className="btn-primary">View</button></td>
-                                            </tr>
-                                          </tbody>
-                                        )
-                                      })}
+                                {/* View Form Here */}
+                                <td><button key={val._id} data-bs-toggle="modal" data-bs-target="#formDetailH" style={{ width: "5rem", height: "1.8em", borderRadius: "20%", boxShadow: "1px 1px 4.5px #303030", marginLeft: "1rem" }} className="btn-primary">View</button></td>
+                                <td><button style={{ border: "0px solid white", backgroundColor: "transparent" }}><img style={{ height: "30px" }} src="https://img.icons8.com/plasticine/100/000000/filled-trash.png" alt='' /></button></td>
+                              </tr>
+                            </tbody>
+                          )
+                        })}
 
-                                      {/* Arkansas Employee Mapping  */}
-                                      {employeeUserListArkansas.map((val, key) => {
-                                        return (
-                                          <tbody key={key}>
-                                            <tr style={{ fontWeight: "bold", color: "#141414" }}>
-                                              <td style={{ color: "grey" }}>{val.todaydate}</td>
-                                              <td>{val.propertyname}</td>
-                                              <td>Arkansas</td>
-                                              <td>{val.phone}</td>
-                                              <td>{val.enddate}</td>
-                                              <td>{val.tempname}</td>
-                                              <td>
-                                                <div >
-                                                  <p id='paraStatusD' className='paraStatusH' style={{ cursor: "pointer" }} data-bs-toggle="dropdown" aria-expanded="false">
-                                                    {val.employeeStatus}
-                                                  </p>
-                                                </div>
 
-                                              </td>
+                        {/* Dallas Employee Mapping  */}
+                        {employeeUserListDallas.map((val, key) => {
+                          return (
+                            <tbody key={key}>
+                              <tr style={{ fontWeight: "bold", color: "#141414" }}>
+                                <td style={{ color: "grey" }}>{val.todaydate}</td>
+                                <td>{val.propertyname}</td>
+                                <td>Dallas</td>
+                                <td>{val.phone}</td>
+                                <td>{val.enddate}</td>
+                                <td>Rishav</td>
+                                <td>123456789</td>
+                                <td>{val.tempname}</td>
+                                <td>
+                                  <div >
+                                    <p type="text"
+                                      placeholder='Active'
+                                      style={{ cursor: "pointer" }} data-bs-toggle="dropdown" aria-expanded="false"
 
-                                              {/* View Form Here */}
-                                              <td><button data-bs-toggle="modal" data-bs-target="#formDetailD" style={{ width: "5rem", height: "1.8em", borderRadius: "20%", boxShadow: "1px 1px 4.5px #303030" }} className="btn-primary">View</button></td>
-                                            </tr>
-                                          </tbody>
-                                        )
-                                      })}
+                                    >
+                                      {val.employeeStatus}
+                                    </p>
+
+                                    <ul className="dropdown-menu">
+                                      <li><p onClick={() => onClickActiveD(val._id)} className="activeDesign dropdown-item"
+
+                                      >Active</p></li>
+
+                                      <li><p onClick={() => onClickClosedD(val._id)} className="closedDesign dropdown-item">Closed</p></li>
+                                    </ul>
+
+                                  </div>
+                                </td>
+
+
+                                {/* View Form Here */}
+                                <td><button data-bs-toggle="modal" data-bs-target="#formDetailD" style={{ width: "5rem", height: "1.8em", borderRadius: "20%", boxShadow: "1px 1px 4.5px #303030", marginLeft: "1rem" }} className="btn-primary">View</button></td>
+                                <td><button style={{ border: "0px solid white", backgroundColor: "transparent" }}><img style={{ height: "30px" }} src="https://img.icons8.com/plasticine/100/000000/filled-trash.png" alt='' /></button></td>
+                              </tr>
+                            </tbody>
+                          )
+                        })}
+
+                        {/* Arkansas Employee Mapping  */}
+                        {employeeUserListArkansas.map((val, key) => {
+                          return (
+                            <tbody key={key}>
+                              <tr style={{ fontWeight: "bold", color: "#141414" }}>
+                                <td style={{ color: "grey" }}>{val.todaydate}</td>
+                                <td>{val.propertyname}</td>
+                                <td>Arkansas</td>
+                                <td>{val.phone}</td>
+                                <td>{val.enddate}</td>
+                                <td>Rishav</td>
+                                <td>123456789</td>
+                                <td>{val.tempname}</td>
+                                <td>
+                                  <div >
+                                    <p type="text"
+                                      placeholder='Active'
+                                      style={{ cursor: "pointer" }} data-bs-toggle="dropdown" aria-expanded="false"
+
+                                    >
+                                      {val.employeeStatus}
+                                    </p>
+
+                                    <ul className="dropdown-menu">
+                                      <li><p onClick={() => onClickActiveA(val._id)} className="activeDesign dropdown-item"
+
+                                      >Active</p></li>
+
+                                      <li><p onClick={() => onClickClosedA(val._id)} className="closedDesign dropdown-item">Closed</p></li>
+                                    </ul>
+
+                                  </div>
+                                </td>
+
+
+                                {/* View Form Here */}
+                                <td><button data-bs-toggle="modal" data-bs-target="#formDetailD" style={{ width: "5rem", height: "1.8em", borderRadius: "20%", boxShadow: "1px 1px 4.5px #303030", marginLeft: "1rem" }} className="btn-primary">View</button></td>
+                                <td><button style={{ border: "0px solid white", backgroundColor: "transparent" }}><img style={{ height: "30px" }} src="https://img.icons8.com/plasticine/100/000000/filled-trash.png" alt='' /></button></td>
+                              </tr>
+                            </tbody>
+                          )
+                        })}
 
 
 
@@ -974,6 +1142,14 @@ export default function AdminDashboard() {
                 </div>
               </div>
             </div>
+
+            {/*<<<<<<<<---------- ACTIVE/CLOSE/TOTAL MODALS ENDS HERE:- ------------->>>>>>> */}
+
+
+
+
+
+
 
             {/* <!-- View FULL Form Details of a particular Houston User Modal --> */}
             {employeeUserList.map((val) => {
@@ -1022,6 +1198,30 @@ export default function AdminDashboard() {
                                       </div>
                                     </div>
                                   </div>
+
+
+                                  {/* Position  */}
+                                  <div className="col-sm-6">
+                                    <div className="setting_area">
+                                      <div className="form-group mt-3">
+                                        <label htmlFor="exampleInputEmail1" style={{ marginBottom: "3.1%" }}>Position</label>
+
+                                        <input style={{ fontWeight: "bold" }} className="form-control setting_input" type="text" placeholder="Manager" name='hourlybillingrate' value={val.position} readOnly />
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                  {/* Hourly Billing Rate  */}
+                                  <div className="col-sm-6">
+                                    <div className="setting_area">
+                                      <div className="form-group mt-3">
+                                        <label htmlFor="exampleInputEmail1" style={{ marginBottom: "3.1%" }}>Hourly Billing Rate</label>
+
+                                        <input style={{ fontWeight: "bold" }} className="form-control setting_input" type="text" placeholder="Empty Field" name='hourlybillingrate' value={val.hourlybillingrate} readOnly />
+                                      </div>
+                                    </div>
+                                  </div>
+
 
                                   <div className="col-sm-6">
                                     <div className="setting_area">
@@ -1251,7 +1451,6 @@ export default function AdminDashboard() {
                 </div>
               )
             })}
-
 
 
             {/* <!-- View FULL Form Details of a particular Dallas User Modal --> */}
@@ -1576,6 +1775,7 @@ export default function AdminDashboard() {
                 </div>
               )
             })}
+
 
             {/* <!-- View FULL Form Details of a particular Arkansas User Modal --> */}
             {employeeUserListArkansas.map((val) => {

@@ -249,9 +249,9 @@ export default function EmpDashboardD() {
                             <div className="home_overview user_dashboard">
                               <div className="over_overview_heading">
                                 <h4>orders</h4>
-                                <Link to="/formD" style={{ textDecoration: "none" }}><h3 className="employee_create_btn"><span>
+                                <Link to="/formD" style={{ textDecoration: "none" }}><button className="btn create_btn employee_create_btn"><span>
                                   <ion-icon name="add-outline" role="img" className="md hydrated" aria-label="add outline"></ion-icon>
-                                </span> create</h3></Link>
+                                </span> create</button></Link>
                               </div>
 
                               <div className="user_orders_area">
@@ -303,6 +303,8 @@ export default function EmpDashboardD() {
                                         <th scope="col">City</th>
                                         <th scope="col">Phone</th>
                                         <th scope="col">End Date</th>
+                                        <th scope="col">Emp Name</th>
+                                        <th scope="col">Emp Phone</th>
                                         <th scope="col">Temp Name</th>
                                         <th scope="col">Status</th>
 
@@ -320,6 +322,14 @@ export default function EmpDashboardD() {
                                             <td>Dallas</td>
                                             <td>{code.phone}</td>
                                             <td>{code.enddate}</td>
+                                            {jsonD.map((jsonobjD) => {
+                                              return (
+                                                <>
+                                                  <td key={jsonobjD._id} jsonobjD={jsonobjD}>{jsonobjD.name}{" "}</td>
+                                                  <td key={jsonobjD._id} jsonobjD={jsonobjD}>{jsonobjD.phone}{" "}</td>
+                                                </>
+                                              )
+                                            })}
                                             <td>{code.tempname}</td>
 
                                             {/* <td id='statusColorH' className="active_status"> */}
@@ -497,6 +507,8 @@ export default function EmpDashboardD() {
                             <th scope="col">City</th>
                             <th scope="col">Phone</th>
                             <th scope="col">End Date</th>
+                            <th scope="col">Emp Name</th>
+                            <th scope="col">Emp Phone</th>
                             <th scope="col">Temp Name</th>
                             <th scope="col">Status</th>
                           </tr>
@@ -507,12 +519,20 @@ export default function EmpDashboardD() {
                           return (
                             <tbody key={key} >
                               <tr style={{ fontWeight: "bold", color: "#141414" }}>
-                              <td style={{ color: "grey" }}>{val.todaydate}</td>
-                                            <td>{val.propertyname}</td>
-                                            <td>Dallas</td>
-                                            <td>{val.phone}</td>
-                                            <td>{val.enddate}</td>
-                                            <td>{val.tempname}</td>
+                                <td style={{ color: "grey" }}>{val.todaydate}</td>
+                                <td>{val.propertyname}</td>
+                                <td>Dallas</td>
+                                <td>{val.phone}</td>
+                                <td>{val.enddate}</td>
+                                {jsonD.map((jsonobjD) => {
+                                  return (
+                                    <>
+                                      <td key={jsonobjD._id} jsonobjD={jsonobjD}>{jsonobjD.name}{" "}</td>
+                                      <td key={jsonobjD._id} jsonobjD={jsonobjD}>{jsonobjD.phone}{" "}</td>
+                                    </>
+                                  )
+                                })}
+                                <td>{val.tempname}</td>
 
                                 <td id='statusColorH' className="active_status">
                                   <div >

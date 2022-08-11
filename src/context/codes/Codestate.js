@@ -108,7 +108,7 @@ const Codestate = (props) => {
   }
 
   // Add a Code
-  const addCode = async (todaydate, staffingmanager, propertyname, phone, propertyaddress, fax, managementcompanyname, billingemailaddress, managernamewhoorderedtemp, manageremailaddress, propertygrade, numberofunits, bilingual, software, permanentpayrate, taxcredit, typeofassignment, epacertified, tempname, startdate, phoneno, enddate, temporaraypayrate, yourmessage, status) => {
+  const addCode = async (todaydate, staffingmanager ,hourlybillingrate, propertyname, phone, propertyaddress, fax, managementcompanyname, billingemailaddress, managernamewhoorderedtemp, manageremailaddress, propertygrade, numberofunits, bilingual, software, permanentpayrate, taxcredit, typeofassignment, epacertified, tempname, startdate, phoneno, enddate, temporaraypayrate, yourmessage, status) => {
     // TODO: API Call
     // API Call 
     const response = await fetch(`${host}/addcode`, {
@@ -118,7 +118,7 @@ const Codestate = (props) => {
         "auth-token": localStorage.getItem("token"),
 
       },
-      body: JSON.stringify({ todaydate, staffingmanager, propertyname, phone, propertyaddress, fax, managementcompanyname, billingemailaddress, managernamewhoorderedtemp, manageremailaddress, propertygrade, numberofunits, bilingual, software, permanentpayrate, taxcredit, typeofassignment, epacertified, tempname, startdate, phoneno, enddate, temporaraypayrate, yourmessage, status })
+      body: JSON.stringify({ todaydate, staffingmanager ,hourlybillingrate, propertyname, phone, propertyaddress, fax, managementcompanyname, billingemailaddress, managernamewhoorderedtemp, manageremailaddress, propertygrade, numberofunits, bilingual, software, permanentpayrate, taxcredit, typeofassignment, epacertified, tempname, startdate, phoneno, enddate, temporaraypayrate, yourmessage, status })
     });
 
     const code = await response.json();
@@ -127,7 +127,7 @@ const Codestate = (props) => {
 
 
   // Add Houston Admin Code
-  const addHoustonAdmin = async (todaydate, staffingmanager, propertyname, phone, propertyaddress, fax, managementcompanyname, billingemailaddress, managernamewhoorderedtemp, manageremailaddress, propertygrade, numberofunits, bilingual, software, permanentpayrate, taxcredit, typeofassignment, epacertified, tempname, startdate, phoneno, enddate, temporaraypayrate, yourmessage, employeeStatus) => {
+  const addHoustonAdmin = async (todaydate, staffingmanager, hourlybillingrate, propertyname, phone, propertyaddress, fax, managementcompanyname, billingemailaddress, managernamewhoorderedtemp, manageremailaddress, propertygrade, numberofunits, bilingual, software, permanentpayrate, taxcredit, typeofassignment, epacertified, tempname, startdate, phoneno, enddate, temporaraypayrate, yourmessage, employeeStatus) => {
     // TODO: API Call
     // API Call 
     const response = await fetch(`${host}/api/empuserformh/insert`, {
@@ -136,7 +136,7 @@ const Codestate = (props) => {
         'Content-Type': 'application/json',
 
       },
-      body: JSON.stringify({ todaydate, staffingmanager, propertyname, phone, propertyaddress, fax, managementcompanyname, billingemailaddress, managernamewhoorderedtemp, manageremailaddress, propertygrade, numberofunits, bilingual, software, permanentpayrate, taxcredit, typeofassignment, epacertified, tempname, startdate, phoneno, enddate, temporaraypayrate, yourmessage, employeeStatus })
+      body: JSON.stringify({ todaydate, staffingmanager, hourlybillingrate, propertyname, phone, propertyaddress, fax, managementcompanyname, billingemailaddress, managernamewhoorderedtemp, manageremailaddress, propertygrade, numberofunits, bilingual, software, permanentpayrate, taxcredit, typeofassignment, epacertified, tempname, startdate, phoneno, enddate, temporaraypayrate, yourmessage, employeeStatus })
     });
 
     const code = await response.json();
@@ -144,7 +144,7 @@ const Codestate = (props) => {
   }
 
   // Add Dallas Admin Code
-  const addDallasAdmin = async (todaydate, staffingmanager, propertyname, phone, propertyaddress, fax, managementcompanyname, billingemailaddress, managernamewhoorderedtemp, manageremailaddress, propertygrade, numberofunits, bilingual, software, permanentpayrate, taxcredit, typeofassignment, epacertified, tempname, startdate, phoneno, enddate, temporaraypayrate, yourmessage, employeeStatus) => {
+  const addDallasAdmin = async (todaydate, staffingmanager, hourlybillingrate, propertyname, phone, propertyaddress, fax, managementcompanyname, billingemailaddress, managernamewhoorderedtemp, manageremailaddress, propertygrade, numberofunits, bilingual, software, permanentpayrate, taxcredit, typeofassignment, epacertified, tempname, startdate, phoneno, enddate, temporaraypayrate, yourmessage, employeeStatus) => {
     // TODO: API Call
     // API Call 
     const response = await fetch(`${host}/api/empuserformd/insert`, {
@@ -153,7 +153,7 @@ const Codestate = (props) => {
         'Content-Type': 'application/json',
 
       },
-      body: JSON.stringify({ todaydate, staffingmanager, propertyname, phone, propertyaddress, fax, managementcompanyname, billingemailaddress, managernamewhoorderedtemp, manageremailaddress, propertygrade, numberofunits, bilingual, software, permanentpayrate, taxcredit, typeofassignment, epacertified, tempname, startdate, phoneno, enddate, temporaraypayrate, yourmessage, employeeStatus })
+      body: JSON.stringify({ todaydate, staffingmanager, hourlybillingrate, propertyname, phone, propertyaddress, fax, managementcompanyname, billingemailaddress, managernamewhoorderedtemp, manageremailaddress, propertygrade, numberofunits, bilingual, software, permanentpayrate, taxcredit, typeofassignment, epacertified, tempname, startdate, phoneno, enddate, temporaraypayrate, yourmessage, employeeStatus })
     });
 
     const code = await response.json();
@@ -161,7 +161,7 @@ const Codestate = (props) => {
   }
 
   // Add Arkansas Admin Code
-  const addArkansasAdmin = async (todaydate, staffingmanager, propertyname, phone, propertyaddress, fax, managementcompanyname, billingemailaddress, managernamewhoorderedtemp, manageremailaddress, propertygrade, numberofunits, bilingual, software, permanentpayrate, taxcredit, typeofassignment, epacertified, tempname, startdate, phoneno, enddate, temporaraypayrate, yourmessage, employeeStatus) => {
+  const addArkansasAdmin = async (todaydate, staffingmanager, hourlybillingrate, propertyname, phone, propertyaddress, fax, managementcompanyname, billingemailaddress, managernamewhoorderedtemp, manageremailaddress, propertygrade, numberofunits, bilingual, software, permanentpayrate, taxcredit, typeofassignment, epacertified, tempname, startdate, phoneno, enddate, temporaraypayrate, yourmessage, employeeStatus) => {
     // TODO: API Call
     // API Call 
     const response = await fetch(`${host}/api/empuserforma/insert`, {
@@ -170,7 +170,7 @@ const Codestate = (props) => {
         'Content-Type': 'application/json',
 
       },
-      body: JSON.stringify({ todaydate, staffingmanager, propertyname, phone, propertyaddress, fax, managementcompanyname, billingemailaddress, managernamewhoorderedtemp, manageremailaddress, propertygrade, numberofunits, bilingual, software, permanentpayrate, taxcredit, typeofassignment, epacertified, tempname, startdate, phoneno, enddate, temporaraypayrate, yourmessage, employeeStatus })
+      body: JSON.stringify({ todaydate, staffingmanager, hourlybillingrate, propertyname, phone, propertyaddress, fax, managementcompanyname, billingemailaddress, managernamewhoorderedtemp, manageremailaddress, propertygrade, numberofunits, bilingual, software, permanentpayrate, taxcredit, typeofassignment, epacertified, tempname, startdate, phoneno, enddate, temporaraypayrate, yourmessage, employeeStatus })
     });
 
     const code = await response.json();

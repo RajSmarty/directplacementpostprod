@@ -268,9 +268,9 @@ export default function EmpDashboard() {
                             <div className="home_overview user_dashboard">
                               <div className="over_overview_heading">
                                 <h4>orders</h4>
-                                <Link to="/formH" style={{ textDecoration: "none" }}><h3 className="employee_create_btn"><span>
+                                <Link to="/formH" style={{ textDecoration: "none" }}><button className="btn create_btn employee_create_btn"><span>
                                   <ion-icon name="add-outline" role="img" className="md hydrated" aria-label="add outline"></ion-icon>
-                                </span> create</h3></Link>
+                                </span> create</button></Link>
                               </div>
 
                               <div className="user_orders_area">
@@ -326,10 +326,10 @@ export default function EmpDashboard() {
                                         <th scope="col">City</th>
                                         <th scope="col">Phone</th>
                                         <th scope="col">End Date</th>
+                                        <th scope="col">Emp Name</th>
+                                        <th scope="col">Emp Phone</th>
                                         <th scope="col">Temp Name</th>
                                         <th scope="col">Status</th>
-
-
                                       </tr>
                                     </thead>
 
@@ -350,6 +350,14 @@ export default function EmpDashboard() {
                                             <td>Houston</td>
                                             <td>{code.phone}</td>
                                             <td>{code.enddate}</td>
+                                            {json.map((jsonobj) => {
+                                              return (
+                                                <>
+                                                  <td key={jsonobj._id} jsonobj={jsonobj}>{jsonobj.name}{" "}</td>
+                                                  <td key={jsonobj._id} jsonobj={jsonobj}>{jsonobj.phone}{" "}</td>
+                                                </>
+                                              )
+                                            })}
                                             <td>{code.tempname}</td>
 
                                             {/* <td id='statusColorH' className="active_status"> */}
@@ -433,6 +441,8 @@ export default function EmpDashboard() {
                             <th scope="col">City</th>
                             <th scope="col">Phone</th>
                             <th scope="col">End Date</th>
+                            <th scope="col">Emp Name</th>
+                            <th scope="col">Emp Phone</th>
                             <th scope="col">Temp Name</th>
                             <th scope="col">Status</th>
                           </tr>
@@ -448,6 +458,16 @@ export default function EmpDashboard() {
                                 <td>Houston</td>
                                 <td>{val.phone}</td>
                                 <td>{val.enddate}</td>
+
+
+                                {json.map((jsonobj) => {
+                                  return (
+                                    <>
+                                      <td key={jsonobj._id} jsonobj={jsonobj}>{jsonobj.name}{" "}</td>
+                                      <td key={jsonobj._id} jsonobj={jsonobj}>{jsonobj.phone}{" "}</td>
+                                    </>
+                                  )
+                                })}
                                 <td>{val.tempname}</td>
 
                                 <td id='statusColorH' className="active_status">
