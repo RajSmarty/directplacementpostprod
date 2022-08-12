@@ -1500,14 +1500,31 @@ export default function AdminDashboard() {
                                           aria-describedby="emailHelp" placeholder="Empty Field"
                                           value={val.staffingmanager} readOnly style={{ fontWeight: "Bold" }} />
                                       </div>
-                                      {/* <div className="form-group" style={{ marginTop: "3%" }}>
-                      <label htmlFor="exampleInputEmail1" style={{ marginBottom: "3.1%" }}>Hourly Billing Rate</label> */}
-                                      {/* <input type="text" className="form-control setting_input" id="exampleInputEmail1"
-                        aria-describedby="emailHelp" placeholder="" onChange={handleOnChange} readonly="readonly" value={text1} /> */}
 
-                                      {/* <input style={{ fontWeight: "bold", color: "#7d7d7d", backgroundColor: "white" }} className="form-control setting_input" type="text" placeholder="" name='hourlybillingrate'  readOnly />
-                    </div> */}
-                                      {/* </form> */}
+                                    </div>
+                                  </div>
+
+
+                                  {/* Position  */}
+                                  <div className="col-sm-6">
+                                    <div className="setting_area">
+                                      <div className="form-group mt-3">
+                                        <label htmlFor="exampleInputEmail1" style={{ marginBottom: "3.1%" }}>Position</label>
+
+                                        <input style={{ fontWeight: "bold" }} className="form-control setting_input" type="text" placeholder="Manager" name='hourlybillingrate' value={val.position} readOnly />
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                  
+                                  {/* Hourly Billing Rate  */}
+                                  <div className="col-sm-6">
+                                    <div className="setting_area">
+                                      <div className="form-group mt-3">
+                                        <label htmlFor="exampleInputEmail1" style={{ marginBottom: "3.1%" }}>Hourly Billing Rate</label>
+
+                                        <input style={{ fontWeight: "bold" }} className="form-control setting_input" type="text" placeholder="Empty Field" name='hourlybillingrate' value={val.hourlybillingrate} readOnly />
+                                      </div>
                                     </div>
                                   </div>
 
