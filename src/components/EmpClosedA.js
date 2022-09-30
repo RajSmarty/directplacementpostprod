@@ -3,20 +3,20 @@ import Axios from 'axios';
 
 export default function EmpClosedA() {
 
-  useEffect(() => {
-    const config = {
-        headers: {
-            "auth-token": localStorage.getItem("token"),
-        },
-    };
-    Axios.get("https://directplacement.herokuapp.com/closedlist", config).then((response) => {
-        setEmployeeUserList(response.data)
-    })
-}, [])
+    useEffect(() => {
+        const config = {
+            headers: {
+                "auth-token": localStorage.getItem("token"),
+            },
+        };
+        Axios.get("https://directplacement.herokuapp.com/closedlist", config).then((response) => {
+            setEmployeeUserList(response.data)
+        })
+    }, [])
 
-const [employeeUserList, setEmployeeUserList] = useState([]);
-  return (
-    <div>
+    const [employeeUserList, setEmployeeUserList] = useState([]);
+    return (
+        <div>
             <div className="container mt-4">
 
                 <div className="home_overview job_table table-responsive">
@@ -29,6 +29,8 @@ const [employeeUserList, setEmployeeUserList] = useState([]);
                                 <th scope="col">City</th>
                                 <th scope="col">Phone</th>
                                 <th scope="col">End Date</th>
+                                {/* <th scope="col">Emp Name</th> */}
+                                <th scope="col">Temp Phone Number</th>
                                 <th scope="col">Temp Name</th>
                                 <th scope="col">Status</th>
                             </tr>
@@ -44,6 +46,7 @@ const [employeeUserList, setEmployeeUserList] = useState([]);
                                         <td>Arkansas</td>
                                         <td>{val.phone}</td>
                                         <td>{val.enddate}</td>
+                                        <td>{val.phoneno}</td>
                                         <td>{val.tempname}</td>
 
                                         <td id='statusColorH' className="deactive_status">
@@ -70,5 +73,5 @@ const [employeeUserList, setEmployeeUserList] = useState([]);
 
             </div>
         </div>
-  )
+    )
 }

@@ -206,7 +206,7 @@ export default function EmpDashboard() {
               <section className="dashboard_area">
                 <div className="container-fluid">
                   <div className="row">
-                    <div className="col-sm-3 tab_bg">
+                    <div  className="col-sm-3 tab_bg">
                       <div className="dashboard_tab sticky">
                         {/* {image.map((jsonimg) => {
                                       return ( */}
@@ -214,7 +214,7 @@ export default function EmpDashboard() {
                         {/* <img style={{ cursor: "pointer" }} src={userDP} alt="Images" data-bs-toggle="modal" data-bs-target="#changeImg" /> */}
 
 
-                        <div className="" data-bs-toggle="modal" data-bs-target="#changeImg" style={{ cursor: "pointer", display: "flex", flexDirection: "column-reverse" }}>
+                        <div className="" data-bs-toggle="modal" data-bs-target="#changeImg" style={{ cursor: "pointer", display: "flex", flexDirection: "column-reverse"}}>
                           {items.length === 0 &&
                             <div style={{ marginTop: "1rem", marginLeft: "7.5rem", width: '100px', height: "6.25rem", borderRadius: "50%", border: "4px solid #00a2e5" }}>
                               <img style={{ borderRadius: "50%", width: "100%" }} src={userDP} alt="" />
@@ -258,7 +258,7 @@ export default function EmpDashboard() {
 
                       </div>
                     </div>
-                    <div className="col-sm-9">
+                    <div  className="col-sm-9">
                       <div className="dashboard_body">
                         <div className="dash_board_title">
                           <h2>dashboard</h2>
@@ -326,8 +326,8 @@ export default function EmpDashboard() {
                                         <th scope="col">City</th>
                                         <th scope="col">Phone</th>
                                         <th scope="col">End Date</th>
-                                        <th scope="col">Emp Name</th>
-                                        <th scope="col">Emp Phone</th>
+                                        {/* <th scope="col">Emp Name</th> */}
+                                        <th scope="col">Temp Phone Number</th>
                                         <th scope="col">Temp Name</th>
                                         <th scope="col">Status</th>
                                       </tr>
@@ -350,14 +350,15 @@ export default function EmpDashboard() {
                                             <td>Houston</td>
                                             <td>{code.phone}</td>
                                             <td>{code.enddate}</td>
-                                            {json.map((jsonobj) => {
+                                            {/* CLIENT LAST UPDATE */}
+                                            {/* {json.map((jsonobj) => {
                                               return (
                                                 <>
                                                   <td key={jsonobj._id} jsonobj={jsonobj}>{jsonobj.name}{" "}</td>
-                                                  <td key={jsonobj._id} jsonobj={jsonobj}>{jsonobj.phone}{" "}</td>
                                                 </>
                                               )
-                                            })}
+                                            })} */}
+                                            <td>{code.phoneno}</td>
                                             <td>{code.tempname}</td>
 
                                             {/* <td id='statusColorH' className="active_status"> */}
@@ -441,8 +442,8 @@ export default function EmpDashboard() {
                             <th scope="col">City</th>
                             <th scope="col">Phone</th>
                             <th scope="col">End Date</th>
-                            <th scope="col">Emp Name</th>
-                            <th scope="col">Emp Phone</th>
+                            {/* <th scope="col">Emp Name</th> */}
+                            <th scope="col">Temp Phone Number</th>
                             <th scope="col">Temp Name</th>
                             <th scope="col">Status</th>
                           </tr>
@@ -460,14 +461,15 @@ export default function EmpDashboard() {
                                 <td>{val.enddate}</td>
 
 
-                                {json.map((jsonobj) => {
+                                {/* {json.map((jsonobj) => {
                                   return (
                                     <>
                                       <td key={jsonobj._id} jsonobj={jsonobj}>{jsonobj.name}{" "}</td>
                                       <td key={jsonobj._id} jsonobj={jsonobj}>{jsonobj.phone}{" "}</td>
                                     </>
                                   )
-                                })}
+                                })} */}
+                                <td>{val.phoneno}</td>
                                 <td>{val.tempname}</td>
 
                                 <td id='statusColorH' className="active_status">

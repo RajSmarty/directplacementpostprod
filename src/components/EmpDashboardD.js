@@ -303,8 +303,8 @@ export default function EmpDashboardD() {
                                         <th scope="col">City</th>
                                         <th scope="col">Phone</th>
                                         <th scope="col">End Date</th>
-                                        <th scope="col">Emp Name</th>
-                                        <th scope="col">Emp Phone</th>
+                                        {/* <th scope="col">Emp Name</th> */}
+                                        <th scope="col">Temp Phone Number</th>
                                         <th scope="col">Temp Name</th>
                                         <th scope="col">Status</th>
 
@@ -322,14 +322,16 @@ export default function EmpDashboardD() {
                                             <td>Dallas</td>
                                             <td>{code.phone}</td>
                                             <td>{code.enddate}</td>
-                                            {jsonD.map((jsonobjD) => {
+                                            {/* CLIENT LAST UPDATE */}
+                                            {/* {jsonD.map((jsonobjD) => {
                                               return (
                                                 <>
                                                   <td key={jsonobjD._id} jsonobjD={jsonobjD}>{jsonobjD.name}{" "}</td>
                                                   <td key={jsonobjD._id} jsonobjD={jsonobjD}>{jsonobjD.phone}{" "}</td>
                                                 </>
                                               )
-                                            })}
+                                            })} */}
+                                            <td>{code.phoneno}</td>
                                             <td>{code.tempname}</td>
 
                                             {/* <td id='statusColorH' className="active_status"> */}
@@ -507,8 +509,8 @@ export default function EmpDashboardD() {
                             <th scope="col">City</th>
                             <th scope="col">Phone</th>
                             <th scope="col">End Date</th>
-                            <th scope="col">Emp Name</th>
-                            <th scope="col">Emp Phone</th>
+                            {/* <th scope="col">Emp Name</th> */}
+                            <th scope="col">Temp Phone Number</th>
                             <th scope="col">Temp Name</th>
                             <th scope="col">Status</th>
                           </tr>
@@ -524,14 +526,15 @@ export default function EmpDashboardD() {
                                 <td>Dallas</td>
                                 <td>{val.phone}</td>
                                 <td>{val.enddate}</td>
-                                {jsonD.map((jsonobjD) => {
+                                {/* {jsonD.map((jsonobjD) => {
                                   return (
                                     <>
                                       <td key={jsonobjD._id} jsonobjD={jsonobjD}>{jsonobjD.name}{" "}</td>
                                       <td key={jsonobjD._id} jsonobjD={jsonobjD}>{jsonobjD.phone}{" "}</td>
                                     </>
                                   )
-                                })}
+                                })} */}
+                                <td>{val.phoneno}</td>
                                 <td>{val.tempname}</td>
 
                                 <td id='statusColorH' className="active_status">

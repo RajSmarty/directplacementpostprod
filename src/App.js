@@ -37,6 +37,7 @@ import Signup from './components/Signup';
 import Login from './components/Login';
 import PasswordReset from './components/PasswordReset';
 import ForgotPassword from './components/ForgotPassword';
+import Demo from './components/Demo';
 
 
 function App() {
@@ -53,6 +54,10 @@ function App() {
                 <UserLogin />
               </Route>
 
+
+              <Route exact path="/demo">
+                <Demo />
+              </Route>
 
 
               <Route exact path="/contact">

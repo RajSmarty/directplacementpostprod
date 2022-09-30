@@ -31,6 +31,8 @@ export default function EmpActiveD() {
                                 <th scope="col">City</th>
                                 <th scope="col">Phone</th>
                                 <th scope="col">End Date</th>
+                                {/* <th scope="col">Emp Name</th> */}
+                                <th scope="col">Temp Phone Number</th>
                                 <th scope="col">Temp Name</th>
                                 <th scope="col">Status</th>
                             </tr>
@@ -46,6 +48,7 @@ export default function EmpActiveD() {
                                         <td>Dallas</td>
                                         <td>{val.phone}</td>
                                         <td>{val.enddate}</td>
+                                        <td>{val.phoneno}</td>
                                         <td>{val.tempname}</td>
 
                                         <td id='statusColorH' className="active_status">

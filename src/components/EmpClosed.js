@@ -4,20 +4,20 @@ import Axios from 'axios';
 
 export default function EmpClosed() {
 
-    
-    useEffect(() => {
-    const config = {
-        headers: {
-          "auth-token": localStorage.getItem("token"),
-        },
-      };
-    Axios.get("https://directplacement.herokuapp.com/closedlist", config).then((response) => {
-      setEmployeeUserList(response.data)
-    })
-  }, [])
 
-  const [employeeUserList, setEmployeeUserList] = useState([]);
-      
+    useEffect(() => {
+        const config = {
+            headers: {
+                "auth-token": localStorage.getItem("token"),
+            },
+        };
+        Axios.get("https://directplacement.herokuapp.com/closedlist", config).then((response) => {
+            setEmployeeUserList(response.data)
+        })
+    }, [])
+
+    const [employeeUserList, setEmployeeUserList] = useState([]);
+
     return (
         <div>
             <div className="container mt-4">
@@ -32,6 +32,8 @@ export default function EmpClosed() {
                                 <th scope="col">City</th>
                                 <th scope="col">Phone</th>
                                 <th scope="col">End Date</th>
+                                {/* <th scope="col">Emp Name</th> */}
+                                <th scope="col">Temp Phone Number</th>
                                 <th scope="col">Temp Name</th>
                                 <th scope="col">Status</th>
                             </tr>
@@ -47,6 +49,7 @@ export default function EmpClosed() {
                                         <td>Houston</td>
                                         <td>{val.phone}</td>
                                         <td>{val.enddate}</td>
+                                        <td>{val.phoneno}</td>
                                         <td>{val.tempname}</td>
 
                                         <td id='statusColorH' className="deactive_status">
