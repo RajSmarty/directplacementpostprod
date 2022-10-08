@@ -644,7 +644,7 @@ export default function AdminDashboard() {
 
 
 
-            {/*<<<<<<<<----------ACTIVE/CLOSE/TOTAL MODALS STARTS FROM HERE:- ------------->>>>>>> */}
+            {/*<<<<<<<<----------ACTIVE/CLOSE/TOTAL MODALS STARTS FROM HERE:------->>>>>>> */}
 
             {/* <!-- Active Order Modal --> */}
             <div className="modal fade" id="ActiveJobOrder" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -1504,7 +1504,7 @@ export default function AdminDashboard() {
                                     </div>
                                   </div>
 
-                                  
+
                                   {/* Hourly Billing Rate  */}
                                   <div className="col-sm-6">
                                     <div className="setting_area">
