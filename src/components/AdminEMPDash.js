@@ -266,7 +266,7 @@ const onClickDeleteA = (_id) => {
                                               <td>{val.position}</td>
                                               <td>{val.email}</td>
                                               <td>{val.phone}</td>
-                                              <td><button onClick={() => onClickDeleteA(val._id)} style={{ border: "0px solid white", backgroundColor: "transparent" }}><img style={{ height: "30px" }} src="https://img.icons8.com/plasticine/100/000000/filled-trash.png" alt='' /></button></td>
+                                              <td><button onClick={() => onClickDeleteA(val._id)} style={{ border: "0px solid white", backgroundColor: "transparent" }}><img style={{ height: "30px" }} src="https://img.icons8.com/plasticine/100/000000/filled-trash.png" alt='' /></button></td> 
 
                                               <td><button style={{ border: "0px solid white", backgroundColor: "transparent" }}><img style={{ height: "25px" }} src="https://img.icons8.com/external-icongeek26-outline-colour-icongeek26/64/000000/external-edit-user-interface-icongeek26-outline-colour-icongeek26.png" alt='' /></button></td>
                                             </tr>
